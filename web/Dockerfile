@@ -1,3 +1,18 @@
-FROM nginx:1.20.0-alpine
+FROM node:16.0.0-alpine3.13 AS builder
 
-COPY ./build/* /usr/share/nginx/html/
+WORKDIR /app
+
+RUN apk add --no-cache git bash
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:1.20.0-alpine AS produciton
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=builder /app/build/* ./

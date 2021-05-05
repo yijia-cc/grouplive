@@ -3,38 +3,54 @@ services:
   calendar:
     build: ./calendar
     ports:
-      - "8081:8080"
+      - "80:8080"
+    environment:
+      - VIRTUAL_HOST=calendar.api.allgame.fun
     depends_on:
       - "db"
   chat:
     build: ./chat
     ports:
-      - "8082:8080"
+      - "80:8080"
+    environment:
+      - VIRTUAL_HOST=chat.api.allgame.fun
     depends_on:
       - "db"
   dashboard:
     build: ./dashboard
     ports:
-      - "8083:8080"
+      - "80:8080"
+    environment:
+      - VIRTUAL_HOST=dashboard.api.allgame.fun
     depends_on:
       - "db"
   discussion:
     build: ./discussion
     ports:
-      - "8084:8080"
+      - "80:8080"
+    environment:
+      - VIRTUAL_HOST=discussion.api.allgame.fun
     depends_on:
       - "db"
   payment:
     build: ./payment
     ports:
-      - "8085:8080"
+      - "80:8080"
+    environment:
+      - VIRTUAL_HOST=payment.api.allgame.fun
     depends_on:
       - "db"
   web:
     build: ./web
     ports:
-      - "80:80"
+      - "8081:80"
   db:
     image: postgres
     ports:
-      - "8086:5432"
+      - "8087:5432"
+  lb:
+    image: jwilder/nginx-proxy:0.9.0-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro

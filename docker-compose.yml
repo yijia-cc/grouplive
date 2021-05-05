@@ -3,47 +3,55 @@ services:
   calendar:
     build: ./calendar
     ports:
-      - "80:8080"
+      - "8082:8080"
     environment:
       - VIRTUAL_HOST=calendar.api.allgame.fun
+      - VIRTUAL_PORT=8082
     depends_on:
       - "db"
   chat:
     build: ./chat
     ports:
-      - "80:8080"
+      - "8083:8080"
     environment:
       - VIRTUAL_HOST=chat.api.allgame.fun
+      - VIRTUAL_PORT=8083
     depends_on:
       - "db"
   dashboard:
     build: ./dashboard
     ports:
-      - "80:8080"
+      - "8084:8080"
     environment:
       - VIRTUAL_HOST=dashboard.api.allgame.fun
+      - VIRTUAL_PORT=8084
     depends_on:
       - "db"
   discussion:
     build: ./discussion
     ports:
-      - "80:8080"
+      - "8085:8080"
     environment:
       - VIRTUAL_HOST=discussion.api.allgame.fun
+      - VIRTUAL_PORT=8085
     depends_on:
       - "db"
   payment:
     build: ./payment
     ports:
-      - "80:8080"
+      - "8086:8080"
     environment:
       - VIRTUAL_HOST=payment.api.allgame.fun
+      - VIRTUAL_PORT=8086
     depends_on:
       - "db"
   web:
     build: ./web
     ports:
       - "8081:80"
+    environment:
+      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
+      - VIRTUAL_PORT=8081
   db:
     image: postgres
     ports:

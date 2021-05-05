@@ -16,3 +16,7 @@ FROM nginx:1.20.0-alpine AS produciton
 WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /app/build/* ./
+
+RUN rm -rf /etc/nginx/conf.d/default.conf
+
+COPY nginx/default.conf /etc/nginx/conf.d/

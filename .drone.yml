@@ -1,0 +1,16 @@
+kind: pipeline
+type: docker
+name: feature-calendar
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd calendar
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request

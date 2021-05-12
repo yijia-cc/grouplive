@@ -14,3 +14,52 @@ trigger:
     - main
   event:
     - pull_request
+---
+kind: pipeline
+type: docker
+name: staging-calendar
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_CALENDAR_STAGING
+      tags: latest
+      dockerfile: calendar/Dockerfile
+      context: calendar
+  - name: Deploy
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_CALENDAR_STAGING:
+        from_secret: DOCKER_REPO_CALENDAR_STAGING
+      REPO_DIR:
+        from_secret: REPO_DIR
+      ENV_FILE_PATH:
+        from_secret: ENV_FILE_PATH
+    settings:
+      host:
+        from_secret: AWS_SSH_HOST
+      port:
+        from_secret: AWS_SSH_PORT
+      username:
+        from_secret: AWS_SSH_USERNAME
+      key:
+        from_secret: AWS_SSH_KEY
+      envs: [DOCKER_REPO_CALENDAR_STAGING, REPO_DIR, ENV_FILE_PATH]
+      script:
+        - docker pull $DOCKER_REPO_CALENDAR_STAGING
+        - cd $REPO_DIR
+        - git checkout master
+        - git pull
+        - docker-compose -f docker-compose-staging.yml --env-file $ENV_FILE_PATH  up -d
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push

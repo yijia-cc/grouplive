@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  calendar-staging:
+    image: ${DOCKER_USERNAME}/calendar-staging:latest
+    ports:
+      - "9082:8080"
+    environment:
+      - VIRTUAL_HOST=calendar.api.staging.allgame.fun
+      - VIRTUAL_PORT=9082

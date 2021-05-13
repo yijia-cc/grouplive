@@ -23,8 +23,6 @@ services:
     environment:
       - VIRTUAL_HOST=chat.api.allgame.fun
       - VIRTUAL_PORT=8083
-    depends_on:
-      - "db"
   dashboard:
     build: ./dashboard
     ports:

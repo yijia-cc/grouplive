@@ -10,7 +10,7 @@ services:
       - VIRTUAL_PORT=8081
   # Backend
   calendar:
-    build: ./calendar
+    image: ${DOCKER_USERNAME}/calendar:latest
     ports:
       - "8082:8080"
     environment:

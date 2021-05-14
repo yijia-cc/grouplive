@@ -1,13 +1,13 @@
 version: "3.3"
 services:
-  # Frontend
-  web:
-    build: ./web
-    ports:
-      - "8081:80"
-    environment:
-      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
-      - VIRTUAL_PORT=8081
+#  # Frontend
+#  web:
+#    image: ${DOCKER_USERNAME}/web:latest
+#    ports:
+#      - "8081:80"
+#    environment:
+#      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
+#      - VIRTUAL_PORT=8081
   # Backend
   calendar:
     image: ${DOCKER_USERNAME}/calendar:latest
@@ -17,30 +17,37 @@ services:
       - VIRTUAL_HOST=calendar.api.allgame.fun
       - VIRTUAL_PORT=8082
   chat:
-    build: ./chat
+    image: ${DOCKER_USERNAME}/chat:latest
     ports:
       - "8083:8080"
     environment:
       - VIRTUAL_HOST=chat.api.allgame.fun
       - VIRTUAL_PORT=8083
   dashboard:
-    build: ./dashboard
+    image: ${DOCKER_USERNAME}/dashboard:latest
     ports:
       - "8084:8080"
     environment:
       - VIRTUAL_HOST=dashboard.api.allgame.fun
       - VIRTUAL_PORT=8084
   discussion:
-    build: ./discussion
+    image: ${DOCKER_USERNAME}/discussion:latest
     ports:
       - "8085:8080"
     environment:
       - VIRTUAL_HOST=discussion.api.allgame.fun
       - VIRTUAL_PORT=8085
   payment:
-    build: ./payment
+    image: ${DOCKER_USERNAME}/payment:latest
     ports:
       - "8086:8080"
     environment:
       - VIRTUAL_HOST=payment.api.allgame.fun
       - VIRTUAL_PORT=8086
+  auth:
+    image: ${DOCKER_USERNAME}/auth:latest
+    ports:
+      - "8087:8080"
+    environment:
+      - VIRTUAL_HOST=auth.api.allgame.fun
+      - VIRTUAL_PORT=8087

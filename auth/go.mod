@@ -1,4 +1,4 @@
-module github.com/yijia-cc/grouplive/chat
+module github.com/yijia-cc/grouplive/auth
 
 go 1.15
 

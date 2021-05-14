@@ -111,7 +111,6 @@ trigger:
     - production
   event:
     - push
-
 ---
 kind: pipeline
 type: docker
@@ -226,8 +225,6 @@ trigger:
     - production
   event:
     - push
-
-
 ---
 kind: pipeline
 type: docker

@@ -1,5 +1,14 @@
 version: "3.3"
 services:
+  # Frontend
+  web-staging:
+    image: ${DOCKER_USERNAME}/web-staging:latest
+    ports:
+      - "9081:80"
+    environment:
+      - VIRTUAL_HOST=www.staging.allgame.fun,staging.allgame.fun
+      - VIRTUAL_PORT=9081
+  # Backend
   calendar-staging:
     image: ${DOCKER_USERNAME}/calendar-staging:latest
     ports:

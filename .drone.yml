@@ -527,7 +527,7 @@ steps:
   - name: Sync Docker image
     image: appleboy/drone-ssh
     environment:
-      DOCKER_REPO_CALENDAR:
+      DOCKER_REPO_DISCUSSION:
         from_secret: DOCKER_REPO_DISCUSSION
     settings:
       host:
@@ -560,7 +560,7 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
-        from_secret: DOCKER_REPO_CHAT
+        from_secret: DOCKER_REPO_PAYMENT
       tags: latest
       dockerfile: payment/Dockerfile
       context: payment

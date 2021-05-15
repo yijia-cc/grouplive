@@ -7,6 +7,6 @@ import (
 )
 
 func TestSubtract(t *testing.T) {
-	subtraction := Subtract(2, 3)
-	assert.Equal(t, -1, subtraction)
+	subtraction := Subtract(6, 3)
+	assert.Equal(t, 3, subtraction)
 }

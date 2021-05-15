@@ -1,13 +1,13 @@
 version: "3.3"
 services:
-#  # Frontend
-#  web:
-#    image: ${DOCKER_USERNAME}/web:latest
-#    ports:
-#      - "8081:80"
-#    environment:
-#      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
-#      - VIRTUAL_PORT=8081
+  # Frontend
+  web:
+    image: ${DOCKER_USERNAME}/web:latest
+    ports:
+      - "8081:80"
+    environment:
+      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
+      - VIRTUAL_PORT=8081
   # Backend
   calendar:
     image: ${DOCKER_USERNAME}/calendar:latest

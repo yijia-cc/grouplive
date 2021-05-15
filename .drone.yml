@@ -102,6 +102,24 @@ trigger:
 ---
 kind: pipeline
 type: docker
+name: feature-web
+
+steps:
+  - name: Run unit tests
+    image: node:16.0.0-alpine3.13
+    commands:
+      - cd web
+      - npm install
+      - CI=true npm test
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
 name: staging-calendar
 
 steps:
@@ -348,6 +366,47 @@ trigger:
 ---
 kind: pipeline
 type: docker
+name: staging-web
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_WEB_STAGING
+      tags: latest
+      dockerfile: web/Dockerfile
+      context: web
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_WEB_STAGING:
+        from_secret: DOCKER_REPO_WEB_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_WEB_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_WEB_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
 name: staging-deploy
 
 steps:
@@ -386,6 +445,7 @@ depends_on:
   - staging-discussion
   - staging-payment
   - staging-auth
+  - staging-web
 ---
 kind: pipeline
 type: docker
@@ -629,6 +689,46 @@ trigger:
 ---
 kind: pipeline
 type: docker
+name: prod-web
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_WEB
+      tags: latest
+      dockerfile: web/Dockerfile
+      context: web
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_WEB:
+        from_secret: DOCKER_REPO_WEB
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_WEB]
+      script:
+        - docker pull $DOCKER_REPO_WEB
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
 name: prod-deploy
 
 steps:
@@ -666,3 +766,4 @@ depends_on:
   - prod-discussion
   - prod-payment
   - prod-auth
+  - prod-web

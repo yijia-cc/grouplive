@@ -124,13 +124,13 @@ steps:
         from_secret: DOCKER_REPO_CALENDAR_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_CALENDAR_STAGING]
       script:
         - docker pull $DOCKER_REPO_CALENDAR_STAGING
@@ -165,13 +165,13 @@ steps:
         from_secret: DOCKER_REPO_DASHBOARD_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_DASHBOARD_STAGING]
       script:
         - docker pull $DOCKER_REPO_DASHBOARD_STAGING
@@ -206,13 +206,13 @@ steps:
         from_secret: DOCKER_REPO_CHAT_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_CHAT_STAGING]
       script:
         - docker pull $DOCKER_REPO_CHAT_STAGING
@@ -247,13 +247,13 @@ steps:
         from_secret: DOCKER_REPO_DISCUSSION_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_DISCUSSION_STAGING]
       script:
         - docker pull $DOCKER_REPO_DISCUSSION_STAGING
@@ -288,13 +288,13 @@ steps:
         from_secret: DOCKER_REPO_PAYMENT_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_PAYMENT_STAGING]
       script:
         - docker pull $DOCKER_REPO_PAYMENT_STAGING
@@ -329,13 +329,13 @@ steps:
         from_secret: DOCKER_REPO_AUTH_STAGING
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_AUTH_STAGING]
       script:
         - docker pull $DOCKER_REPO_AUTH_STAGING
@@ -360,13 +360,13 @@ steps:
         from_secret: ENV_FILE_PATH
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [REPO_DIR, ENV_FILE_PATH]
       script:
         - cd $REPO_DIR
@@ -411,13 +411,13 @@ steps:
         from_secret: DOCKER_REPO_CALENDAR
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_CALENDAR]
       script:
         - docker pull $DOCKER_REPO_CALENDAR
@@ -451,13 +451,13 @@ steps:
         from_secret: DOCKER_REPO_DASHBOARD
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_DASHBOARD]
       script:
         - docker pull $DOCKER_REPO_DASHBOARD
@@ -491,13 +491,13 @@ steps:
         from_secret: DOCKER_REPO_CHAT
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_CHAT]
       script:
         - docker pull $DOCKER_REPO_CHAT
@@ -531,13 +531,13 @@ steps:
         from_secret: DOCKER_REPO_DISCUSSION
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_DISCUSSION]
       script:
         - docker pull $DOCKER_REPO_DISCUSSION
@@ -571,13 +571,13 @@ steps:
         from_secret: DOCKER_REPO_PAYMENT
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_PAYMENT]
       script:
         - docker pull $DOCKER_REPO_PAYMENT
@@ -611,13 +611,13 @@ steps:
         from_secret: DOCKER_REPO_AUTH
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [DOCKER_REPO_AUTH]
       script:
         - docker pull $DOCKER_REPO_AUTH
@@ -641,13 +641,13 @@ steps:
         from_secret: ENV_FILE_PATH
     settings:
       host:
-        from_secret: AWS_SSH_HOST
+        from_secret: SSH_HOST
       port:
-        from_secret: AWS_SSH_PORT
+        from_secret: SSH_PORT
       username:
-        from_secret: AWS_SSH_USERNAME
+        from_secret: SSH_USERNAME
       key:
-        from_secret: AWS_SSH_KEY
+        from_secret: SSH_KEY
       envs: [REPO_DIR, ENV_FILE_PATH]
       script:
         - cd $REPO_DIR

@@ -1,0 +1,31 @@
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+
+# Global Owner
+*            @yijia-cc
+
+# frontend owner
+*.js         @wl328Weiminli
+
+# auth owner
+auth/*       @unevenmoon
+auth/*       @isabellakqq
+
+# calendar owner
+calendar/*   @yijia-cc
+
+# chat owner
+chat/*       @MEtoCS
+chat/*       @wikiwu24
+chat/*       @yuranranran
+
+# dashboard owner
+dashboard/*  @isabellakqq
+dashboard/*  @ziyang-666
+
+# discussion owner
+discussion/* @jackiewang5566
+
+# payment owner
+payment/*    @Zanzan666
+

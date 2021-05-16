@@ -55,10 +55,11 @@ name: feature-discussion
 
 steps:
   - name: Run unit tests
-    image: golang:1.16
+    image: openjdk:11.0.2-jdk-oracle
     commands:
       - cd discussion
-      - go test ./...
+      - unset SERVER_PORT
+      - ./gradlew test -i
 trigger:
   branch:
     - master

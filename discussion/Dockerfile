@@ -1,26 +1,19 @@
-FROM golang:1.16-alpine AS builder
+# Build
+FROM openjdk:11.0.2-jdk-oracle AS builder
 
 WORKDIR /app
-
-RUN apk add --no-cache git bash
-
-# Install dependencies
-COPY go.* ./
-RUN go mod download
-
-# Verify dependencies
-RUN go mod verify
 
 COPY . .
 
-RUN go build -o bin/main main.go
+RUN ./gradlew build
 
-FROM alpine:3.13 AS production
+# Production
+FROM openjdk:11.0.2-jre-slim AS production
 
 WORKDIR /app
 
-RUN apk add --no-cache bash
+#RUN apk add --no-cache bash
 
-COPY --from=builder /app/bin/main ./bin/main
+COPY --from=builder /app/build/libs/*.jar app.jar
 
-ENTRYPOINT ["/app/bin/main"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

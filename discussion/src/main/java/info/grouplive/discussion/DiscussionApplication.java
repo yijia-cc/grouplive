@@ -17,5 +17,4 @@ public class DiscussionApplication {
 	public String hello() {
 		return "Hello World!";
 	}
-
 }

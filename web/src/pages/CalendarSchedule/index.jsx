@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { getData } from "../../redux/actions/testAction";
 import DisplayData from "./DisplayData";
-const CalendarSch = (props) => {
+const CalendarSchedule = (props) => {
   const { getData } = props;
   const clickHandler = async () => {
     try {

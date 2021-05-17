@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { Layout, Breadcrumb } from "antd";
-import CalendarSch from "../../pages/CalendarSch";
+import CalendarSchedule from "../../pages/CalendarSchedule";
 import ChatRoom from "../../pages/ChatRoom";
 import Dashboard from "../../pages/Dashboard";
 import DiscussBoard from "../../pages/DiscussBoard";

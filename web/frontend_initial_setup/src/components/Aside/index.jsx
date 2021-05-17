@@ -25,7 +25,7 @@ function Aside(props) {
           Dash Board
           <NavLink to="/dashboard" />
         </Menu.Item>
-        <Menu.Item key="discussboard" icon={<FireOutlined />}>
+        <Menu.Item key="discussion" icon={<FireOutlined />}>
           Discussion Board
           <NavLink to="/discussboard" />
         </Menu.Item>

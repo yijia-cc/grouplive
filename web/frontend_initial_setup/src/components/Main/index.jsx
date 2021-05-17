@@ -32,9 +32,9 @@ const Main = (props) => {
       >
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/discussboard" component={DiscussBoard} />
-          <Route path="/ChatRoom" component={ChatRoom} />
-          <Route path="/Calendar" component={CalendarSch} />
+          <Route path="/discussion" component={DiscussBoard} />
+          <Route path="/chat" component={ChatRoom} />
+          <Route path="/calendar" component={CalendarSchedule} />
           <Redirect to="/dashboard" />
         </Switch>
       </Content>

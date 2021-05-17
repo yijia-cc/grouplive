@@ -29,7 +29,7 @@ function Aside(props) {
           Discussion Board
           <NavLink to="/discussion" />
         </Menu.Item>
-        <Menu.Item key="chatRoom" icon={<WechatOutlined />}>
+        <Menu.Item key="chat" icon={<WechatOutlined />}>
           Chat Room
           <NavLink to="/chatRoom" />
         </Menu.Item>

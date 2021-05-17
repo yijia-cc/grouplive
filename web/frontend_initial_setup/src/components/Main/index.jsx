@@ -8,7 +8,7 @@ import DiscussBoard from "../../pages/DiscussBoard";
 const { Content } = Layout;
 const routeMap = {
   dashboard: "Dashboard",
-  discussboard: "Discussion board",
+  discussion: "Discussion board",
   chat: "Chat room",
   calendar: "Calendar schedule",
 };

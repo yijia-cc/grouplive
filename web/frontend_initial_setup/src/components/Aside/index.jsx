@@ -31,7 +31,7 @@ function Aside(props) {
         </Menu.Item>
         <Menu.Item key="chat" icon={<WechatOutlined />}>
           Chat Room
-          <NavLink to="/chatRoom" />
+          <NavLink to="/chat" />
         </Menu.Item>
         <Menu.Item key="Calendar" icon={<CalendarOutlined />}>
           Calendar Schedule

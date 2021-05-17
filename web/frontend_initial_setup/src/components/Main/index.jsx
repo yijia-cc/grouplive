@@ -9,7 +9,7 @@ const { Content } = Layout;
 const routeMap = {
   dashboard: "Dashboard",
   discussboard: "Discussion board",
-  chatRoom: "Char room",
+  chat: "Chat room",
   calendar: "Calendar schedule",
 };
 const Main = (props) => {

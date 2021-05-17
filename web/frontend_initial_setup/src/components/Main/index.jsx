@@ -10,7 +10,7 @@ const routeMap = {
   dashboard: "Dashboard",
   discussboard: "Discussion board",
   chatRoom: "Char room",
-  Calendar: "Calendar schedule",
+  calendar: "Calendar schedule",
 };
 const Main = (props) => {
   const { pathname } = props.location;

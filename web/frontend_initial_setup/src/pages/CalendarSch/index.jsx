@@ -30,4 +30,4 @@ export default connect(
     testData: state.testData,
   }),
   { getData }
-)(CalendarSch);
+)(CalendarSchedule);

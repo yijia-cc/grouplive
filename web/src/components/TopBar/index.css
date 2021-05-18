@@ -1,7 +1,11 @@
 .logo {
-  height: 40px;
+  position: relative;
 }
-.navigation {
+.logo img {
+  position: absolute;
+  height: 50px;
+}
+.rightBar {
   display: flex;
   justify-content: flex-end;
 }

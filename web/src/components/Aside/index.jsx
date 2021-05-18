@@ -22,7 +22,7 @@ function Aside(props) {
         style={{ height: "100%", borderRight: 0 }}
       >
         <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
-          Dash Board
+          DashBoard
           <NavLink to="/dashboard" />
         </Menu.Item>
         <Menu.Item key="discussion" icon={<FireOutlined />}>

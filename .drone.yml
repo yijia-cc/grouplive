@@ -107,7 +107,7 @@ name: feature-web
 
 steps:
   - name: Run unit tests
-    image: node:14.16.0-alpine3.13
+    image: node:16.0.0-alpine3.13
     commands:
       - cd web
       - npm install

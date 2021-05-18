@@ -111,7 +111,7 @@ steps:
     commands:
       - cd web
       - npm install
-#      - CI=true npm test
+      - CI=true npm test
 trigger:
   branch:
     - master

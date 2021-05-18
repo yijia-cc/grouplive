@@ -8,44 +8,90 @@ type Query {
     Revise API to utilize graphql nest & nested parameters
     https://graphql.org/learn/schema/#arguments
     """
-    amenityTypes(start: Datetime!, end: Datetime!): [AmenityType!]!
-    operationalTime(amenityId: ID!, start: Datetime!, end: Datetime!): [TimeSlot!]!
-    pastReservations: [Reservation!]!
-    upcomingReservations: [Reservation!]!
-
+    amenityTypes: [AmenityType!]!
+    amenityType(id: ID!): AmenityType
+    reservations: [Reservation!]!
 }
 
 type Mutation {
-    holdAmenity(id: ID!): Void
-    makeReservation(reservation: Reservation!): ID!
-    updateReservation(reservation: Reservation!): Void
+    makeReservation(reservationInput: ReservationInput!): Reservation
+    confirmReservation(id: ID!): Void
     cancelReservation(id: ID!): Void
-    createAmenityType(amenityType: AmenityType!): ID!
-    addAmenity(amenity: Amenity!): ID!
-    listReservations(amenityId: ID!): [Reservation!]!
+    updateReservation(reservation: ReservationInput!): Reservation
+
+    addAmenityType(amenityType: AmenityTypeInput!): Void
+    deleteAmenityType(id: ID!): Void
+    updateAmenityType(amenityType: AmenityTypeInput!): Void
+
+    addAmenity(amenity: AmenityInput!): Void
+    deleteAmenity(id: ID!): Void
+    updateAmenity(amenity: AmenityInput!): Void
 }
 
-type Reservation {
+input ReservationInput {
+    reservationID: ID
+    amenityID: ID!
+    timeRange: TimeRangeInput!
+}
+
+input AmenityFilterInput {
+    timeRange: TimeRangeInput
+}
+
+input AmenityTypeInput {
     id: ID
-    amenityID: ID
-    timeRange: TimeRange
+    title: String
+    description: String
+    thumbnailUrl: String
 }
 
-type Amenity {
+input AmenityInput {
     id: ID
     name: String
+    type: AmenityTypeInput!
+    operationalHours: [TimeRangeInput!]!
 }
 
 type AmenityType {
-    id: ID
+    id: ID!
+    title: String
+    description: String
+    thumbnailUrl: String
+
+    amenities(filter: AmenityFilterInput): [Amenity!]!
+}
+
+type Reservation {
+    id: ID!
+    amenity: Amenity!
+    holdDuration: Duration
+    timeSlot: TimeSlot!
+}
+
+type Amenity {
+    id: ID!
     name: String
-    iconUrl: String
+    type: AmenityType!
+    schedule(weekStart: Datetime): Schedule
+    operationalHours: [TimeRange!]!
+}
+
+type Schedule {
+    id: ID!
+    weekStart: Datetime!
+    previous: Schedule
+    next: Schedule
+    timeSlots: [TimeSlot!]!
 }
 
 type TimeSlot {
-    type: TimeSlotType
-    timeRange: TimeRange
-    holdDuration: Duration
+    type: TimeSlotType!
+    timeRange: TimeRange!
+}
+
+input TimeRangeInput  {
+    start: Datetime
+    end: Datetime
 }
 
 type TimeRange {

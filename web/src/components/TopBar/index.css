@@ -1,0 +1,16 @@
+.logo {
+  position: relative;
+}
+.logo img {
+  position: absolute;
+  height: 50px;
+}
+.rightBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}

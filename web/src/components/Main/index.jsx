@@ -11,8 +11,6 @@ const { Content } = Layout;
 
 const Main = (props) => {
   return (
-    // style={{ padding: "100px 24px 24px" }}
-    // <Layout style={{ padding: "112px 24px 24px" }}>
     <Row justify="center" style={{ padding: "112px 0 24px" }}>
       <Col span={22}>
         <Content

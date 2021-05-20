@@ -1,124 +1,124 @@
-#kind: pipeline
-#type: docker
-#name: feature-calendar
-#
-#steps:
-#  - name: Run unit tests
-#    image: golang:1.16
-#    commands:
-#      - cd calendar
-#      - go test ./...
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-dashboard
-#
-#steps:
-#  - name: Run unit tests
-#    image: golang:1.16
-#    commands:
-#      - cd dashboard
-#      - go test ./...
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-chat
-#
-#steps:
-#  - name: Run unit tests
-#    image: golang:1.16
-#    commands:
-#      - cd chat
-#      - go test ./...
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-discussion
-#
-#steps:
-#  - name: Run unit tests
-#    image: openjdk:11.0.2-jdk-oracle
-#    commands:
-#      - cd discussion
-#      - unset SERVER_PORT
-#      - ./gradlew test -i
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-payment
-#
-#steps:
-#  - name: Run unit tests
-#    image: golang:1.16
-#    commands:
-#      - cd payment
-#      - go test ./...
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-auth
-#
-#steps:
-#  - name: Run unit tests
-#    image: golang:1.16
-#    commands:
-#      - cd auth
-#      - go test ./...
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
-#kind: pipeline
-#type: docker
-#name: feature-web
-#
-#steps:
-#  - name: Run unit tests
-#    image: node:16.0.0-alpine3.13
-#    commands:
-#      - cd web
-#      - npm install
-#      - CI=true npm test
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - pull_request
-#---
+kind: pipeline
+type: docker
+name: feature-calendar
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd calendar
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-dashboard
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd dashboard
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-chat
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd chat
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-discussion
+
+steps:
+  - name: Run unit tests
+    image: openjdk:11.0.2-jdk-oracle
+    commands:
+      - cd discussion
+      - unset SERVER_PORT
+      - ./gradlew test -i
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-payment
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd payment
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-auth
+
+steps:
+  - name: Run unit tests
+    image: golang:1.16
+    commands:
+      - cd auth
+      - go test ./...
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: feature-web
+
+steps:
+  - name: Run unit tests
+    image: node:16.0.0-alpine3.13
+    commands:
+      - cd web
+      - npm install
+      - CI=true npm test
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - pull_request
+---
 kind: pipeline
 type: docker
 name: staging-calendar
@@ -154,257 +154,257 @@ steps:
       script:
         - docker pull $DOCKER_REPO_CALENDAR_STAGING
 trigger:
-#  branch:
-#    - master
-#    - main
+  branch:
+    - master
+    - main
   event:
     - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-dashboard
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_DASHBOARD_STAGING
-#      tags: latest
-#      dockerfile: dashboard/Dockerfile
-#      context: dashboard
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_DASHBOARD_STAGING:
-#        from_secret: DOCKER_REPO_DASHBOARD_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_DASHBOARD_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_DASHBOARD_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-chat
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_CHAT_STAGING
-#      tags: latest
-#      dockerfile: chat/Dockerfile
-#      context: chat
-#  - name: Sync Dockere image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_CHAT_STAGING:
-#        from_secret: DOCKER_REPO_CHAT_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_CHAT_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_CHAT_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-discussion
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_DISCUSSION_STAGING
-#      tags: latest
-#      dockerfile: discussion/Dockerfile
-#      context: discussion
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_DISCUSSION_STAGING:
-#        from_secret: DOCKER_REPO_DISCUSSION_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_DISCUSSION_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_DISCUSSION_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-payment
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_PAYMENT_STAGING
-#      tags: latest
-#      dockerfile: payment/Dockerfile
-#      context: payment
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_PAYMENT_STAGING:
-#        from_secret: DOCKER_REPO_PAYMENT_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_PAYMENT_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_PAYMENT_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-auth
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_AUTH_STAGING
-#      tags: latest
-#      dockerfile: auth/Dockerfile
-#      context: auth
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_AUTH_STAGING:
-#        from_secret: DOCKER_REPO_AUTH_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_AUTH_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_AUTH_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-web
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_WEB_STAGING
-#      tags: latest
-#      dockerfile: web/Dockerfile
-#      context: web
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_WEB_STAGING:
-#        from_secret: DOCKER_REPO_WEB_STAGING
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_WEB_STAGING]
-#      script:
-#        - docker pull $DOCKER_REPO_WEB_STAGING
-#trigger:
-#  branch:
-#    - master
-#    - main
-#  event:
-#    - push
+---
+kind: pipeline
+type: docker
+name: staging-dashboard
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_DASHBOARD_STAGING
+      tags: latest
+      dockerfile: dashboard/Dockerfile
+      context: dashboard
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_DASHBOARD_STAGING:
+        from_secret: DOCKER_REPO_DASHBOARD_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_DASHBOARD_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_DASHBOARD_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: staging-chat
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_CHAT_STAGING
+      tags: latest
+      dockerfile: chat/Dockerfile
+      context: chat
+  - name: Sync Dockere image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_CHAT_STAGING:
+        from_secret: DOCKER_REPO_CHAT_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_CHAT_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_CHAT_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: staging-discussion
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_DISCUSSION_STAGING
+      tags: latest
+      dockerfile: discussion/Dockerfile
+      context: discussion
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_DISCUSSION_STAGING:
+        from_secret: DOCKER_REPO_DISCUSSION_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_DISCUSSION_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_DISCUSSION_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: staging-payment
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_PAYMENT_STAGING
+      tags: latest
+      dockerfile: payment/Dockerfile
+      context: payment
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_PAYMENT_STAGING:
+        from_secret: DOCKER_REPO_PAYMENT_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_PAYMENT_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_PAYMENT_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: staging-auth
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_AUTH_STAGING
+      tags: latest
+      dockerfile: auth/Dockerfile
+      context: auth
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_AUTH_STAGING:
+        from_secret: DOCKER_REPO_AUTH_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_AUTH_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_AUTH_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: staging-web
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_WEB_STAGING
+      tags: latest
+      dockerfile: web/Dockerfile
+      context: web
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_WEB_STAGING:
+        from_secret: DOCKER_REPO_WEB_STAGING
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_WEB_STAGING]
+      script:
+        - docker pull $DOCKER_REPO_WEB_STAGING
+trigger:
+  branch:
+    - master
+    - main
+  event:
+    - push
 ---
 kind: pipeline
 type: docker
@@ -434,337 +434,337 @@ steps:
         - git pull
         - docker-compose -f docker-compose-staging.yml --env-file $ENV_FILE_PATH  up -d
 trigger:
-#  branch:
-#    - master
-#    - main
+  branch:
+    - master
+    - main
   event:
     - push
 depends_on:
   - staging-calendar
-#  - staging-chat
-#  - staging-dashboard
-#  - staging-discussion
-#  - staging-payment
-#  - staging-auth
-#  - staging-web
-#---
-#kind: pipeline
-#type: docker
-#name: prod-calendar
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_CALENDAR
-#      tags: latest
-#      dockerfile: calendar/Dockerfile
-#      context: calendar
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_CALENDAR:
-#        from_secret: DOCKER_REPO_CALENDAR
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_CALENDAR]
-#      script:
-#        - docker pull $DOCKER_REPO_CALENDAR
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-dashboard
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_DASHBOARD
-#      tags: latest
-#      dockerfile: dashboard/Dockerfile
-#      context: dashboard
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_DASHBOARD:
-#        from_secret: DOCKER_REPO_DASHBOARD
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_DASHBOARD]
-#      script:
-#        - docker pull $DOCKER_REPO_DASHBOARD
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-chat
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_CHAT
-#      tags: latest
-#      dockerfile: chat/Dockerfile
-#      context: chat
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_CHAT:
-#        from_secret: DOCKER_REPO_CHAT
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_CHAT]
-#      script:
-#        - docker pull $DOCKER_REPO_CHAT
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-discussion
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_DISCUSSION
-#      tags: latest
-#      dockerfile: discussion/Dockerfile
-#      context: discussion
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_DISCUSSION:
-#        from_secret: DOCKER_REPO_DISCUSSION
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_DISCUSSION]
-#      script:
-#        - docker pull $DOCKER_REPO_DISCUSSION
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-payment
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_PAYMENT
-#      tags: latest
-#      dockerfile: payment/Dockerfile
-#      context: payment
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_PAYMENT:
-#        from_secret: DOCKER_REPO_PAYMENT
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_PAYMENT]
-#      script:
-#        - docker pull $DOCKER_REPO_PAYMENT
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-auth
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_AUTH
-#      tags: latest
-#      dockerfile: auth/Dockerfile
-#      context: auth
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_AUTH:
-#        from_secret: DOCKER_REPO_AUTH
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_AUTH]
-#      script:
-#        - docker pull $DOCKER_REPO_AUTH
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-web
-#
-#steps:
-#  - name: Build Docker image
-#    image: plugins/docker
-#    settings:
-#      username:
-#        from_secret: DOCKER_USERNAME
-#      password:
-#        from_secret: DOCKER_PASSWORD
-#      repo:
-#        from_secret: DOCKER_REPO_WEB
-#      tags: latest
-#      dockerfile: web/Dockerfile
-#      context: web
-#  - name: Sync Docker image
-#    image: appleboy/drone-ssh
-#    environment:
-#      DOCKER_REPO_WEB:
-#        from_secret: DOCKER_REPO_WEB
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [DOCKER_REPO_WEB]
-#      script:
-#        - docker pull $DOCKER_REPO_WEB
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#---
-#kind: pipeline
-#type: docker
-#name: prod-deploy
-#
-#steps:
-#  - name: Deploy services
-#    image: appleboy/drone-ssh
-#    environment:
-#      REPO_DIR:
-#        from_secret: REPO_DIR
-#      ENV_FILE_PATH:
-#        from_secret: ENV_FILE_PATH
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [REPO_DIR, ENV_FILE_PATH]
-#      script:
-#        - cd $REPO_DIR
-#        - git checkout production
-#        - git pull
-#        - docker-compose -f docker-compose-prod.yml --env-file $ENV_FILE_PATH  up -d
-#trigger:
-#  branch:
-#    - production
-#  event:
-#    - push
-#depends_on:
-#  - prod-calendar
-#  - prod-chat
-#  - prod-dashboard
-#  - prod-discussion
-#  - prod-payment
-#  - prod-auth
-#  - prod-web
+  - staging-chat
+  - staging-dashboard
+  - staging-discussion
+  - staging-payment
+  - staging-auth
+  - staging-web
+---
+kind: pipeline
+type: docker
+name: prod-calendar
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_CALENDAR
+      tags: latest
+      dockerfile: calendar/Dockerfile
+      context: calendar
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_CALENDAR:
+        from_secret: DOCKER_REPO_CALENDAR
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_CALENDAR]
+      script:
+        - docker pull $DOCKER_REPO_CALENDAR
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-dashboard
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_DASHBOARD
+      tags: latest
+      dockerfile: dashboard/Dockerfile
+      context: dashboard
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_DASHBOARD:
+        from_secret: DOCKER_REPO_DASHBOARD
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_DASHBOARD]
+      script:
+        - docker pull $DOCKER_REPO_DASHBOARD
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-chat
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_CHAT
+      tags: latest
+      dockerfile: chat/Dockerfile
+      context: chat
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_CHAT:
+        from_secret: DOCKER_REPO_CHAT
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_CHAT]
+      script:
+        - docker pull $DOCKER_REPO_CHAT
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-discussion
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_DISCUSSION
+      tags: latest
+      dockerfile: discussion/Dockerfile
+      context: discussion
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_DISCUSSION:
+        from_secret: DOCKER_REPO_DISCUSSION
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_DISCUSSION]
+      script:
+        - docker pull $DOCKER_REPO_DISCUSSION
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-payment
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_PAYMENT
+      tags: latest
+      dockerfile: payment/Dockerfile
+      context: payment
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_PAYMENT:
+        from_secret: DOCKER_REPO_PAYMENT
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_PAYMENT]
+      script:
+        - docker pull $DOCKER_REPO_PAYMENT
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-auth
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_AUTH
+      tags: latest
+      dockerfile: auth/Dockerfile
+      context: auth
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_AUTH:
+        from_secret: DOCKER_REPO_AUTH
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_AUTH]
+      script:
+        - docker pull $DOCKER_REPO_AUTH
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-web
+
+steps:
+  - name: Build Docker image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo:
+        from_secret: DOCKER_REPO_WEB
+      tags: latest
+      dockerfile: web/Dockerfile
+      context: web
+  - name: Sync Docker image
+    image: appleboy/drone-ssh
+    environment:
+      DOCKER_REPO_WEB:
+        from_secret: DOCKER_REPO_WEB
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [DOCKER_REPO_WEB]
+      script:
+        - docker pull $DOCKER_REPO_WEB
+trigger:
+  branch:
+    - production
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: prod-deploy
+
+steps:
+  - name: Deploy services
+    image: appleboy/drone-ssh
+    environment:
+      REPO_DIR:
+        from_secret: REPO_DIR
+      ENV_FILE_PATH:
+        from_secret: ENV_FILE_PATH
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [REPO_DIR, ENV_FILE_PATH]
+      script:
+        - cd $REPO_DIR
+        - git checkout production
+        - git pull
+        - docker-compose -f docker-compose-prod.yml --env-file $ENV_FILE_PATH  up -d
+trigger:
+  branch:
+    - production
+  event:
+    - push
+depends_on:
+  - prod-calendar
+  - prod-chat
+  - prod-dashboard
+  - prod-discussion
+  - prod-payment
+  - prod-auth
+  - prod-web

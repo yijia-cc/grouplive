@@ -25,8 +25,3 @@ func (Amenity) Type() AmenityType {
 func (Amenity) OperationalHours() []TimeRange {
 	return nil
 }
-
-
-
-
-

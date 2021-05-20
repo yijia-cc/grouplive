@@ -9,15 +9,15 @@ type Query {
     https://graphql.org/learn/schema/#arguments
     """
     amenityTypes: [AmenityType!]!
-    amenityType(id: ID!): AmenityType
+    amenityType(id: ID!): AmenityType!
     reservations: [Reservation!]!
 }
 
 type Mutation {
-    makeReservation(reservationInput: ReservationInput!): Reservation
+    makeReservation(reservation: ReservationInput!): Reservation!
     confirmReservation(id: ID!): Void
     cancelReservation(id: ID!): Void
-    updateReservation(reservation: ReservationInput!): Reservation
+    updateReservation(reservation: ReservationInput!): Reservation!
 
     addAmenityType(amenityType: AmenityTypeInput!): Void
     deleteAmenityType(id: ID!): Void
@@ -29,8 +29,8 @@ type Mutation {
 }
 
 input ReservationInput {
-    reservationID: ID
-    amenityID: ID!
+    reservationId: ID
+    amenityId: ID!
     timeRange: TimeRangeInput!
 }
 
@@ -72,13 +72,13 @@ type Amenity {
     id: ID!
     name: String
     type: AmenityType!
-    schedule(weekStart: Datetime): Schedule
+    schedule(weekStart: Time): Schedule
     operationalHours: [TimeRange!]!
 }
 
 type Schedule {
     id: ID!
-    weekStart: Datetime!
+    weekStart: Time!
     previous: Schedule
     next: Schedule
     timeSlots: [TimeSlot!]!
@@ -90,13 +90,13 @@ type TimeSlot {
 }
 
 input TimeRangeInput  {
-    start: Datetime
-    end: Datetime
+    start: Time!
+    end: Time!
 }
 
 type TimeRange {
-    start: Datetime
-    end: Datetime
+    start: Time!
+    end: Time!
 }
 
 enum TimeSlotType {
@@ -105,6 +105,6 @@ enum TimeSlotType {
     BOOKED_BY_ME
 }
 
-scalar Datetime
+scalar Time
 scalar Duration
 scalar Void

@@ -405,42 +405,42 @@ trigger:
 #    - main
 #  event:
 #    - push
-#---
-#kind: pipeline
-#type: docker
-#name: staging-deploy
-#
-#steps:
-#  - name: Deploy services
-#    image: appleboy/drone-ssh
-#    environment:
-#      REPO_DIR:
-#        from_secret: REPO_DIR
-#      ENV_FILE_PATH:
-#        from_secret: ENV_FILE_PATH
-#    settings:
-#      host:
-#        from_secret: SSH_HOST
-#      port:
-#        from_secret: SSH_PORT
-#      username:
-#        from_secret: SSH_USERNAME
-#      key:
-#        from_secret: SSH_KEY
-#      envs: [REPO_DIR, ENV_FILE_PATH]
-#      script:
-#        - cd $REPO_DIR
-#        - git checkout master
-#        - git pull
-#        - docker-compose -f docker-compose-staging.yml --env-file $ENV_FILE_PATH  up -d
-#trigger:
+---
+kind: pipeline
+type: docker
+name: staging-deploy
+
+steps:
+  - name: Deploy services
+    image: appleboy/drone-ssh
+    environment:
+      REPO_DIR:
+        from_secret: REPO_DIR
+      ENV_FILE_PATH:
+        from_secret: ENV_FILE_PATH
+    settings:
+      host:
+        from_secret: SSH_HOST
+      port:
+        from_secret: SSH_PORT
+      username:
+        from_secret: SSH_USERNAME
+      key:
+        from_secret: SSH_KEY
+      envs: [REPO_DIR, ENV_FILE_PATH]
+      script:
+        - cd $REPO_DIR
+        - git checkout master
+        - git pull
+        - docker-compose -f docker-compose-staging.yml --env-file $ENV_FILE_PATH  up -d
+trigger:
 #  branch:
 #    - master
 #    - main
-#  event:
-#    - push
-#depends_on:
-#  - staging-calendar
+  event:
+    - push
+depends_on:
+  - staging-calendar
 #  - staging-chat
 #  - staging-dashboard
 #  - staging-discussion

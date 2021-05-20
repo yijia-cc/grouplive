@@ -23,4 +23,6 @@ RUN apk add --no-cache bash
 
 COPY --from=builder /app/bin/main ./bin/main
 
+COPY --from=builder /app/gqlapi/schema.graphqls ./gqlapi
+
 ENTRYPOINT ["/app/bin/main"]

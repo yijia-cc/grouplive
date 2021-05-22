@@ -52,6 +52,11 @@ input AmenityInput {
     operationalHours: [TimeRangeInput!]!
 }
 
+input TimeRangeInput  {
+    start: Time!
+    end: Time!
+}
+
 type AmenityType {
     id: ID!
     title: String
@@ -87,11 +92,6 @@ type Schedule {
 type TimeSlot {
     type: TimeSlotType!
     timeRange: TimeRange!
-}
-
-input TimeRangeInput  {
-    start: Time!
-    end: Time!
 }
 
 type TimeRange {

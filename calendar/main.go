@@ -1,32 +1,31 @@
 package main
 
 import (
-	"fmt"
-	graphql "github.com/graph-gophers/graphql-go"
-	"github.com/graph-gophers/graphql-go/relay"
-	"github.com/yijia-cc/grouplive/calendar/gqlapi"
-	"io/ioutil"
-	"log"
-	"net/http"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/yijia-cc/grouplive/calendar/config"
+	"github.com/yijia-cc/grouplive/calendar/db"
+	"github.com/yijia-cc/grouplive/calendar/gql"
+	"sync"
 )
 
 func main() {
-	content, err := readStringFromFile("gqlapi/schema.graphqls")
+	cfg := config.FromEnv()
+	database, err := db.Connect(cfg)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
+	}
+	defer database.Close()
+
+	err = db.Migrate(database, cfg)
+	if err != nil {
+		panic(err)
 	}
 
-	schema := graphql.MustParseSchema(content, &gqlapi.Resolver{})
-	http.Handle("/", &relay.Handler{Schema: schema})
-
-	fmt.Println("GraphQL API started at port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func readStringFromFile(filePath string) (string, error) {
-	content, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		return "", err
-	}
-	return string(content), nil
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		gql.StartServer(cfg)
+	}()
+	wg.Wait()
 }

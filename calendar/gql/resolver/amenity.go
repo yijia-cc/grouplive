@@ -1,4 +1,4 @@
-package gqlapi
+package resolver
 
 import "github.com/graph-gophers/graphql-go"
 

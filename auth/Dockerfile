@@ -23,4 +23,4 @@ RUN apk add --no-cache bash
 
 COPY --from=builder /app/bin/main ./bin/main
 
-ENTRYPOINT ["/app/bin/main"]
+ENTRYPOINT ["./bin/main"]

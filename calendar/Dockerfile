@@ -25,10 +25,10 @@ COPY --from=builder /app/bin/main ./bin/main
 
 COPY --from=builder /app/gql/schema.graphqls ./gql/
 
-ENV CALENDAR_GRAPHQL_SCHEMA_PATH=gql/schema.graphqls
+ENV GRAPHQL_SCHEMA_PATH=gql/schema.graphqls
 
 COPY --from=builder /app/db/migrations/ ./db/migrations/
 
-ENV CALENDAR_DB_MIGRATION_DIR=db/migrations/
+ENV DB_MIGRATION_DIR=./db/migrations/
 
-ENTRYPOINT ["/app/bin/main"]
+ENTRYPOINT ["./bin/main"]

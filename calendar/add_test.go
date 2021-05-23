@@ -7,6 +7,6 @@ import (
 )
 
 func TestAdd(t *testing.T) {
-	sum := Add(8, 3)
-	assert.Equal(t, 11, sum)
+	sum := Add(7, 3)
+	assert.Equal(t, 10, sum)
 }

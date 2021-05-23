@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
+	"os"
 )
 
 type Config struct {
@@ -17,7 +18,7 @@ type Config struct {
 }
 
 func FromEnv() Config{
-	err := godotenv.Load()
+	err := autoLoadEnv()
 	if err != nil {
 		panic(err)
 	}
@@ -28,4 +29,13 @@ func FromEnv() Config{
 		panic(err)
 	}
 	return config
+}
+
+func autoLoadEnv() error {
+	_, err := os.Stat(".env")
+	if os.IsNotExist(err) {
+		return nil
+	}
+
+	return godotenv.Load()
 }

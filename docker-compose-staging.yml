@@ -22,7 +22,6 @@ services:
       - DB_USER=${CALENDAR_STAGING_DB_USER}
       - DB_PASSWORD=${CALENDAR_STAGING_DB_PASSWORD}
       - DB_NAME=${CALENDAR_STAGING_DB_NAME}
-      - GRAPHQL_SERVER_PORT=${CALENDAR_STAGING_GRAPHQL_SERVER_PORT}
   chat-staging:
     image: ${DOCKER_USERNAME}/chat-staging:latest
     ports:

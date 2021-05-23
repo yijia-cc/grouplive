@@ -133,6 +133,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_CALENDAR_STAGING
+      cache_from:
+        from_secret: DOCKER_REPO_CALENDAR_STAGING
       tags: latest
       dockerfile: calendar/Dockerfile
       context: calendar
@@ -173,6 +175,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_DASHBOARD_STAGING
+      cache_from:
         from_secret: DOCKER_REPO_DASHBOARD_STAGING
       tags: latest
       dockerfile: dashboard/Dockerfile
@@ -215,6 +219,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_CHAT_STAGING
+      cache_from:
+        from_secret: DOCKER_REPO_CHAT_STAGING
       tags: latest
       dockerfile: chat/Dockerfile
       context: chat
@@ -255,6 +261,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_DISCUSSION_STAGING
+      cache_from:
         from_secret: DOCKER_REPO_DISCUSSION_STAGING
       tags: latest
       dockerfile: discussion/Dockerfile
@@ -297,6 +305,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_PAYMENT_STAGING
+      cache_from:
+        from_secret: DOCKER_REPO_PAYMENT_STAGING
       tags: latest
       dockerfile: payment/Dockerfile
       context: payment
@@ -338,6 +348,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_AUTH_STAGING
+      cache_from:
+        from_secret: DOCKER_REPO_AUTH_STAGING
       tags: latest
       dockerfile: auth/Dockerfile
       context: auth
@@ -378,6 +390,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_WEB_STAGING
+      cache_from:
         from_secret: DOCKER_REPO_WEB_STAGING
       tags: latest
       dockerfile: web/Dockerfile
@@ -462,6 +476,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_CALENDAR
+      cache_from:
+        from_secret: DOCKER_REPO_CALENDAR
       tags: latest
       dockerfile: calendar/Dockerfile
       context: calendar
@@ -501,6 +517,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_DASHBOARD
+      cache_from:
         from_secret: DOCKER_REPO_DASHBOARD
       tags: latest
       dockerfile: dashboard/Dockerfile
@@ -542,6 +560,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_CHAT
+      cache_from:
+        from_secret: DOCKER_REPO_CHAT
       tags: latest
       dockerfile: chat/Dockerfile
       context: chat
@@ -581,6 +601,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_DISCUSSION
+      cache_from:
         from_secret: DOCKER_REPO_DISCUSSION
       tags: latest
       dockerfile: discussion/Dockerfile
@@ -622,6 +644,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_PAYMENT
+      cache_from:
+        from_secret: DOCKER_REPO_PAYMENT
       tags: latest
       dockerfile: payment/Dockerfile
       context: payment
@@ -662,6 +686,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo:
         from_secret: DOCKER_REPO_AUTH
+      cache_from:
+        from_secret: DOCKER_REPO_AUTH
       tags: latest
       dockerfile: auth/Dockerfile
       context: auth
@@ -701,6 +727,8 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo:
+        from_secret: DOCKER_REPO_WEB
+      cache_from:
         from_secret: DOCKER_REPO_WEB
       tags: latest
       dockerfile: web/Dockerfile

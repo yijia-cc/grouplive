@@ -1,4 +1,4 @@
-package gqlapi
+package resolver
 
 import "github.com/graph-gophers/graphql-go"
 
@@ -13,8 +13,8 @@ type TimeRangeInput struct {
 
 type ReservationInput struct {
 	ReservationID *graphql.ID
-	AmenityID graphql.ID
-	TimeRange TimeRangeInput
+	AmenityID     graphql.ID
+	TimeRange     TimeRangeInput
 }
 
 type AmenityTypeInput struct {
@@ -25,8 +25,8 @@ type AmenityTypeInput struct {
 }
 
 type AmenityInput struct {
-	Id *graphql.ID
-	Name *string
-	Type AmenityTypeInput
+	Id               *graphql.ID
+	Name             *string
+	Type             AmenityTypeInput
 	OperationalHours []TimeRangeInput
 }

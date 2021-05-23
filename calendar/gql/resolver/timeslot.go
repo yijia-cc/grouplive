@@ -1,4 +1,4 @@
-package gqlapi
+package resolver
 
 type TimeSlot struct{}
 

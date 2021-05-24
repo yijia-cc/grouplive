@@ -55,7 +55,7 @@ name: feature-discussion
 
 steps:
   - name: Run unit tests
-    image: openjdk:11.0.2-jdk-oracle
+    image: 3.8.1-jdk-11
     commands:
       - cd discussion
       - unset SERVER_PORT

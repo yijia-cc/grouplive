@@ -59,7 +59,8 @@ steps:
     commands:
       - cd discussion
       - unset SERVER_PORT
-      - ./gradlew test -i
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn test -B
 trigger:
   branch:
     - master

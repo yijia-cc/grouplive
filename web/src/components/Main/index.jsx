@@ -18,7 +18,6 @@ const Main = props => {
 
     console.log(props);
 
-    // Redirect user to <Login> page if not logged in, or the <Dashboard> page if already logged in
     const showLogin = () => {
         return isLoggedIn ? (
             <Redirect to="/login" />

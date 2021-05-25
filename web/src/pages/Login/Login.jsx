@@ -25,9 +25,6 @@ const Login = props => {
             .then(res => {
                 if (res.status === 200) {
                     const { data } = res;
-                    // Once successfully logged in, call the callback from the App component, so that
-                    // the token is saved in localStorage and the isLoggedIn state is set, which re-renders
-                    // the App component, and hence, the Main component and its children.
                     handleLoggedIn(data);
                     message.success("Login succeed! ");
                 }

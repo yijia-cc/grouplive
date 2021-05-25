@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout, Row, Col } from "antd";
-import CalendarSchedule from "../../pages/CalendarSchedule";
+import Calendar from "../../pages/Calendar";
 import ChatRoom from "../../pages/ChatRoom";
 import Dashboard from "../../pages/Dashboard";
 import DiscussBoard from "../../pages/DiscussBoard";
@@ -11,7 +11,7 @@ const { Content } = Layout;
 
 const Main = (props) => {
   return (
-    <Row justify="center" style={{ padding: "112px 0 24px" }}>
+    <Row justify="center" style={{ padding: "112px 35px 24px" }}>
       <Col span={22}>
         <Content
           className="site-layout-background"
@@ -25,7 +25,7 @@ const Main = (props) => {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/discussion" component={DiscussBoard} />
             <Route path="/chat" component={ChatRoom} />
-            <Route path="/calendar" component={CalendarSchedule} />
+            <Route path="/calendar" component={Calendar} />
             <Route path="/userinfo" component={UserInfo} />
             <Route path="/payment" component={Payment} />
             <Redirect to="/dashboard" />

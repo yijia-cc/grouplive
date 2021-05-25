@@ -6,10 +6,9 @@ import Dashboard from "../../pages/Dashboard";
 import DiscussBoard from "../../pages/DiscussBoard";
 import UserInfo from "../../pages/UserInfo";
 import Payment from "../../pages/Payment";
-import "./index.css";
-
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
+import "./index.css";
 
 const { Content } = Layout;
 

@@ -9,7 +9,6 @@ const GroupLive = () => {
         localStorage.getItem(TOKEN_KEY) ? true : false
     );
 
-    // When logging out, the browser needs to delete the token from localStorage; no interaction is needed from the server!
     const logout = () => {
         console.log("log out");
         localStorage.removeItem(TOKEN_KEY);

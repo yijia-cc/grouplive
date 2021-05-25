@@ -1,14 +1,13 @@
 # Build
-FROM openjdk:11.0.2-jdk-oracle AS builder
+FROM maven:3.8.1-jdk-11-slim AS builder
 
 WORKDIR /app
-
-COPY . .
-
-RUN ./gradlew build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
 
 # Production
-FROM openjdk:11.0.2-jre-slim AS production
+FROM maven:3.8.1-jdk-11-slim AS production
 
 WORKDIR /app
 

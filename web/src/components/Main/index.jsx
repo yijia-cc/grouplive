@@ -7,34 +7,55 @@ import DiscussBoard from "../../pages/DiscussBoard";
 import UserInfo from "../../pages/UserInfo";
 import Payment from "../../pages/Payment";
 import "./index.css";
+
+import Login from "../../pages/Login/Login";
+import Register from "../../pages/Register/Register";
+
 const { Content } = Layout;
 
-const Main = (props) => {
-  return (
-    <Row justify="center" style={{ padding: "112px 0 24px" }}>
-      <Col span={22}>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 1000,
-          }}
-        >
-          <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/discussion" component={DiscussBoard} />
-            <Route path="/chat" component={ChatRoom} />
-            <Route path="/calendar" component={CalendarSchedule} />
-            <Route path="/userinfo" component={UserInfo} />
-            <Route path="/payment" component={Payment} />
-            <Redirect to="/dashboard" />
-          </Switch>
-        </Content>
-      </Col>
-    </Row>
-    // </Layout>
-  );
+const Main = props => {
+    const { isLoggedIn, handleLoggedIn } = props;
+
+    console.log(props);
+
+    // Redirect user to <Login> page if not logged in, or the <Dashboard> page if already logged in
+    const showLogin = () => {
+        return isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
+            <Login handleLoggedIn={handleLoggedIn} />
+        );
+    };
+
+    return (
+        <Row justify="center" style={{ padding: "112px 0 24px" }}>
+            <Col span={22}>
+                <Content
+                    className="site-layout-background"
+                    style={{
+                        padding: 24,
+                        margin: 0,
+                        minHeight: 1000,
+                    }}
+                >
+                    <Switch>
+                        <Route path="/" exact render={showLogin} />
+                        <Route path="/login" render={showLogin} />
+                        <Route path="/register" component={Register} />
+
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/discussion" component={DiscussBoard} />
+                        <Route path="/chat" component={ChatRoom} />
+                        <Route path="/calendar" component={CalendarSchedule} />
+                        <Route path="/userinfo" component={UserInfo} />
+                        <Route path="/payment" component={Payment} />
+                        <Redirect to="/dashboard" />
+                    </Switch>
+                </Content>
+            </Col>
+        </Row>
+        // </Layout>
+    );
 };
 
 export default Main;

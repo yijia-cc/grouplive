@@ -1,16 +1,23 @@
 .logo {
-  position: relative;
+    position: relative;
 }
 .logo img {
-  position: absolute;
-  height: 50px;
+    position: absolute;
+    height: 50px;
 }
 .rightBar {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout {
+    font-size: 26px;
+    padding-left: 30px;
+    color: white;
 }

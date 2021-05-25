@@ -1,18 +1,11 @@
-# Build
-FROM maven:3.8.1-jdk-11-slim AS builder
+# Build stage
+FROM maven:3.8.1-jdk-11-slim AS build
+COPY src "/home/app/src"
+COPY pom.xml "/home/app"
+RUN mvn -f "/home/app/pom.xml" clean package
 
-WORKDIR /app
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
-
-# Production
-FROM maven:3.8.1-jdk-11-slim AS production
-
-WORKDIR /app
-
-#RUN apk add --no-cache bash
-
-COPY --from=builder /app/build/libs/*.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Package stage
+FROM build
+COPY --from=build "/home/app/target/discussion-0.0.1-SNAPSHOT.jar" "/usr/local/lib/discussion.jar"
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/usr/local/lib/discussion.jar"]

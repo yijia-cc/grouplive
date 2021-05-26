@@ -1,23 +1,24 @@
 package config
 
 import (
+	"os"
+
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
-	"os"
 )
 
 type Config struct {
-	DbHost         string `envconfig:"DB_HOST"`
-	DbPort         int    `envconfig:"DB_PORT"`
-	DbUser         string `envconfig:"DB_USER"`
-	DbPassword     string `envconfig:"DB_PASSWORD"`
-	DBName         string `envconfig:"DB_NAME"`
-	DbMigrationDir string `envconfig:"DB_MIGRATION_DIR"`
+	DbHost            string `envconfig:"DB_HOST"`
+	DbPort            int    `envconfig:"DB_PORT"`
+	DbUser            string `envconfig:"DB_USER"`
+	DbPassword        string `envconfig:"DB_PASSWORD"`
+	DBName            string `envconfig:"DB_NAME"`
+	DbMigrationDir    string `envconfig:"DB_MIGRATION_DIR"`
 	GraphQLSchemaPath string `envconfig:"GRAPHQL_SCHEMA_PATH"`
-	GraphQLServerPort int `envconfig:"GRAPHQL_SERVER_PORT"`
+	GraphQLServerPort int    `envconfig:"GRAPHQL_SERVER_PORT"`
 }
 
-func FromEnv() Config{
+func FromEnv() Config {
 	err := autoLoadEnv()
 	if err != nil {
 		panic(err)

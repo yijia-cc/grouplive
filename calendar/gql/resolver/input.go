@@ -8,7 +8,7 @@ type AmenityFilterInput struct {
 
 type TimeRangeInput struct {
 	Start graphql.Time
-	End graphql.Time
+	End   graphql.Time
 }
 
 type ReservationInput struct {
@@ -18,9 +18,9 @@ type ReservationInput struct {
 }
 
 type AmenityTypeInput struct {
-	Id *graphql.ID
-	Title *string
-	Description *string
+	Id           *graphql.ID
+	Title        *string
+	Description  *string
 	ThumbnailUrl *string
 }
 
@@ -29,4 +29,9 @@ type AmenityInput struct {
 	Name             *string
 	Type             AmenityTypeInput
 	OperationalHours []TimeRangeInput
+}
+
+type ScheduleUpdateSubscribeInput struct {
+	AmenityId graphql.ID
+	WeekStart graphql.Time
 }

@@ -2,11 +2,9 @@ package resolver
 
 import "github.com/graph-gophers/graphql-go"
 
-type AmenityType struct {}
+type AmenityType struct{}
 
-func (AmenityType) Amenities(args struct {
-	Filter *AmenityFilterInput
-}) []Amenity {
+func (AmenityType) Amenities() []Amenity {
 	return nil
 }
 

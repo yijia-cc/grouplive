@@ -15,6 +15,10 @@ func (query) AmenityType(args struct {
 	return AmenityType{}
 }
 
+func (query) MyCalendar() Schedule {
+	return Schedule{}
+}
+
 func (query) Reservations() []Reservation {
 	return nil
 }

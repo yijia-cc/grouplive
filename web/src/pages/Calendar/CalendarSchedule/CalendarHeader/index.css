@@ -1,0 +1,20 @@
+.claendar-header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+}
+
+.claendar-header-amenity {
+  margin-left: 16px;
+}
+
+.claendar-header-amenity-room {
+  margin-left: 30px;
+}
+.claendar-header-right {
+  margin-right: 10px;
+}
+.claendar-header-right-btn {
+  margin-left: 10px;
+}

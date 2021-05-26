@@ -1,16 +1,20 @@
-.logo {
-  position: relative;
-}
-.logo img {
-  position: absolute;
-  height: 50px;
-}
-.rightBar {
+.topBar-wrapper {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
+.topBar-wrapper-logo {
+  height: 45px;
+}
+
+.topBar-title {
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  font-size: 28px;
+  color: #84c7ee;
+}
+
+.topBar-right {
+  min-width: 526px;
 }

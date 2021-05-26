@@ -111,7 +111,7 @@ steps:
     image: node:16.0.0-alpine3.13
     commands:
       - cd web
-      - npm install
+      - npm install --legacy-peer-deps
       - CI=true npm test
 trigger:
   branch:

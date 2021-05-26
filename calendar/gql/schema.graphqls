@@ -1,6 +1,7 @@
 schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
 }
 
 type Query {
@@ -10,6 +11,7 @@ type Query {
     """
     amenityTypes: [AmenityType!]!
     amenityType(id: ID!): AmenityType!
+    myCalendar: Schedule!
     reservations: [Reservation!]!
 }
 
@@ -28,14 +30,19 @@ type Mutation {
     updateAmenity(amenity: AmenityInput!): Void
 }
 
+type Subscription {
+    scheduleUpdateSubscribe(input: ScheduleUpdateSubscribeInput!): Void
+}
+
+input ScheduleUpdateSubscribeInput {
+    amenityId: ID!
+    weekStart: Time!
+}
+
 input ReservationInput {
     reservationId: ID
     amenityId: ID!
     timeRange: TimeRangeInput!
-}
-
-input AmenityFilterInput {
-    timeRange: TimeRangeInput
 }
 
 input AmenityTypeInput {
@@ -63,7 +70,7 @@ type AmenityType {
     description: String
     thumbnailUrl: String
 
-    amenities(filter: AmenityFilterInput): [Amenity!]!
+    amenities: [Amenity!]!
 }
 
 type Reservation {
@@ -71,6 +78,7 @@ type Reservation {
     amenity: Amenity!
     holdDuration: Duration
     timeSlot: TimeSlot!
+    status: ReservationStatus!
 }
 
 type Amenity {
@@ -86,6 +94,7 @@ type Schedule {
     weekStart: Time!
     previous: Schedule
     next: Schedule
+    reservations: [Reservation!]!
     timeSlots: [TimeSlot!]!
 }
 
@@ -97,6 +106,12 @@ type TimeSlot {
 type TimeRange {
     start: Time!
     end: Time!
+}
+
+enum ReservationStatus {
+    UPCOMING
+    ONGOING
+    PAST
 }
 
 enum TimeSlotType {

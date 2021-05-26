@@ -2,16 +2,17 @@ package gql
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/gql/resolver"
-	"io/ioutil"
-	"log"
-	"net/http"
 )
 
-func StartServer(cfg config.Config)  {
+func StartServer(cfg config.Config) {
 	content, err := readStringFromFile(cfg.GraphQLSchemaPath)
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +27,6 @@ func StartServer(cfg config.Config)  {
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.GraphQLServerPort), mux))
 }
-
 
 func readStringFromFile(filePath string) (string, error) {
 	content, err := ioutil.ReadFile(filePath)

@@ -1,11 +1,13 @@
 package resolver
 
 import (
-	"github.com/graph-gophers/graphql-go/decode"
 	"time"
+
+	"github.com/graph-gophers/graphql-go/decode"
 )
 
 var _ decode.Unmarshaler = (*Duration)(nil)
+
 type Duration struct {
 	time.Duration
 }
@@ -25,7 +27,8 @@ func (d *Duration) UnmarshalGraphQL(input interface{}) error {
 }
 
 var _ decode.Unmarshaler = (*Void)(nil)
-type Void struct {}
+
+type Void struct{}
 
 func (v Void) ImplementsGraphQLType(name string) bool {
 	return name == "Void"

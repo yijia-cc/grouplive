@@ -2,12 +2,12 @@ package resolver
 
 import "github.com/graph-gophers/graphql-go"
 
-type Amenity struct {}
+type Amenity struct{}
 
 func (Amenity) Schedule(args struct {
 	WeekStart *graphql.Time
 }) *Schedule {
-	 return nil
+	return nil
 }
 
 func (Amenity) Id() graphql.ID {

@@ -2,7 +2,7 @@ package resolver
 
 import "github.com/graph-gophers/graphql-go"
 
-type Schedule struct {}
+type Schedule struct{}
 
 func (Schedule) Id() graphql.ID {
 	return "id"
@@ -21,5 +21,9 @@ func (Schedule) Next() *Schedule {
 }
 
 func (Schedule) TimeSlots() []TimeSlot {
+	return nil
+}
+
+func (Schedule) Reservations() []Reservation {
 	return nil
 }

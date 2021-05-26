@@ -1,11 +1,12 @@
 package main
 
 import (
+	"sync"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db"
 	"github.com/yijia-cc/grouplive/calendar/gql"
-	"sync"
 )
 
 func main() {

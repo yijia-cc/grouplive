@@ -11,29 +11,28 @@ const { Content } = Layout;
 
 const Main = (props) => {
   return (
-    <Row justify="center" style={{ padding: "112px 35px 24px" }}>
-      <Col span={22}>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 1000,
-          }}
-        >
-          <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/discussion" component={DiscussBoard} />
-            <Route path="/chat" component={ChatRoom} />
-            <Route path="/calendar" component={Calendar} />
-            <Route path="/userinfo" component={UserInfo} />
-            <Route path="/payment" component={Payment} />
-            <Redirect to="/dashboard" />
-          </Switch>
-        </Content>
-      </Col>
-    </Row>
-    // </Layout>
+    <Content style={{ padding: "112px 50px 24px" }}>
+      {/* <Col span={22}> */}
+      <Content
+        className="site-layout-background"
+        style={{
+          padding: 24,
+          margin: 0,
+          minHeight: 1000,
+        }}
+      >
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/discussion" component={DiscussBoard} />
+          <Route path="/chat" component={ChatRoom} />
+          <Route path="/calendar" component={Calendar} />
+          <Route path="/userinfo" component={UserInfo} />
+          <Route path="/payment" component={Payment} />
+          <Redirect to="/dashboard" />
+        </Switch>
+      </Content>
+      {/* </Col> */}
+    </Content>
   );
 };
 

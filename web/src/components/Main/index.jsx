@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Layout, Row, Col } from "antd";
+import { Layout } from "antd";
 import Calendar from "../../pages/Calendar";
 import ChatRoom from "../../pages/ChatRoom";
 import Dashboard from "../../pages/Dashboard";
@@ -11,14 +11,13 @@ const { Content } = Layout;
 
 const Main = (props) => {
   return (
-    <Content style={{ padding: "112px 50px 24px" }}>
-      {/* <Col span={22}> */}
+    <Layout style={{ padding: "112px 50px 24px" }}>
       <Content
         className="site-layout-background"
         style={{
           padding: 24,
           margin: 0,
-          minHeight: 1000,
+          minHeight: 1200,
         }}
       >
         <Switch>
@@ -31,8 +30,7 @@ const Main = (props) => {
           <Redirect to="/dashboard" />
         </Switch>
       </Content>
-      {/* </Col> */}
-    </Content>
+    </Layout>
   );
 };
 

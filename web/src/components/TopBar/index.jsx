@@ -12,7 +12,7 @@ function TopBar(props) {
   return (
     <Header
       className="topBar-wrapper"
-      style={{ position: "fixed", zIndex: 1, width: "100%" }}
+      style={{ position: "fixed", zIndex: 999, width: "100%" }}
     >
       <img src={logo1} alt="topBar-logo" className="topBar-wrapper-logo" />
       <span className="topBar-title">GroupLive</span>
@@ -41,7 +41,7 @@ function TopBar(props) {
           <NavLink to="/calendar" />
         </Menu.Item>
       </Menu>
-      <UserSetting />
+      <UserSetting pathname={pathname} />
     </Header>
   );
 }

@@ -22,6 +22,6 @@ func (f FakeAmenity) FindAmenityInfo(_ tx.Transaction, amenityTypeId entity.ID) 
 	return amenityInfos, nil
 }
 
-func NewFakeAmenity(amenityInfosFixture []entity.AmenityInfo) FakeAmenity  {
+func NewFakeAmenity(amenityInfosFixture []entity.AmenityInfo) FakeAmenity {
 	return FakeAmenity{amenityInfos: amenityInfosFixture}
 }

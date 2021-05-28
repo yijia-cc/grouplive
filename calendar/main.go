@@ -3,8 +3,9 @@ package main
 import (
 	"sync"
 
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/calendar/config"
+
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/calendar/db"
 	"github.com/yijia-cc/grouplive/calendar/gql"
 )
@@ -26,7 +27,7 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		gql.StartServer(cfg)
+		gql.StartServer(cfg, database)
 	}()
 	wg.Wait()
 }

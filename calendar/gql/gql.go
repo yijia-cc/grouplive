@@ -1,24 +1,26 @@
 package gql
 
 import (
+	"database/sql"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
+	"github.com/yijia-cc/grouplive/calendar/dep"
+
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/yijia-cc/grouplive/calendar/config"
-	"github.com/yijia-cc/grouplive/calendar/gql/resolver"
 )
 
-func StartServer(cfg config.Config) {
+func StartServer(cfg config.Config, db *sql.DB) {
 	content, err := readStringFromFile(cfg.GraphQLSchemaPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	schema := graphql.MustParseSchema(content, &resolver.Resolver{})
+	schema := graphql.MustParseSchema(content, dep.InitGraphQLResolver(db))
 
 	mux := http.NewServeMux()
 	mux.Handle("/", &relay.Handler{Schema: schema})

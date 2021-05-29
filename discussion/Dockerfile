@@ -1,19 +1,21 @@
 # Build
-FROM openjdk:11.0.2-jdk-oracle AS builder
+FROM maven:3.8.1-jdk-11-slim AS builder
 
 WORKDIR /app
 
-COPY . .
+COPY pom.xml ./
 
-RUN ./gradlew build
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
+RUN mvn -B clean package
 
 # Production
-FROM openjdk:11.0.2-jre-slim AS production
+FROM maven:3.8.1-jdk-11-slim AS production
 
 WORKDIR /app
 
-#RUN apk add --no-cache bash
-
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

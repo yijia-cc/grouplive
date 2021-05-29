@@ -55,11 +55,12 @@ name: feature-discussion
 
 steps:
   - name: Run unit tests
-    image: openjdk:11.0.2-jdk-oracle
+    image: maven:3.8.1-jdk-11
     commands:
       - cd discussion
       - unset SERVER_PORT
-      - ./gradlew test -i
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn test -B
 trigger:
   branch:
     - master

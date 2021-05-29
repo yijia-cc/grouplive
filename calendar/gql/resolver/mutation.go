@@ -5,61 +5,61 @@ import "github.com/graph-gophers/graphql-go"
 type mutation struct {
 }
 
-func (mutation) MakeReservation(args struct{
+func (mutation) MakeReservation(args struct {
 	Reservation ReservationInput
 }) Reservation {
 	return Reservation{}
 }
 
-func (mutation) ConfirmReservation(args struct{
+func (mutation) ConfirmReservation(args struct {
 	Id graphql.ID
 }) *Void {
 	return nil
 }
 
-func (mutation) CancelReservation(args struct{
+func (mutation) CancelReservation(args struct {
 	Id graphql.ID
 }) *Void {
 	return nil
 }
 
-func (mutation) UpdateReservation(args struct{
+func (mutation) UpdateReservation(args struct {
 	Reservation ReservationInput
 }) Reservation {
 	return Reservation{}
 }
 
-func (mutation) AddAmenityType(args struct{
+func (mutation) AddAmenityType(args struct {
 	AmenityType AmenityTypeInput
 }) *Void {
 	return nil
 }
 
-func (mutation) DeleteAmenityType(args struct{
+func (mutation) DeleteAmenityType(args struct {
 	Id graphql.ID
 }) *Void {
 	return nil
 }
 
-func (mutation) UpdateAmenityType(args struct{
+func (mutation) UpdateAmenityType(args struct {
 	AmenityType AmenityTypeInput
 }) *Void {
 	return nil
 }
 
-func (mutation) AddAmenity(args struct{
+func (mutation) AddAmenity(args struct {
 	Amenity AmenityInput
 }) *Void {
 	return nil
 }
 
-func (mutation) DeleteAmenity(args struct{
+func (mutation) DeleteAmenity(args struct {
 	Id graphql.ID
 }) *Void {
 	return nil
 }
 
-func (mutation) UpdateAmenity(args struct{
+func (mutation) UpdateAmenity(args struct {
 	Amenity AmenityInput
 }) *Void {
 	return nil

@@ -20,3 +20,7 @@ func (Reservation) HoldDuration() *Duration {
 func (Reservation) TimeSlot() TimeSlot {
 	return TimeSlot{}
 }
+
+func (Reservation) Status() ReservationStatus {
+	return upcoming
+}

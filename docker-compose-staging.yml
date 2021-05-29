@@ -43,6 +43,12 @@ services:
     environment:
       - VIRTUAL_HOST=discussion.api.staging.allgame.fun
       - VIRTUAL_PORT=9085
+      - DB_HOST=${DISCUSSION_STAGING_DB_HOST}
+      - DB_PORT=${DISCUSSION_STAGING_DB_PORT}
+      - DB_USER=${DISCUSSION_STAGING_DB_USER}
+      - DB_PASSWORD=${DISCUSSION_STAGING_DB_PASSWORD}
+      - DB_NAME=${DISCUSSION_STAGING_DB_NAME}
+      - API_PORT=8080
   payment-staging:
     image: ${DOCKER_USERNAME}/payment-staging:latest
     ports:

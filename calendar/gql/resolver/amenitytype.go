@@ -1,27 +1,40 @@
 package resolver
 
-import "github.com/graph-gophers/graphql-go"
+import (
+	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/entity"
+)
 
-type AmenityType struct {}
-
-func (AmenityType) Amenities(args struct {
-	Filter *AmenityFilterInput
-}) []Amenity {
-	return nil
+type AmenityType struct {
+	amenityType entity.AmenityType
 }
 
-func (AmenityType) Id() graphql.ID {
-	return "id"
+func (a AmenityType) AmenityInfoList() []AmenityInfo {
+	gqlInfo := make([]AmenityInfo, 0)
+	for _, info := range a.amenityType.AmenityInfoList {
+		gqlInfo = append(gqlInfo, newAmenityInfo(info))
+	}
+	return gqlInfo
 }
 
-func (AmenityType) Title() *string {
-	return nil
+func (a AmenityType) Id() graphql.ID {
+	return graphql.ID(a.amenityType.ID)
 }
 
-func (AmenityType) Description() *string {
-	return nil
+func (a AmenityType) Title() *string {
+	return &a.amenityType.Title
 }
 
-func (AmenityType) ThumbnailUrl() *string {
-	return nil
+func (a AmenityType) Description() *string {
+	return &a.amenityType.Description
+}
+
+func (a AmenityType) ThumbnailUrl() *string {
+	return &a.amenityType.ThumbnailURL
+}
+
+func newAmenityType(amenityType entity.AmenityType) AmenityType {
+	return AmenityType{
+		amenityType: amenityType,
+	}
 }

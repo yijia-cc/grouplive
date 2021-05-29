@@ -1,6 +1,9 @@
 package service
 
 import (
+	"errors"
+	"github.com/yijia-cc/grouplive/calendar/auth"
+	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
 	"github.com/yijia-cc/grouplive/calendar/entity"
 	"github.com/yijia-cc/grouplive/calendar/repo"
@@ -8,11 +11,16 @@ import (
 )
 
 type Calendar struct {
+	authorizer auth.Authorizer
 	transactionFactory tx.TransactionFactory
 	amenityTypeRepo    repo.AmenityType
 }
 
-func (c Calendar) ListAmenityTypes() ([]entity.AmenityType, error) {
+func (c Calendar) ListAmenityTypes(user *entity.User) ([]entity.AmenityType, error) {
+	if !c.authorizer.HasPermission(user, permission.ViewAmenityTypes, nil) {
+		return nil, errors.New("user is not allowed to view amenity types")
+	}
+
 	transaction, err := c.transactionFactory.NewTransaction()
 	if err != nil {
 		return nil, err
@@ -26,3 +34,4 @@ func NewCalendar(transactionFactory tx.TransactionFactory, amenityDao dao.Amenit
 		amenityTypeRepo: repo.NewAmenityType(amenityDao, amenityTypeDao),
 	}
 }
+

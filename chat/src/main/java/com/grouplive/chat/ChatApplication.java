@@ -12,7 +12,7 @@ public class ChatApplication {
 		SpringApplication.run(ChatApplication.class, args);
 	}
 
-	@GetMapping("/chat")
+	@GetMapping("/chathome")
 	public String hello() {
 	    return "Welcome to chat!";
 	}

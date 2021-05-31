@@ -1,12 +1,13 @@
 package service
 
 import (
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/yijia-cc/grouplive/calendar/auth/authtest"
 	"github.com/yijia-cc/grouplive/calendar/db/dao/daotest"
 	"github.com/yijia-cc/grouplive/calendar/entity"
 	"github.com/yijia-cc/grouplive/calendar/tx/txtest"
-	"testing"
 )
 
 func TestCalendar_ListAmenityTypes(t *testing.T) {
@@ -33,7 +34,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 		name                 string
 		amenityTypesFixture  []entity.AmenityType
 		amenityInfosFixture  []entity.AmenityInfo
-		inputUser *entity.User
+		inputUser            *entity.User
 		expectedHasError     bool
 		expectedAmenityTypes []entity.AmenityType
 	}{
@@ -51,7 +52,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 				dreamGymInfo,
 				miniGymInfo,
 			},
-			inputUser: &entity.User{ID: "tester1"},
+			inputUser:        &entity.User{ID: "tester1"},
 			expectedHasError: false,
 			expectedAmenityTypes: []entity.AmenityType{
 				{
@@ -84,7 +85,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 				miniGymInfo,
 				poolInfo,
 			},
-			inputUser: &entity.User{ID: "tester2"},
+			inputUser:        &entity.User{ID: "tester2"},
 			expectedHasError: false,
 			expectedAmenityTypes: []entity.AmenityType{
 				{

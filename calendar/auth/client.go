@@ -15,11 +15,10 @@ func (c Client) HasPermission(user *entity.User, permission permission.Permissio
 	panic("implement me")
 }
 
-func (c Client) GetUser(authToken string) entity.User {
+func (c Client) GetUser(authToken string) *entity.User {
 	panic("implement me")
 }
 
-func NewClient() Client{
+func NewClient() Client {
 	return Client{}
 }
-

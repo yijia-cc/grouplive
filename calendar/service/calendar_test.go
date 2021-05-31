@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/yijia-cc/grouplive/calendar/auth/authtest"
 	"github.com/yijia-cc/grouplive/calendar/db/dao/daotest"
 	"github.com/yijia-cc/grouplive/calendar/entity"
 	"github.com/yijia-cc/grouplive/calendar/tx/txtest"
@@ -113,7 +114,8 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 			fakeAmenityType := daotest.NewFakeAmenityType(testCase.amenityTypesFixture)
 			fakeAmenity := daotest.NewFakeAmenity(testCase.amenityInfosFixture)
 			fakeTransactionFactory := txtest.NewFakeTransactionFactory()
-			calendarService := NewCalendar(fakeTransactionFactory, fakeAmenity, fakeAmenityType)
+			stubAuthorizer := authtest.NewStubAuthorizer()
+			calendarService := NewCalendar(stubAuthorizer, fakeTransactionFactory, fakeAmenity, fakeAmenityType)
 
 			actual, err := calendarService.ListAmenityTypes(testCase.inputUser)
 			if testCase.expectedHasError {

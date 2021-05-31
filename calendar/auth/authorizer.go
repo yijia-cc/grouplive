@@ -5,10 +5,6 @@ import (
 	"github.com/yijia-cc/grouplive/calendar/entity"
 )
 
-type Authorizer struct {
-
-}
-
-func (a Authorizer) HasPermission(user *entity.User, permission permission.Permission, resourceID *string) bool {
-	panic("Implement me!")
+type Authorizer interface {
+	HasPermission(user *entity.User, permission permission.Permission, resourceID *string) bool
 }

@@ -28,8 +28,14 @@ func (c Calendar) ListAmenityTypes(user *entity.User) ([]entity.AmenityType, err
 	return c.amenityTypeRepo.GetAllAmenityTypes(transaction)
 }
 
-func NewCalendar(transactionFactory tx.TransactionFactory, amenityDao dao.Amenity, amenityTypeDao dao.AmenityType) Calendar {
+func NewCalendar(
+	authorizer auth.Authorizer,
+	transactionFactory tx.TransactionFactory,
+	amenityDao dao.Amenity,
+	amenityTypeDao dao.AmenityType,
+	) Calendar {
 	return Calendar{
+		authorizer: authorizer,
 		transactionFactory: transactionFactory,
 		amenityTypeRepo: repo.NewAmenityType(amenityDao, amenityTypeDao),
 	}

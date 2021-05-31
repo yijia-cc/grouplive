@@ -70,7 +70,11 @@ type AmenityType {
     description: String
     thumbnailUrl: String
 
-    amenities: [Amenity!]!
+    amenityInfoList: [AmenityInfo!]!
+}
+
+type AmenityInfo {
+
 }
 
 type Reservation {

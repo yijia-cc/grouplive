@@ -1,26 +1,21 @@
-FROM golang:1.16-alpine AS builder
+# Build
+FROM maven:3.8.1-jdk-11-slim AS builder
 
 WORKDIR /app
 
-RUN apk add --no-cache git bash
+COPY pom.xml ./
 
-# Install dependencies
-COPY go.* ./
-RUN go mod download
+RUN mvn dependency:go-offline
 
-# Verify dependencies
-RUN go mod verify
+COPY src ./src
 
-COPY . .
+RUN mvn -B clean package
 
-RUN go build -o bin/main main.go
-
-FROM alpine:3.13 AS production
+# Production
+FROM maven:3.8.1-jdk-11-slim AS production
 
 WORKDIR /app
 
-RUN apk add --no-cache bash
+COPY --from=builder /app/target/*.jar app.jar
 
-COPY --from=builder /app/bin/main ./bin/main
-
-ENTRYPOINT ["./bin/main"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

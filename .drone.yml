@@ -38,10 +38,12 @@ name: feature-chat
 
 steps:
   - name: Run unit tests
-    image: golang:1.16
+    image: maven:3.8.1-jdk-11
     commands:
-      - cd chat
-      - go test ./...
+      - cd discussion
+      - unset SERVER_PORT
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn test -B
 trigger:
   branch:
     - master
@@ -225,7 +227,7 @@ steps:
       tags: latest
       dockerfile: chat/Dockerfile
       context: chat
-  - name: Sync Dockere image
+  - name: Sync Docker image
     image: appleboy/drone-ssh
     environment:
       DOCKER_REPO_CHAT_STAGING:

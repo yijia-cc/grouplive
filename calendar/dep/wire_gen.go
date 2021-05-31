@@ -7,6 +7,7 @@ package dep
 
 import (
 	"database/sql"
+	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
 	"github.com/yijia-cc/grouplive/calendar/gql/resolver"
 	"github.com/yijia-cc/grouplive/calendar/tx"
@@ -15,9 +16,10 @@ import (
 // Injectors from dep.go:
 
 func InitGraphQLResolver(db *sql.DB) *resolver.Resolver {
+	client := auth.NewClient()
 	safeTransactionFactory := tx.NewSafeTransactionFactory(db)
 	amenitySQL := dao.NewAmenitySQL(db)
 	amenityTypeSQL := dao.NewAmenityTypeSQL(db)
-	resolverResolver := resolver.NewResolver(safeTransactionFactory, amenitySQL, amenityTypeSQL)
+	resolverResolver := resolver.NewResolver(client, safeTransactionFactory, amenitySQL, amenityTypeSQL)
 	return resolverResolver
 }

@@ -7,19 +7,22 @@ package dep
 
 import (
 	"database/sql"
+	"net/http"
+
 	"github.com/yijia-cc/grouplive/calendar/auth"
+	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
-	"github.com/yijia-cc/grouplive/calendar/gql/resolver"
+	"github.com/yijia-cc/grouplive/calendar/gql/server"
 	"github.com/yijia-cc/grouplive/calendar/tx"
 )
 
 // Injectors from dep.go:
 
-func InitGraphQLResolver(db *sql.DB) *resolver.Resolver {
+func InitGraphQLServer(cfg config.Config, db *sql.DB) *http.ServeMux {
 	client := auth.NewClient()
 	safeTransactionFactory := tx.NewSafeTransactionFactory(db)
 	amenitySQL := dao.NewAmenitySQL(db)
 	amenityTypeSQL := dao.NewAmenityTypeSQL(db)
-	resolverResolver := resolver.NewResolver(client, safeTransactionFactory, amenitySQL, amenityTypeSQL)
-	return resolverResolver
+	serveMux := server.NewServer(cfg, client, client, safeTransactionFactory, amenitySQL, amenityTypeSQL)
+	return serveMux
 }

@@ -14,4 +14,3 @@ func (f FakeTransactionFactory) NewTransaction() (tx.Transaction, error) {
 func NewFakeTransactionFactory() FakeTransactionFactory {
 	return FakeTransactionFactory{}
 }
-

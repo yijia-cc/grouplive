@@ -3,8 +3,9 @@ package auth
 import (
 	"context"
 	"errors"
-	"github.com/yijia-cc/grouplive/calendar/entity"
 	"net/http"
+
+	"github.com/yijia-cc/grouplive/calendar/entity"
 )
 
 type key int
@@ -15,7 +16,7 @@ func TokenFromRequest(req *http.Request) (string, error) {
 	panic("implement me")
 }
 
-func NewContext(ctx context.Context, user *entity.User) context.Context {
+func NewContextWithUser(ctx context.Context, user *entity.User) context.Context {
 	return context.WithValue(ctx, userKey, user)
 }
 

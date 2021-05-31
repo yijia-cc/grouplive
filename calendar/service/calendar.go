@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
@@ -11,7 +12,7 @@ import (
 )
 
 type Calendar struct {
-	authorizer auth.Authorizer
+	authorizer         auth.Authorizer
 	transactionFactory tx.TransactionFactory
 	amenityTypeRepo    repo.AmenityType
 }
@@ -33,11 +34,10 @@ func NewCalendar(
 	transactionFactory tx.TransactionFactory,
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
-	) Calendar {
+) Calendar {
 	return Calendar{
-		authorizer: authorizer,
+		authorizer:         authorizer,
 		transactionFactory: transactionFactory,
-		amenityTypeRepo: repo.NewAmenityType(amenityDao, amenityTypeDao),
+		amenityTypeRepo:    repo.NewAmenityType(amenityDao, amenityTypeDao),
 	}
 }
-

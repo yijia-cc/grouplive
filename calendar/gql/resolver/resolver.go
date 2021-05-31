@@ -19,6 +19,7 @@ func NewResolver(
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
 ) *Resolver {
+
 	calendarService := service.NewCalendar(authorizer, transactionFactory, amenityDao, amenityTypeDao)
 	return &Resolver{
 		query: newQuery(calendarService),

@@ -2,6 +2,7 @@ package resolver
 
 import (
 	"context"
+
 	"github.com/graph-gophers/graphql-go"
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/service"

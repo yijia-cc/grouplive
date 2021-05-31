@@ -1,7 +1,9 @@
 package resolver
 
 import (
+	"context"
 	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/service"
 )
 
@@ -9,8 +11,13 @@ type query struct {
 	calendarService service.Calendar
 }
 
-func (q query) AmenityTypes() ([]AmenityType, error) {
-	types, err := q.calendarService.ListAmenityTypes()
+func (q query) AmenityTypes(ctx context.Context) ([]AmenityType, error) {
+	user, err := auth.UserFromContext(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	types, err := q.calendarService.ListAmenityTypes(user)
 	if err != nil {
 		return nil, err
 	}

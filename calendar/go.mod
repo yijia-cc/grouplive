@@ -14,4 +14,5 @@ require (
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/sync v0.0.0-20200625203802-6e8e738ad208 // indirect
 	golang.org/x/sys v0.0.0-20201029080932-201ba4db2418 // indirect
+	google.golang.org/grpc v1.38.0 // indirect
 )

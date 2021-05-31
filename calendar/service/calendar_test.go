@@ -32,6 +32,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 		name                 string
 		amenityTypesFixture  []entity.AmenityType
 		amenityInfosFixture  []entity.AmenityInfo
+		inputUser *entity.User
 		expectedHasError     bool
 		expectedAmenityTypes []entity.AmenityType
 	}{
@@ -49,6 +50,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 				dreamGymInfo,
 				miniGymInfo,
 			},
+			inputUser: &entity.User{ID: "tester1"},
 			expectedHasError: false,
 			expectedAmenityTypes: []entity.AmenityType{
 				{
@@ -81,6 +83,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 				miniGymInfo,
 				poolInfo,
 			},
+			inputUser: &entity.User{ID: "tester2"},
 			expectedHasError: false,
 			expectedAmenityTypes: []entity.AmenityType{
 				{
@@ -112,7 +115,7 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 			fakeTransactionFactory := txtest.NewFakeTransactionFactory()
 			calendarService := NewCalendar(fakeTransactionFactory, fakeAmenity, fakeAmenityType)
 
-			actual, err := calendarService.ListAmenityTypes()
+			actual, err := calendarService.ListAmenityTypes(testCase.inputUser)
 			if testCase.expectedHasError {
 				assert.NotNil(t, err)
 				return

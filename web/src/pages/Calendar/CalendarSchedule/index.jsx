@@ -1,6 +1,10 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
+import {
+  ViewState,
+  EditingState,
+  IntegratedEditing,
+} from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   Appointments,
@@ -14,6 +18,7 @@ import {
   TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { message } from "antd";
+import { nanoid } from "nanoid";
 import { appointments } from "./demo-data/appointments";
 import CalendarHeader from "./CalendarHeader";
 import "./index.css";
@@ -21,13 +26,15 @@ import "./index.css";
 export default class CalendarSchedule extends React.PureComponent {
   constructor(props) {
     super(props);
+    const { state } = this.props.history.location;
+    const amenity = state ? state.type : "Meeting room";
     this.state = {
-      data: appointments,
+      data: [],
       currentDate: Date.now(),
-
       addedAppointment: {},
       appointmentChanges: {},
       editingAppointment: undefined,
+      amenity,
     };
 
     this.commitChanges = this.commitChanges.bind(this);
@@ -39,7 +46,8 @@ export default class CalendarSchedule extends React.PureComponent {
     };
   }
 
-  changeAddedAppointment(addedAppointment) {
+  changeAddedAppointment(addedAppointment, amenity) {
+    addedAppointment.title = amenity;
     this.setState({ addedAppointment });
   }
 
@@ -55,8 +63,7 @@ export default class CalendarSchedule extends React.PureComponent {
     this.setState((state) => {
       let { data } = state;
       if (added) {
-        const startingAddedId =
-          data.length > 0 ? data[data.length - 1].id + 1 : 0;
+        const startingAddedId = nanoid();
         data = [...data, { id: startingAddedId, ...added }];
       }
       if (changed) {
@@ -115,13 +122,13 @@ export default class CalendarSchedule extends React.PureComponent {
     return (
       <AppointmentForm.TextEditor
         {...restProps}
-        value="Basketball Court"
+        value={this.state.amenity}
         readOnly={true}
       />
     );
   };
 
-  booleanEditorComponent = ({ ...restProps }) => {
+  booleanEditorComponent = (props) => {
     return null;
   };
 
@@ -129,19 +136,26 @@ export default class CalendarSchedule extends React.PureComponent {
     return <AppointmentForm.CommandButton {...restProps} />;
   };
 
+  setAmenityType = (amenity) => {
+    this.setState({ amenity });
+  };
+
   render() {
-    const { state } = this.props.history.location;
     const {
       currentDate,
       data,
       addedAppointment,
       appointmentChanges,
       editingAppointment,
+      amenity,
     } = this.state;
     return (
       <>
-        <CalendarHeader state={state} />
-        <Paper className="calendar-body" state={state}>
+        <CalendarHeader
+          amenity={amenity}
+          setAmenityType={this.setAmenityType}
+        />
+        <Paper className="calendar-body">
           <Scheduler data={data} height={760}>
             <ViewState
               currentDate={currentDate}
@@ -150,12 +164,15 @@ export default class CalendarSchedule extends React.PureComponent {
             <EditingState
               onCommitChanges={this.commitChanges}
               addedAppointment={addedAppointment}
-              onAddedAppointmentChange={this.changeAddedAppointment}
+              onAddedAppointmentChange={(addedAppointment) => {
+                this.changeAddedAppointment(addedAppointment, amenity);
+              }}
               appointmentChanges={appointmentChanges}
               onAppointmentChangesChange={this.changeAppointmentChanges}
               editingAppointment={editingAppointment}
               onEditingAppointmentChange={this.changeEditingAppointment}
             />
+            <IntegratedEditing />
             <WeekView
               startDayHour={9}
               endDayHour={22}
@@ -185,5 +202,17 @@ export default class CalendarSchedule extends React.PureComponent {
         </Paper>
       </>
     );
+  }
+  componentDidMount() {
+    const data = appointments.filter((ele) => ele.title === this.state.amenity);
+    this.setState({ data });
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.amenity !== this.state.amenity) {
+      const data = appointments.filter(
+        (ele) => ele.title === this.state.amenity
+      );
+      this.setState({ data });
+    }
   }
 }

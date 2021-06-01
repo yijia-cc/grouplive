@@ -4,11 +4,10 @@ import { DownOutlined } from "@ant-design/icons";
 import "./index.css";
 
 const CalendarHeader = (props) => {
-  let type = props.state ? props.state.type : "Meeting room";
-  const [amenity, setAmenity] = useState(type);
+  const { amenity, setAmenityType } = props;
   const [room, setRoom] = useState("Room1");
   const amenityHandler = ({ key }) => {
-    setAmenity(key);
+    setAmenityType(key);
   };
   const roomHandler = ({ key }) => {
     setRoom(key);

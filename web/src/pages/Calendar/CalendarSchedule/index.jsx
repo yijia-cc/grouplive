@@ -66,6 +66,7 @@ export default class CalendarSchedule extends React.PureComponent {
   }
 
   render() {
+    const { state } = this.props.history.location;
     const {
       currentDate,
       data,
@@ -76,8 +77,8 @@ export default class CalendarSchedule extends React.PureComponent {
 
     return (
       <>
-        <CalendarHeader />
-        <Paper className="calendar-body">
+        <CalendarHeader state={state} />
+        <Paper className="calendar-body" state={state}>
           <Scheduler data={data} height={760}>
             <ViewState currentDate={currentDate} />
             <EditingState

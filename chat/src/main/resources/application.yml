@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://allgame.fun:18300/chat-staging
+    username: chat-staging
+    password: egzqJnTvQ24855QzvpSGNqCfJnfAgH
+
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true

@@ -141,6 +141,7 @@ export default class CalendarSchedule extends React.PureComponent {
   };
 
   render() {
+    const { state } = this.props.history.location;
     const {
       currentDate,
       data,

@@ -38,7 +38,7 @@ name: feature-chat
 
 steps:
   - name: Run unit tests
-    image: maven:3.8.1-jdk-11
+    image: maven:3.8-openjdk-15-slim
     commands:
       - cd discussion
       - unset SERVER_PORT

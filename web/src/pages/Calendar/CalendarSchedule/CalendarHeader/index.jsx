@@ -21,7 +21,7 @@ const CalendarHeader = (props) => {
     </Menu>
   );
   const menu2 = (
-    <Menu onClick={roomHandler}>
+    <Menu selectable={true} onClick={roomHandler}>
       <Menu.Item key="Room1">Room1</Menu.Item>
       <Menu.Item key="Room2">Room2</Menu.Item>
       <Menu.Item key="Room3">Room3</Menu.Item>

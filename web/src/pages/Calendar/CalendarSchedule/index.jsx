@@ -9,7 +9,11 @@ import {
   WeekView,
   ConfirmationDialog,
   CurrentTimeIndicator,
+  Toolbar,
+  DateNavigator,
+  TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import { message } from "antd";
 import { appointments } from "./demo-data/appointments";
 import CalendarHeader from "./CalendarHeader";
 import "./index.css";
@@ -69,14 +73,12 @@ export default class CalendarSchedule extends React.PureComponent {
     });
   }
 
-  timeComparatoCurrentTime = (time1) =>
-    time1 < this.state.currentDate ? true : false;
+  timeComparatoCurrentTime = (time1) => (time1 < Date.now() ? true : false);
   timeTableCellComponent = ({ ...restProps }) => {
-    const time1 = restProps.startDate.getTime();
-    const checkIfTimePast = this.timeComparatoCurrentTime(time1);
-    if (checkIfTimePast) {
+    const { isShaded } = restProps;
+    if (isShaded) {
       restProps.onDoubleClick = () => {
-        console.log("time has Past");
+        message.info("Current time is not available");
       };
     }
     return <WeekView.TimeTableCell {...restProps} />;
@@ -85,6 +87,7 @@ export default class CalendarSchedule extends React.PureComponent {
   headerComponent = ({ showOpenButton, showDeleteButton, ...restProps }) => {
     const { startDate } = restProps.appointmentData;
     const checkIfTimePast = this.timeComparatoCurrentTime(startDate.getTime());
+    restProps.showCloseButton = true;
     return (
       <AppointmentTooltip.Header
         showOpenButton={!checkIfTimePast}
@@ -92,6 +95,38 @@ export default class CalendarSchedule extends React.PureComponent {
         {...restProps}
       />
     );
+  };
+
+  labelComponent = ({ text, ...restProps }) => {
+    let newText;
+    if (text === "Details") {
+      newText = "Amenity";
+    } else if (text === "-") {
+      newText = "-";
+    } else if (text === "More Information") {
+      newText = "";
+    }
+    return <AppointmentForm.Label {...restProps} text={newText} />;
+  };
+
+  textEditorComponent = ({ ...restProps }) => {
+    const { type } = restProps;
+    if (type === "multilineTextEditor") return null;
+    return (
+      <AppointmentForm.TextEditor
+        {...restProps}
+        value="Basketball Court"
+        readOnly={true}
+      />
+    );
+  };
+
+  booleanEditorComponent = ({ ...restProps }) => {
+    return null;
+  };
+
+  commandButtonComponent = ({ ...restProps }) => {
+    return <AppointmentForm.CommandButton {...restProps} />;
   };
 
   render() {
@@ -103,13 +138,15 @@ export default class CalendarSchedule extends React.PureComponent {
       appointmentChanges,
       editingAppointment,
     } = this.state;
-
     return (
       <>
         <CalendarHeader state={state} />
         <Paper className="calendar-body" state={state}>
           <Scheduler data={data} height={760}>
-            <ViewState currentDate={currentDate} />
+            <ViewState
+              currentDate={currentDate}
+              onCurrentDateChange={this.currentDateChange}
+            />
             <EditingState
               onCommitChanges={this.commitChanges}
               addedAppointment={addedAppointment}
@@ -124,6 +161,9 @@ export default class CalendarSchedule extends React.PureComponent {
               endDayHour={22}
               timeTableCellComponent={this.timeTableCellComponent}
             />
+            <Toolbar />
+            <DateNavigator />
+            <TodayButton />
             <ConfirmationDialog />
             <Appointments />
             <AppointmentTooltip
@@ -131,7 +171,11 @@ export default class CalendarSchedule extends React.PureComponent {
               showOpenButton
               showDeleteButton
             />
-            <AppointmentForm />
+            <AppointmentForm
+              labelComponent={this.labelComponent}
+              textEditorComponent={this.textEditorComponent}
+              booleanEditorComponent={this.booleanEditorComponent}
+            />
             <CurrentTimeIndicator
               shadePreviousCells={true}
               shadePreviousAppointments={true}

@@ -6,4 +6,11 @@ export const appointments = [
     id: 0,
     location: "Room 1",
   },
+  {
+    title: "Basketball Court",
+    startDate: new Date(2021, 5, 1, 9, 35),
+    endDate: new Date(2021, 5, 1, 11, 30),
+    id: 0,
+    location: "Room 1",
+  },
 ];

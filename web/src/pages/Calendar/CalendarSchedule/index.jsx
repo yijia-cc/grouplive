@@ -82,6 +82,18 @@ export default class CalendarSchedule extends React.PureComponent {
     return <WeekView.TimeTableCell {...restProps} />;
   };
 
+  headerComponent = ({ showOpenButton, showDeleteButton, ...restProps }) => {
+    const { startDate } = restProps.appointmentData;
+    const checkIfTimePast = this.timeComparatoCurrentTime(startDate.getTime());
+    return (
+      <AppointmentTooltip.Header
+        showOpenButton={!checkIfTimePast}
+        showDeleteButton={!checkIfTimePast}
+        {...restProps}
+      />
+    );
+  };
+
   render() {
     const { state } = this.props.history.location;
     const {
@@ -114,7 +126,11 @@ export default class CalendarSchedule extends React.PureComponent {
             />
             <ConfirmationDialog />
             <Appointments />
-            <AppointmentTooltip showOpenButton showDeleteButton />
+            <AppointmentTooltip
+              headerComponent={this.headerComponent}
+              showOpenButton
+              showDeleteButton
+            />
             <AppointmentForm />
             <CurrentTimeIndicator
               shadePreviousCells={true}

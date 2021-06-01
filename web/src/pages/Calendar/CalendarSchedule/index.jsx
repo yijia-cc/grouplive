@@ -8,6 +8,7 @@ import {
   AppointmentTooltip,
   WeekView,
   ConfirmationDialog,
+  CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { appointments } from "./demo-data/appointments";
 import CalendarHeader from "./CalendarHeader";
@@ -18,7 +19,7 @@ export default class CalendarSchedule extends React.PureComponent {
     super(props);
     this.state = {
       data: appointments,
-      currentDate: "2021-05-24",
+      currentDate: Date.now(),
 
       addedAppointment: {},
       appointmentChanges: {},
@@ -29,6 +30,9 @@ export default class CalendarSchedule extends React.PureComponent {
     this.changeAddedAppointment = this.changeAddedAppointment.bind(this);
     this.changeAppointmentChanges = this.changeAppointmentChanges.bind(this);
     this.changeEditingAppointment = this.changeEditingAppointment.bind(this);
+    this.currentDateChange = (currentDate) => {
+      this.setState({ currentDate });
+    };
   }
 
   changeAddedAppointment(addedAppointment) {
@@ -65,6 +69,19 @@ export default class CalendarSchedule extends React.PureComponent {
     });
   }
 
+  timeComparatoCurrentTime = (time1) =>
+    time1 < this.state.currentDate ? true : false;
+  timeTableCellComponent = ({ ...restProps }) => {
+    const time1 = restProps.startDate.getTime();
+    const checkIfTimePast = this.timeComparatoCurrentTime(time1);
+    if (checkIfTimePast) {
+      restProps.onDoubleClick = () => {
+        console.log("time has Past");
+      };
+    }
+    return <WeekView.TimeTableCell {...restProps} />;
+  };
+
   render() {
     const { state } = this.props.history.location;
     const {
@@ -90,11 +107,20 @@ export default class CalendarSchedule extends React.PureComponent {
               editingAppointment={editingAppointment}
               onEditingAppointmentChange={this.changeEditingAppointment}
             />
-            <WeekView startDayHour={9} endDayHour={22} />
+            <WeekView
+              startDayHour={9}
+              endDayHour={22}
+              timeTableCellComponent={this.timeTableCellComponent}
+            />
             <ConfirmationDialog />
             <Appointments />
             <AppointmentTooltip showOpenButton showDeleteButton />
             <AppointmentForm />
+            <CurrentTimeIndicator
+              shadePreviousCells={true}
+              shadePreviousAppointments={true}
+              updateInterval={10000}
+            />
           </Scheduler>
         </Paper>
       </>

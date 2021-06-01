@@ -40,7 +40,8 @@ func StartupHttpRouter(jwtMiddleware *jwtmiddleware.JWTMiddleware) *mux.Router {
 	r.Handle("/signin", http.HandlerFunc(signinHandler)).Methods("POST", "OPTIONS")
 
 	// 2. API that needs user authentication
-	r.Handle("/token", jwtMiddleware.Handler(http.HandlerFunc(tokenHandler))).Methods("POST", "OPTIONS")
+	r.Handle("/userid", jwtMiddleware.Handler(http.HandlerFunc(userIdHandler))).Methods("GET", "OPTIONS")
+	r.Handle("/user", jwtMiddleware.Handler(http.HandlerFunc(userInfoHandler))).Methods("GET", "OPTIONS")
 
 	// 3. API that needs both user authentication and user authorization (via Role-based Access Control, RBAC)
 	r.Handle("/post/{id}", jwtMiddleware.Handler(AccessHandler{checkAccess, deleteHandler})).Methods("DELETE", "OPTIONS")

@@ -25,7 +25,7 @@ func (h AccessHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAccess(userName string) bool {
-	user, err := model.GetUserByName(userName)
+	user, err := model.GetUserById(userName)
 	if err != nil {
 		return false
 	}

@@ -30,10 +30,10 @@ func Auth(user *User) error {
 }
 
 
-func GetUserByName(userName string) (*User, error) {
+func GetUserById(userId string) (*User, error) {
 	var user User
 	sql := "SELECT username, password, first_name, last_name, email, apt, role from users where username = ?"
 
-	err := db.QueryRow(sql, userName).Scan(&user.UserName, &user.Password, &user.FirstName, &user.LastName, &user.Email, &user.Apt, &user.Role)
+	err := db.QueryRow(sql, userId).Scan(&user.UserName, &user.Password, &user.FirstName, &user.LastName, &user.Email, &user.Apt, &user.Role)
 	return &user, err
 }

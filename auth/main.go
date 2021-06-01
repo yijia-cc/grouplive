@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/auth/config"
 	"github.com/yijia-cc/grouplive/auth/controller"
 	"github.com/yijia-cc/grouplive/auth/model"
 	"log"
 	"net/http"
 	"sync"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 

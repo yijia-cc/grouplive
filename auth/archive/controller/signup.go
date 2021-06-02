@@ -3,14 +3,15 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/yijia-cc/grouplive/auth/model"
 	"log"
 	"net/http"
 	"regexp"
+
+	"github.com/yijia-cc/grouplive/auth/archive/model"
 )
 
 func signupHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")  // Allow CORS only for any origins
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Allow CORS only for any origins
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "text/plain")
 

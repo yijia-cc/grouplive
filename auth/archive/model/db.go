@@ -3,8 +3,9 @@ package model
 import (
 	"database/sql"
 	"fmt"
-	"github.com/yijia-cc/grouplive/auth/config"
 	"log"
+
+	"github.com/yijia-cc/grouplive/auth/config"
 )
 
 // A database connection pool used by the model
@@ -28,8 +29,6 @@ func DBConn(cfg *config.Config) *sql.DB {
 
 	return db
 }
-
-
 
 func CreateUserTable() error {
 	sql := `CREATE TABLE IF NOT EXISTS users (

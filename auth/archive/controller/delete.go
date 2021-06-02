@@ -2,10 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
-)
 
+	"github.com/gorilla/mux"
+)
 
 func deleteHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("[Debug]: ", "Received a delete request")
@@ -20,7 +20,7 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 	// Retrieve decoded user token from the request context
 	userName := getUserNameFromToken(r)
 
-	// Retrieve the URL path parameter from the URL /post/{id} matched by the mux HTTP router
+	// Retrieve the URL path parameter from the URL /post/{id} matched by the mux HTTP routing
 	id := mux.Vars(r)["id"]
 
 	success, err := deletePost(id, userName)

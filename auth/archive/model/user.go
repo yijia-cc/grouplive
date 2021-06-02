@@ -12,13 +12,11 @@ type User struct {
 	Role      string `json:"role"`
 }
 
-
 func AddUser(user *User) (sql.Result, error) {
 	sql := "INSERT INTO users (username, password, first_name, last_name, email, apt, role) VALUES (?, ?, ?, ?, ?, ?, ?)"
 	res, err := db.Exec(sql, user.UserName, user.Password, user.FirstName, user.LastName, user.Email, user.Apt, user.Role)
 	return res, err
 }
-
 
 func Auth(user *User) error {
 	sql := "SELECT first_name, last_name, email, apt, role from users where username = ? and password = ?"
@@ -28,7 +26,6 @@ func Auth(user *User) error {
 	err := db.QueryRow(sql, user.UserName, user.Password).Scan(&user.FirstName, &user.LastName, &user.Email, &user.Apt, &user.Role)
 	return err
 }
-
 
 func GetUserByName(userName string) (*User, error) {
 	var user User

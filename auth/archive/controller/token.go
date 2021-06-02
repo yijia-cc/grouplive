@@ -2,14 +2,15 @@ package controller
 
 import (
 	"fmt"
-	"github.com/form3tech-oss/jwt-go"
 	"log"
 	"net/http"
+
+	"github.com/form3tech-oss/jwt-go"
 )
 
 // tokenHandler is for tesing purpose only. It displays all key/value pairs stored in the user token
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")  // Allow CORS only for any origins
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Allow CORS only for any origins
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "text/plain")
 

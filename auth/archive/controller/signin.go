@@ -3,11 +3,12 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/form3tech-oss/jwt-go"
-	"github.com/yijia-cc/grouplive/auth/model"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/form3tech-oss/jwt-go"
+	"github.com/yijia-cc/grouplive/auth/archive/model"
 )
 
 func signinHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +46,7 @@ func signinHandler(w http.ResponseWriter, r *http.Request) {
 	// The actual encoding is not done until SigningKey is provided in token.SignedString(SigningKey).
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": user.UserName,
-		"exp":     time.Now().Add(time.Hour * 24).Unix(), // Set the token expiration time to 24 hours from now
+		"exp":      time.Now().Add(time.Hour * 24).Unix(), // Set the token expiration time to 24 hours from now
 	})
 
 	// Token encoding and signing: get the complete, signed token using our provided secret key. The actual token encoding

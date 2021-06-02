@@ -1,4 +1,4 @@
-package main
+package archive
 
 import (
 	"sync"
@@ -22,6 +22,24 @@ func main() {
 		panic(err)
 	}
 
+	//cfg := config.LoadEnv()
+	//
+	//db := model.DBConn(cfg)
+	//defer db.Close()
+	//
+	//router := controller.StartUp(cfg)
+	//
+	//wg := sync.WaitGroup{}
+	//wg.Add(1)
+	//go func() {
+	//	defer wg.Done()
+	//	log.Fatal(http.ListenAndServe(":8080", router))
+	//}()
+	//fmt.Println("Service started at :8080")
+	//wg.Wait()
+
+	//routingServer := routing.NewServer()
+	//lis := net.Li
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {

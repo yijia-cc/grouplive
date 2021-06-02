@@ -1,21 +1,21 @@
 package controller
 
 import (
+	"net/http"
+
 	jwtmiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/form3tech-oss/jwt-go"
 	"github.com/gorilla/mux"
-	"github.com/yijia-cc/grouplive/auth/config"
-	"net/http"
 )
 
 var SigningKey []byte
 
-func StartUp(cfg *config.Config) *mux.Router {
-	SigningKey = []byte(cfg.TokenSecretKey)
-	jwtMiddleware := StartupJWT()
-	router := StartupHttpRouter(jwtMiddleware)
-	return router
-}
+//func StartUp(cfg *config.Config) *mux.Router {
+//	SigningKey = []byte(cfg.TokenSecretKey)
+//	jwtMiddleware := StartupJWT()
+//	router := StartupHttpRouter(jwtMiddleware)
+//	return router
+//}
 
 // StartupJWT adds an extra layer of security middleware between the client and the backend APIs, to protect APIs from disallowed users
 func StartupJWT() *jwtmiddleware.JWTMiddleware {
@@ -24,14 +24,14 @@ func StartupJWT() *jwtmiddleware.JWTMiddleware {
 			return SigningKey, nil
 		},
 		SigningMethod: jwt.SigningMethodHS256,
-		UserProperty: "userToken",
+		UserProperty:  "userToken",
 	})
 
 	return jwtMiddleware
 }
 
-// StartupHttpRouter configures the HTTP router to deliver requests to the desired APIs via URL patten matching, and at
-// the same time, the JWT middleware is prepended before the router to protect 3 types of API that needs different level of protection
+// StartupHttpRouter configures the HTTP routing to deliver requests to the desired APIs via URL patten matching, and at
+// the same time, the JWT middleware is prepended before the routing to protect 3 types of API that needs different level of protection
 func StartupHttpRouter(jwtMiddleware *jwtmiddleware.JWTMiddleware) *mux.Router {
 	r := mux.NewRouter()
 

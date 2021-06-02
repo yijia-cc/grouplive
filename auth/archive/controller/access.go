@@ -2,12 +2,13 @@ package controller
 
 import (
 	"fmt"
-	"github.com/yijia-cc/grouplive/auth/model"
 	"net/http"
+
+	"github.com/yijia-cc/grouplive/auth/archive/model"
 )
 
 // AccessHandler implements the http.Handler interface with Access control
-type AccessHandler struct{
+type AccessHandler struct {
 	access func(string) bool
 	handle func(http.ResponseWriter, *http.Request)
 }

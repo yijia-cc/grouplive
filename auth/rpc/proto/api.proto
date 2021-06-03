@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/yijia-cc/grouplive/auth/rpc/proto";
+
+service AuthenticationService {
+    rpc VerifyIdentity(VerifyIdentityRequest) returns (VerifyIdentityResponse);
+}
+
+service AuthorizationService {
+    rpc HasPermission(HasPermissionRequest) returns (HasPermissionResponse);
+}
+
+service UserService {
+    rpc GetUser(GetUserRequest) returns (User);
+}
+
+message VerifyIdentityRequest {
+    string auth_token = 1;
+}
+
+message VerifyIdentityResponse {
+    string user_id = 1;
+}
+
+message HasPermissionRequest {
+    optional string user_id = 1;
+    string permission_id = 2;
+    optional string resource_id = 3;
+}
+
+message HasPermissionResponse {
+    bool has_permission = 1;
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+message User {
+    string id = 1;
+    optional string lastname = 2;
+    optional string firstname = 3;
+    Unit unit = 4;
+}
+
+message Unit {
+    string address = 1;
+    string apt_number = 2;
+}

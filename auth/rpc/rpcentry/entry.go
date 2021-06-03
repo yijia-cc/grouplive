@@ -1,22 +1,24 @@
-package entry
+package rpcentry
 
 import (
 	"database/sql"
 	"fmt"
-	"net/http"
+	"net"
 
 	"github.com/yijia-cc/grouplive/auth/config"
 	"github.com/yijia-cc/grouplive/auth/dep"
 )
 
 func StartServer(cfg config.Config, sqlDB *sql.DB) {
-	routingServer := dep.InitRoutingServer(
-		dep.JWTSigningKey(cfg.JWTSigningKey),
+	server := dep.InitGRPCServer(dep.JWTSigningKey(cfg.JWTSigningKey),
 		dep.CaesarCipherOffset(cfg.CaesarCipherOffset),
 		sqlDB,
 	)
-	fmt.Println("GraphQL API started at port 8080")
-	if err := http.ListenAndServe(":8080", routingServer); err != nil {
+
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.GRPCAPIPort))
+	if err != nil {
 		panic(err)
 	}
+	err = server.Serve(lis)
+	panic(err)
 }

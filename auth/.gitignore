@@ -1,2 +1,3 @@
-# Environmental variables
+.idea
+.DS_Store
 .env

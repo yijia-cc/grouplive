@@ -1,32 +1,32 @@
 package main
 
 import (
-	"fmt"
-	"github.com/yijia-cc/grouplive/auth/config"
-	"github.com/yijia-cc/grouplive/auth/controller"
-	"github.com/yijia-cc/grouplive/auth/model"
-	"log"
-	"net/http"
 	"sync"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/yijia-cc/grouplive/auth/config"
+	"github.com/yijia-cc/grouplive/auth/db"
+	"github.com/yijia-cc/grouplive/auth/routing/entry"
 )
 
-
 func main() {
-	cfg := config.LoadEnv()
+	cfg := config.FromEnv()
+	sqlDB, err := db.Connect(cfg)
+	if err != nil {
+		panic(err)
+	}
+	defer sqlDB.Close()
 
-	db := model.DBConn(cfg)
-	defer db.Close()
-
-	router := controller.StartUp(cfg)
+	err = db.Migrate(sqlDB, cfg)
+	if err != nil {
+		panic(err)
+	}
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		log.Fatal(http.ListenAndServe(":8080", router))
+		entry.StartServer(cfg, sqlDB)
 	}()
-	fmt.Println("Service started at :8080")
 	wg.Wait()
 }

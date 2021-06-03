@@ -9,7 +9,7 @@
 Build Docker image
 
 ```bash
-docker build -t web .
+docker build -t payment .
 ```
 
 Create and update `.env` file
@@ -21,7 +21,7 @@ cp .env.dist .env
 Start local server
 
 ```bash
-docker run --env-file .env -p 8080:8080 --network="host" web
+docker run --env-file .env -p 8080:8080 --network="host" payment
 ```
 
 You can visit your service at [http://127.0.0.1:8080](http://127.0.0.1:8080).

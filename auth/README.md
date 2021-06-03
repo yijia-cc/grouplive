@@ -1,4 +1,4 @@
-# Calendar Service
+# Auth Service
 
 ## Prerequisite
 
@@ -9,7 +9,7 @@
 Build Docker image
 
 ```bash
-docker build -t web .
+docker build -t auth .
 ```
 
 Create and update `.env` file
@@ -21,7 +21,7 @@ cp .env.dist .env
 Start local server
 
 ```bash
-docker run --env-file .env -p 8080:8080 --network="host" web
+docker run --env-file .env -p 8080:8080 --network="host" auth
 ```
 
 You can visit your service at [http://127.0.0.1:8080](http://127.0.0.1:8080).
@@ -34,13 +34,13 @@ You can visit your service at [http://127.0.0.1:8080](http://127.0.0.1:8080).
 
 Merge a PR into `master`  branch will automatically deploy the service to `staging` environment.
 
-You can try out the service at [http://payment.api.staging.allgame.fun](http://payment.api.staging.allgame.fun) after deployment.
+You can try out the service at [http://auth.api.staging.allgame.fun](http://auth.api.staging.allgame.fun) after deployment.
 
 ###  Production
 
 Merge a PR from `master` branch to `production` branch will automatically deploy the service to `production` environment.
 
-You can try out the service at [http://payment.api.allgame.fun](http://payment.api.allgame.fun) after deployment.
+You can try out the service at [http://auth.api.allgame.fun](http://auth.api.allgame.fun) after deployment.
 
 ## Authors
 

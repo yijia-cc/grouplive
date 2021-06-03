@@ -2,11 +2,14 @@
 CREATE TABLE user
 (
     id                 VARCHAR(3) PRIMARY KEY,
-    name               VARCHAR(100),
+    last_name          VARCHAR(50),
+    first_name         VARCHAR(50),
     username           VARCHAR(50),
     email              VARCHAR(200),
     encrypted_password VARCHAR(72),
-    last_signed_in_at  DATETIME
+    last_signed_in_at  DATETIME,
+    address            VARCHAR(200),
+    apt_number         VARCHAR(50)
 );
 
 CREATE TABLE permission

@@ -14,6 +14,8 @@ type Config struct {
 	DBName             string `envconfig:"DB_NAME"`
 	DbUser             string `envconfig:"DB_USER"`
 	DbPassword         string `envconfig:"DB_PASSWORD"`
+	WebAPIPort         int    `envconfig:"WEB_API_PORT"`
+	GRPCAPIPort        int    `envconfig:"GRPC_API_PORT"`
 	JWTSigningKey      string `envconfig:"JWT_SIGNING_KEY"`
 	CaesarCipherOffset int    `envconfig:"CAESAR_CIPHER_OFFSET"`
 }

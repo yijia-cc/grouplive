@@ -3,10 +3,12 @@ package main
 import (
 	"sync"
 
+	"github.com/yijia-cc/grouplive/auth/rpc/rpcentry"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/auth/config"
 	"github.com/yijia-cc/grouplive/auth/db"
-	"github.com/yijia-cc/grouplive/auth/routing/entry"
+	"github.com/yijia-cc/grouplive/auth/routing/routingentry"
 )
 
 func main() {
@@ -26,7 +28,12 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		entry.StartServer(cfg, sqlDB)
+		routingentry.StartServer(cfg, sqlDB)
+	}()
+
+	go func() {
+		defer wg.Done()
+		rpcentry.StartServer(cfg, sqlDB)
 	}()
 	wg.Wait()
 }

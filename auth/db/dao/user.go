@@ -21,7 +21,7 @@ type UserSQL struct {
 
 func (u UserSQL) FindUserByID(tx tx.Transaction, id *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, name, username, encrypted_password, last_signed_in_at
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
 FROM user
 WHERE id = ?;
 `, id)
@@ -30,7 +30,7 @@ WHERE id = ?;
 
 func (u UserSQL) FindUserByUsername(tx tx.Transaction, username *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, name, username, encrypted_password, last_signed_in_at
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
 FROM user
 WHERE username = ?;
 `, username)
@@ -39,7 +39,7 @@ WHERE username = ?;
 
 func (u UserSQL) FindUserByEmail(tx tx.Transaction, email *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, name, username, encrypted_password, last_signed_in_at
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
 FROM user
 WHERE email = ?;
 `, email)
@@ -48,7 +48,7 @@ WHERE email = ?;
 
 func findUser(row *sql.Row) (entity.User, error) {
 	user := entity.User{}
-	err := row.Scan(&user.ID, &user.Name, &user.Username, &user.EncryptedPassword, &user.LastSignedInAt)
+	err := row.Scan(&user.ID, &user.LastName, &user.FirstName, &user.Username, &user.EncryptedPassword, &user.LastSignedInAt)
 	return user, err
 }
 

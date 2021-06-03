@@ -63,7 +63,7 @@ func (a Authentication) SignIn(username string, password string) (string, error)
 	return a.jwtAuthority.IssueToken(payload)
 }
 
-func (a Authentication) GetUserID(authToken string) string {
+func (a Authentication) VerifyIdentity(authToken string) (string, error) {
 	panic("Implement me!")
 }
 

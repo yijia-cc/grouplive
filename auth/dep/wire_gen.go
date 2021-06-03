@@ -11,8 +11,10 @@ import (
 
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/routing"
+	"github.com/yijia-cc/grouplive/auth/rpc"
 	"github.com/yijia-cc/grouplive/auth/tm"
 	"github.com/yijia-cc/grouplive/auth/tx"
+	"google.golang.org/grpc"
 )
 
 // Injectors from wire.go:
@@ -25,11 +27,23 @@ func InitRoutingServer(jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCip
 	return serveMux
 }
 
+func InitGRPCServer(jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset, sqlDB *sql.DB) *grpc.Server {
+	localTimer := tm.NewLocalTimer()
+	safeTransactionFactory := tx.NewSafeTransactionFactory(sqlDB)
+	userSQL := dao.NewUserSQL(sqlDB)
+	server := newGRPCServer(localTimer, safeTransactionFactory, userSQL, jwtSigningKey, caesarCipherOffset)
+	return server
+}
+
 // wire.go:
 
 type JWTSigningKey string
 
 type CaesarCipherOffset int
+
+func newGRPCServer(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *grpc.Server {
+	return rpc.NewServer(timer, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))
+}
 
 func newRoutingServer(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *http.ServeMux {
 	return routing.NewServer(timer, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))

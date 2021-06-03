@@ -4,7 +4,9 @@ import "time"
 
 type User struct {
 	ID                ID
-	Name              *string
+	LastName          *string
+	FirstName         *string
+	Unit              Unit
 	Username          *string
 	EncryptedPassword *string
 	LastSignedInAt    *time.Time

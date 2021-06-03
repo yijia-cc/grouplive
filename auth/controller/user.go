@@ -48,7 +48,7 @@ func userInfoHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func getUserNameFromToken(r *http.Request) string {
-	userToken := r.Context().Value("userToken")
+	userToken := r.Context().Value("userToken") //r.data[userToken]
 	claims := userToken.(*jwt.Token).Claims
 	return claims.(jwt.MapClaims)["username"].(string)
 }

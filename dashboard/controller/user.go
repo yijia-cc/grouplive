@@ -25,14 +25,14 @@ func userHandler(w http.ResponseWriter, r *http.Request) {
 	//if err != nil {
 	//	log.Fatal(err)
 	//}
-	//
+	//grpc
 	//var userid string
  	//resp.Body.Read(&userid)
 
 
 
 
-	// Query event db for the specific user
+	// Query *** db for the specific user
 
 	// Convert data to json
 

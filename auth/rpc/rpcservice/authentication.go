@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 
+	"github.com/yijia-cc/grouplive/auth/idgen"
+
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/rpc/proto"
 	"github.com/yijia-cc/grouplive/auth/service"
@@ -26,6 +28,6 @@ func (a Authentication) VerifyIdentity(_ context.Context, request *proto.VerifyI
 	return &proto.VerifyIdentityResponse{UserId: userID}, nil
 }
 
-func NewAuthentication(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) Authentication {
-	return Authentication{authenticationService: service.NewAuthentication(timer, txFactory, userDao, jwtSigningKey, caesarCipherOffset)}
+func NewAuthentication(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) Authentication {
+	return Authentication{authenticationService: service.NewAuthentication(timer, idGenerator, txFactory, userDao, jwtSigningKey, caesarCipherOffset)}
 }

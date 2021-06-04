@@ -19,6 +19,6 @@ func StartServer(cfg config.Config, sqlDB *sql.DB) {
 	if err != nil {
 		panic(err)
 	}
-	err = server.Serve(lis)
-	panic(err)
+	fmt.Printf("GRPC server started at port %d\n", cfg.GRPCAPIPort)
+	panic(server.Serve(lis))
 }

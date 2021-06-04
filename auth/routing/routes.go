@@ -3,6 +3,8 @@ package routing
 import (
 	"net/http"
 
+	"github.com/yijia-cc/grouplive/auth/idgen"
+
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/service"
 	"github.com/yijia-cc/grouplive/auth/tm"
@@ -15,8 +17,8 @@ type route struct {
 	handleFunc http.HandlerFunc
 }
 
-func getRoutes(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) []route {
-	authenticationService := service.NewAuthentication(timer, txFactory, userDao, jwtSigningKey, caesarCipherOffset)
+func getRoutes(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) []route {
+	authenticationService := service.NewAuthentication(timer, idGenerator, txFactory, userDao, jwtSigningKey, caesarCipherOffset)
 	return []route{
 		{
 			path:       "/sign-in",

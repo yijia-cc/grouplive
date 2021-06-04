@@ -277,7 +277,7 @@ type User struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        string  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id        string  `protobuf:"bytes,1,opt,name=idgen,proto3" json:"idgen,omitempty"`
 	Lastname  *string `protobuf:"bytes,2,opt,name=lastname,proto3,oneof" json:"lastname,omitempty"`
 	Firstname *string `protobuf:"bytes,3,opt,name=firstname,proto3,oneof" json:"firstname,omitempty"`
 	Unit      *Unit   `protobuf:"bytes,4,opt,name=unit,proto3" json:"unit,omitempty"`

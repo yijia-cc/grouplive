@@ -21,8 +21,8 @@ func (u User) GetUser(_ context.Context, request *proto.GetUserRequest) (*proto.
 	}
 	return &proto.User{
 		Id:        string(user.ID),
-		Lastname:  user.LastName,
-		Firstname: user.FirstName,
+		Lastname:  &user.LastName,
+		Firstname: &user.FirstName,
 		Unit: &proto.Unit{
 			Address:   user.Unit.Address,
 			AptNumber: user.Unit.AptNumber,

@@ -31,6 +31,10 @@ func (u User) FindUser(tx tx.Transaction, query FindUserQuery) (entity.User, err
 	return entity.User{}, errors.New("user filtering condition not provided")
 }
 
+func (u User) CreateUser(tx tx.Transaction, user entity.User) error {
+	return u.userDao.CreateUser(tx, user)
+}
+
 func NewUser(userDao dao.User) User {
 	return User{userDao: userDao}
 }

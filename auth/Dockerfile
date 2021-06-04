@@ -23,6 +23,8 @@ RUN apk add --no-cache bash
 
 COPY --from=builder /app/bin/main ./bin/main
 
+COPY --from=builder /app/db/migrations/ ./db/migrations/
+
 ENV DB_MIGRATION_DIR=./db/migrations/
 
 ENTRYPOINT ["./bin/main"]

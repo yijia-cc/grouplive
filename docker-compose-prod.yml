@@ -60,6 +60,7 @@ services:
     image: ${DOCKER_USERNAME}/auth:latest
     ports:
       - "8087:8080"
+      - "11087:8081"
     environment:
       - VIRTUAL_HOST=auth.api.allgame.fun
       - VIRTUAL_PORT=8087

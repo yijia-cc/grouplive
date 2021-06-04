@@ -60,6 +60,7 @@ services:
     image: ${DOCKER_USERNAME}/auth-staging:latest
     ports:
       - "9087:8080"
+      - "12087:8081"
     environment:
       - VIRTUAL_HOST=auth.api.staging.allgame.fun
       - VIRTUAL_PORT=9087

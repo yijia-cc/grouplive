@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getData } from "../../redux/actions/testAction";
 import SubNavBar from "./SubNavBar";
@@ -31,9 +31,11 @@ const Calendar = (props) => {
   );
 };
 
-export default connect(
-  (state) => ({
-    testData: state.testData,
-  }),
-  { getData }
-)(Calendar);
+export default withRouter(
+  connect(
+    (state) => ({
+      testData: state.testData,
+    }),
+    { getData }
+  )(Calendar)
+);

@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import Login from "../../pages/Login";
+import Register from "../../pages/Register";
 import Calendar from "../../pages/Calendar";
 import ChatRoom from "../../pages/ChatRoom";
 import Dashboard from "../../pages/Dashboard";
@@ -50,6 +51,7 @@ const Main = (props) => {
         <Switch>
           <Route path="/" exact render={showLogin} />
           <Route path="/login" render={showLogin} />
+          <Route path="/register" component={Register} />
           <Route path="/dashboard" render={showDashBoard} />
           <Route path="/discussion" render={showDiscussBoard} />
           <Route path="/chat" render={showChatRoom} />

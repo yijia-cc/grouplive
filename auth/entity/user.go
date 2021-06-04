@@ -4,10 +4,11 @@ import "time"
 
 type User struct {
 	ID                ID
-	LastName          *string
-	FirstName         *string
+	LastName          string
+	FirstName         string
 	Unit              Unit
-	Username          *string
-	EncryptedPassword *string
+	Username          string
+	Email             string
+	EncryptedPassword string
 	LastSignedInAt    *time.Time
 }

@@ -15,8 +15,8 @@ func StartServer(cfg config.Config, sqlDB *sql.DB) {
 		dep.CaesarCipherOffset(cfg.CaesarCipherOffset),
 		sqlDB,
 	)
-	fmt.Println("GraphQL API started at port 8080")
-	if err := http.ListenAndServe(":8080", routingServer); err != nil {
+	fmt.Printf("Web server started at port %d\n", cfg.WebAPIPort)
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.WebAPIPort), routingServer); err != nil {
 		panic(err)
 	}
 }

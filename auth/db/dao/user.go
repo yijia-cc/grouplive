@@ -7,16 +7,33 @@ import (
 	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
+var _ error = (*UserNotFound)(nil)
+
+type UserNotFound struct{}
+
+func (u UserNotFound) Error() string {
+	return "user not found"
+}
+
 type User interface {
 	FindUserByID(tx tx.Transaction, id *string) (entity.User, error)
 	FindUserByUsername(tx tx.Transaction, username *string) (entity.User, error)
 	FindUserByEmail(tx tx.Transaction, email *string) (entity.User, error)
+	CreateUser(tx tx.Transaction, user entity.User) error
 }
 
 var _ User = (*UserSQL)(nil)
 
 type UserSQL struct {
 	db *sql.DB
+}
+
+func (u UserSQL) CreateUser(tx tx.Transaction, user entity.User) error {
+	_, err := tx.DBTransaction.Exec(`
+INSERT INTO user
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+`, user.ID, user.LastName, user.FirstName, user.Username, user.Email, user.EncryptedPassword, nil, user.Unit.Address, user.Unit.AptNumber)
+	return err
 }
 
 func (u UserSQL) FindUserByID(tx tx.Transaction, id *string) (entity.User, error) {
@@ -48,7 +65,19 @@ WHERE email = ?;
 
 func findUser(row *sql.Row) (entity.User, error) {
 	user := entity.User{}
-	err := row.Scan(&user.ID, &user.LastName, &user.FirstName, &user.Username, &user.EncryptedPassword, &user.LastSignedInAt)
+	err := row.Scan(
+		&user.ID,
+		&user.LastName,
+		&user.FirstName,
+		&user.Username,
+		&user.EncryptedPassword,
+		&user.LastSignedInAt,
+		&user.Unit.Address,
+		&user.Unit.AptNumber,
+	)
+	if err == sql.ErrNoRows {
+		return entity.User{}, UserNotFound{}
+	}
 	return user, err
 }
 

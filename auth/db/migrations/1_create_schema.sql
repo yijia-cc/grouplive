@@ -1,10 +1,10 @@
 -- +migrate Up
 CREATE TABLE user
 (
-    id                 VARCHAR(3) PRIMARY KEY,
+    id                 VARCHAR(36) PRIMARY KEY,
     last_name          VARCHAR(50),
     first_name         VARCHAR(50),
-    username           VARCHAR(50),
+    username           VARCHAR(50) UNIQUE,
     email              VARCHAR(200),
     encrypted_password VARCHAR(72),
     last_signed_in_at  DATETIME,

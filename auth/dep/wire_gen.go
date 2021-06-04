@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/yijia-cc/grouplive/auth/db/dao"
+	"github.com/yijia-cc/grouplive/auth/idgen"
 	"github.com/yijia-cc/grouplive/auth/routing"
 	"github.com/yijia-cc/grouplive/auth/rpc"
 	"github.com/yijia-cc/grouplive/auth/tm"
@@ -21,17 +22,19 @@ import (
 
 func InitRoutingServer(jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset, sqlDB *sql.DB) *http.ServeMux {
 	localTimer := tm.NewLocalTimer()
+	uuidGenerator := idgen.NewUUIDGenerator()
 	safeTransactionFactory := tx.NewSafeTransactionFactory(sqlDB)
 	userSQL := dao.NewUserSQL(sqlDB)
-	serveMux := newRoutingServer(localTimer, safeTransactionFactory, userSQL, jwtSigningKey, caesarCipherOffset)
+	serveMux := newRoutingServer(localTimer, uuidGenerator, safeTransactionFactory, userSQL, jwtSigningKey, caesarCipherOffset)
 	return serveMux
 }
 
 func InitGRPCServer(jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset, sqlDB *sql.DB) *grpc.Server {
 	localTimer := tm.NewLocalTimer()
+	uuidGenerator := idgen.NewUUIDGenerator()
 	safeTransactionFactory := tx.NewSafeTransactionFactory(sqlDB)
 	userSQL := dao.NewUserSQL(sqlDB)
-	server := newGRPCServer(localTimer, safeTransactionFactory, userSQL, jwtSigningKey, caesarCipherOffset)
+	server := newGRPCServer(localTimer, uuidGenerator, safeTransactionFactory, userSQL, jwtSigningKey, caesarCipherOffset)
 	return server
 }
 
@@ -41,10 +44,10 @@ type JWTSigningKey string
 
 type CaesarCipherOffset int
 
-func newGRPCServer(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *grpc.Server {
-	return rpc.NewServer(timer, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))
+func newGRPCServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *grpc.Server {
+	return rpc.NewServer(timer, idGenerator, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))
 }
 
-func newRoutingServer(timer tm.Timer, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *http.ServeMux {
-	return routing.NewServer(timer, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))
+func newRoutingServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey JWTSigningKey, caesarCipherOffset CaesarCipherOffset) *http.ServeMux {
+	return routing.NewServer(timer, idGenerator, txFactory, userDao, string(jwtSigningKey), int(caesarCipherOffset))
 }

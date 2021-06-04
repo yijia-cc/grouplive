@@ -63,3 +63,12 @@ services:
     environment:
       - VIRTUAL_HOST=auth.api.allgame.fun
       - VIRTUAL_PORT=8087
+      - DB_HOST=${AUTH_DB_HOST}
+      - DB_PORT=${AUTH_DB_PORT}
+      - DB_USER=${AUTH_DB_USER}
+      - DB_PASSWORD=${AUTH_DB_PASSWORD}
+      - DB_NAME=${AUTH_DB_NAME}
+      - WEB_API_PORT=8080
+      - GRPC_API_PORT=8081
+      - JWT_SIGNING_KEY=${AUTH_JWT_SIGNING_KEY}
+      - CAESAR_CIPHER_OFFSET=${AUTH_CAESAR_CIPHER_OFFSET}

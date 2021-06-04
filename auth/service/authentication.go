@@ -16,6 +16,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+const hour = 60 * time.Minute
+const day = 24 * hour
+const week = 7 * day
+const authTokenValidDuration = week
+
 type tokenPayload struct {
 	EncryptedUserID string    `json:"encrypted_user_id"`
 	IssuedAt        time.Time `json:"issued_at"`
@@ -109,7 +114,18 @@ func (a Authentication) SignIn(username string, password string) (string, error)
 }
 
 func (a Authentication) VerifyIdentity(authToken string) (string, error) {
-	panic("Implement me!")
+	payload := tokenPayload{}
+	err := a.jwtAuthority.GetPayload(authToken, &payload)
+	if err != nil {
+		return "", err
+	}
+
+	expiredAt := payload.IssuedAt.Add(authTokenValidDuration)
+	if  expiredAt.Before(a.timer.Now()) {
+		return "", errors.New("auth token expired")
+	}
+
+	return a.cipher.Decrypt(payload.EncryptedUserID), nil
 }
 
 func (a Authentication) nextUniqueUserID(transaction tx.Transaction) (entity.ID, error) {

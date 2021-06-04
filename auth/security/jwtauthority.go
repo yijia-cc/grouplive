@@ -2,6 +2,7 @@ package security
 
 import (
 	"encoding/json"
+	"errors"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -20,8 +21,29 @@ func (j JWTAuthority) IssueToken(payload interface{}) (string, error) {
 	return token.SignedString(j.signingKey)
 }
 
-func (j JWTAuthority) GetPayload(token string, output *interface{}) {
-	panic("Implement me!")
+func (j JWTAuthority) GetPayload(tokenStr string, output interface{}) error {
+	token, err := jwt.Parse(tokenStr, func(token *jwt.Token)(interface{}, error) {
+		return j.signingKey, nil
+	})
+	if err != nil {
+		return err
+	}
+
+	if !token.Valid {
+		return errors.New("token is invalid")
+	}
+
+	var claims jwt.MapClaims
+	var ok bool
+	if claims, ok = token.Claims.(jwt.MapClaims); !ok {
+		return errors.New("token payload is not map")
+	}
+
+	buf, err := json.Marshal(map[string]interface{}(claims))
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(buf, output)
 }
 
 func toMap(input interface{}) (map[string]interface{}, error) {

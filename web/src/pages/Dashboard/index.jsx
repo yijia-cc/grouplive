@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "antd";
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
 import Macy from "macy";
 import "./index.less";
 class Dashboard extends React.Component {

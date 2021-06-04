@@ -4,6 +4,7 @@ import { DownOutlined } from "@ant-design/icons";
 import avator from "../images/testAvatar.JPG";
 import "./index.css";
 const User = (props) => {
+  const { handleLogout } = props;
   const pathname = props.pathname.split("/")[1];
   let selectedKey = "";
   if (pathname === "userinfo") {
@@ -19,7 +20,7 @@ const User = (props) => {
       <Menu.Item key="payment">
         <NavLink to="/payment">Payment</NavLink>
       </Menu.Item>
-      <Menu.Item key="logout" danger>
+      <Menu.Item key="logout" danger onClick={handleLogout}>
         Log out
       </Menu.Item>
     </Menu>

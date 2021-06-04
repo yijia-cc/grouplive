@@ -23,6 +23,7 @@ func newSignUpHandlerFunc(authenticationService service.Authentication) http.Han
 			Password  string `json:"password"`
 			Firstname string `json:"firstname"`
 			Lastname  string `json:"lastname"`
+			Email     string `json:"email"`
 			Address   string `json:"address"`
 			AptNumber string `json:"apt_number"`
 		}{}
@@ -37,6 +38,7 @@ func newSignUpHandlerFunc(authenticationService service.Authentication) http.Han
 			LastName:  jsonReqBody.Lastname,
 			FirstName: jsonReqBody.Firstname,
 			Username:  jsonReqBody.Username,
+			Email:     jsonReqBody.Email,
 			Unit: entity.Unit{
 				AptNumber: jsonReqBody.AptNumber,
 				Address:   jsonReqBody.Address,

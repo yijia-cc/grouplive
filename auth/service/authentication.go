@@ -2,7 +2,7 @@ package service
 
 import (
 	"errors"
-	"regexp"
+	"github.com/yijia-cc/grouplive/auth/validator"
 	"time"
 
 	"github.com/yijia-cc/grouplive/auth/entity"
@@ -15,8 +15,6 @@ import (
 	"github.com/yijia-cc/grouplive/auth/tx"
 	"golang.org/x/crypto/bcrypt"
 )
-
-var usernameFormat = regexp.MustCompile(`^[0-9a-zA-Z]+$`)
 
 type tokenPayload struct {
 	EncryptedUserID string    `json:"encrypted_user_id"`
@@ -33,6 +31,11 @@ type Authentication struct {
 }
 
 func (a Authentication) SignUp(user entity.User, password string) error {
+	err := user.Validate()
+	if err != nil {
+		return err
+	}
+
 	transaction, err := a.txFactory.NewTransaction()
 	if err != nil {
 		return err
@@ -69,28 +72,12 @@ func (a Authentication) SignUp(user entity.User, password string) error {
 	return transaction.Commit()
 }
 
-func (a Authentication) nextUniqueUserID(transaction tx.Transaction) (entity.ID, error) {
-	for {
-		id := a.idGenerator.NextID()
-		query := repo.FindUserQuery{ID: (*string)(&id)}
-		_, err := a.userRepo.FindUser(transaction, query)
-		switch err.(type) {
-		case nil:
-			continue
-		case dao.UserNotFound:
-			return id, nil
-		default:
-			return "", err
-		}
-	}
-}
-
 func (a Authentication) SignIn(username string, password string) (string, error) {
-	if !validateUsername(username) {
+	if !validator.ValidateUsername(username) {
 		return "", errors.New("invalid username format")
 	}
 
-	if !validatePassword(password) {
+	if !validator.ValidatePassword(password) {
 		return "", errors.New("invalid password format")
 	}
 
@@ -125,12 +112,20 @@ func (a Authentication) VerifyIdentity(authToken string) (string, error) {
 	panic("Implement me!")
 }
 
-func validateUsername(username string) bool {
-	return usernameFormat.MatchString(username)
-}
-
-func validatePassword(password string) bool {
-	return len(password) >= 8
+func (a Authentication) nextUniqueUserID(transaction tx.Transaction) (entity.ID, error) {
+	for {
+		id := a.idGenerator.NextID()
+		query := repo.FindUserQuery{ID: (*string)(&id)}
+		_, err := a.userRepo.FindUser(transaction, query)
+		switch err.(type) {
+		case nil:
+			continue
+		case dao.UserNotFound:
+			return id, nil
+		default:
+			return "", err
+		}
+	}
 }
 
 func NewAuthentication(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) Authentication {

@@ -6,7 +6,7 @@ RUN apk add --no-cache git bash
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 

@@ -27,11 +27,10 @@ CREATE TABLE permission_binding
 
 ALTER TABLE permission_binding
     ADD CONSTRAINT fk_permission_binding_permission_id
-        FOREIGN KEY (permission_id) REFERENCES permission (id),
+        FOREIGN KEY (permission_id) REFERENCES permission(id),
     ADD CONSTRAINT fk_permission_binding_user_id
-        FOREIGN KEY (user_id) REFERENCES user (id),
-    ADD CONSTRAINT fk_permission_binding
-        PRIMARY KEY (permission_id, user_id, resource_id);
+        FOREIGN KEY (user_id) REFERENCES user(id),
+    ADD PRIMARY KEY (permission_id, user_id, resource_id);
 
 -- +migrate Down
 ALTER TABLE permission_binding

@@ -15,7 +15,7 @@
 	<description>Chat application using Websockets</description>
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>15</java.version>
 	</properties>
 
 	<dependencies>
@@ -68,18 +68,12 @@
 				<version>3.8.0</version>
 				<configuration>
 					<release>${java.version}</release>
-					<compilerArgs>
-						--enable-preview
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
-				<configuration>
-					<argLine>--enable-preview</argLine>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

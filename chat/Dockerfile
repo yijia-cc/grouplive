@@ -1,5 +1,5 @@
 # Build
-FROM maven:3.8.1-jdk-11-slim AS builder
+FROM maven:3.8.1-openjdk-15-slim AS builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn -B clean package
 
 # Production
-FROM maven:3.8.1-jdk-11-slim AS production
+FROM maven:3.8.1-openjdk-15-slim AS production
 
 WORKDIR /app
 

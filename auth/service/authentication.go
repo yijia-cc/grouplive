@@ -53,7 +53,7 @@ func (a Authentication) SignUp(user entity.User, password string) error {
 	switch err.(type) {
 	case nil:
 		return errors.New("user already exists")
-	case dao.UserNotFound:
+	case dao.NotFound:
 	default:
 		return err
 	}
@@ -95,7 +95,7 @@ func (a Authentication) SignIn(username string, password string) (string, error)
 	user, err := a.userRepo.FindUser(transaction, query)
 	switch err.(type) {
 	case nil:
-	case dao.UserNotFound:
+	case dao.NotFound:
 		return "", errors.New("user not found")
 	default:
 		return "", err
@@ -136,7 +136,7 @@ func (a Authentication) nextUniqueUserID(transaction tx.Transaction) (entity.ID,
 		switch err.(type) {
 		case nil:
 			continue
-		case dao.UserNotFound:
+		case dao.NotFound:
 			return id, nil
 		default:
 			return "", err

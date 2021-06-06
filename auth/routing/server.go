@@ -11,7 +11,7 @@ import (
 	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
-func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) *http.ServeMux {
+func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int, permissionBinding dao.PermissionBinding) *http.ServeMux {
 	serveMux := http.NewServeMux()
 	router := mux.NewRouter()
 	routes := getRoutes(timer, idGenerator, txFactory, userDao, jwtSigningKey, caesarCipherOffset)

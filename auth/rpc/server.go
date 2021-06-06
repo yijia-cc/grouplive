@@ -10,10 +10,10 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) *grpc.Server {
+func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int, permissionBinding dao.PermissionBinding) *grpc.Server {
 	server := grpc.NewServer()
 	proto.RegisterAuthenticationServiceServer(server, rpcservice.NewAuthentication(timer, idGenerator, txFactory, userDao, jwtSigningKey, caesarCipherOffset))
-	proto.RegisterAuthorizationServiceServer(server, rpcservice.NewAuthorization())
-	proto.RegisterUserServiceServer(server, rpcservice.NewUser())
+	proto.RegisterAuthorizationServiceServer(server, rpcservice.NewAuthorization(txFactory, permissionBinding))
+	proto.RegisterUserServiceServer(server, rpcservice.NewUser(txFactory, userDao))
 	return server
 }

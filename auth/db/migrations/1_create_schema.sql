@@ -6,10 +6,10 @@ CREATE TABLE user
     first_name         VARCHAR(50),
     username           VARCHAR(50) UNIQUE,
     email              VARCHAR(200),
-    encrypted_password VARCHAR(72),
+    encrypted_password VARCHAR(72) NOT NULL,
     last_signed_in_at  DATETIME,
-    address            VARCHAR(200),
-    apt_number         VARCHAR(50)
+    address            VARCHAR(200) NOT NULL,
+    apt_number         VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE permission

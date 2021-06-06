@@ -2,6 +2,8 @@ package rpcservice
 
 import (
 	"context"
+	"github.com/yijia-cc/grouplive/auth/db/dao"
+	"github.com/yijia-cc/grouplive/auth/tx"
 
 	"github.com/yijia-cc/grouplive/auth/rpc/proto"
 	"github.com/yijia-cc/grouplive/auth/service"
@@ -30,6 +32,6 @@ func (u User) GetUser(_ context.Context, request *proto.GetUserRequest) (*proto.
 	}, nil
 }
 
-func NewUser() User {
-	return User{userService: service.NewUser()}
+func NewUser(txFactory tx.TransactionFactory, userDao dao.User) User {
+	return User{userService: service.NewUser(txFactory, userDao)}
 }

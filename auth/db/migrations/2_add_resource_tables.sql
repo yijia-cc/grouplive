@@ -9,7 +9,7 @@ CREATE TABLE resource
 (
     id      VARCHAR(3) PRIMARY KEY,
     name    VARCHAR(100),
-    type VARCHAR(3)
+    type VARCHAR(3) NOT NULL
 );
 
 ALTER TABLE resource

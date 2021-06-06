@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:latest AS produciton
+FROM nginx:1.20.0-alpine AS produciton
 
 WORKDIR /usr/share/nginx/html
 

@@ -3,19 +3,10 @@ services:
   # Frontend
   web:
     image: ${DOCKER_USERNAME}/web:latest
-    ports:
-      - "8081:80"
-    environment:
-      - VIRTUAL_HOST=allgame.fun,www.allgame.fun
-      - VIRTUAL_PORT=8081
   # Backend
   calendar:
     image: ${DOCKER_USERNAME}/calendar:latest
-    ports:
-      - "8082:8080"
     environment:
-      - VIRTUAL_HOST=calendar.api.allgame.fun
-      - VIRTUAL_PORT=8082
       - GRAPHQL_SERVER_PORT=8080
       - DB_HOST=${CALENDAR_DB_HOST}
       - DB_PORT=${CALENDAR_DB_PORT}
@@ -24,25 +15,11 @@ services:
       - DB_NAME=${CALENDAR_DB_NAME}
   chat:
     image: ${DOCKER_USERNAME}/chat:latest
-    ports:
-      - "8083:8080"
-    environment:
-      - VIRTUAL_HOST=chat.api.allgame.fun
-      - VIRTUAL_PORT=8083
   dashboard:
     image: ${DOCKER_USERNAME}/dashboard:latest
-    ports:
-      - "8084:8080"
-    environment:
-      - VIRTUAL_HOST=dashboard.api.allgame.fun
-      - VIRTUAL_PORT=8084
   discussion:
     image: ${DOCKER_USERNAME}/discussion:latest
-    ports:
-      - "8085:8080"
     environment:
-      - VIRTUAL_HOST=discussion.api.allgame.fun
-      - VIRTUAL_PORT=8085
       - DB_HOST=${DISCUSSION_DB_HOST}
       - DB_PORT=${DISCUSSION_DB_PORT}
       - DB_USER=${DISCUSSION_DB_USER}
@@ -51,19 +28,9 @@ services:
       - API_PORT=8080
   payment:
     image: ${DOCKER_USERNAME}/payment:latest
-    ports:
-      - "8086:8080"
-    environment:
-      - VIRTUAL_HOST=payment.api.allgame.fun
-      - VIRTUAL_PORT=8086
   auth:
     image: ${DOCKER_USERNAME}/auth:latest
-    ports:
-      - "8087:8080"
-      - "11087:8081"
     environment:
-      - VIRTUAL_HOST=auth.api.allgame.fun
-      - VIRTUAL_PORT=8087
       - DB_HOST=${AUTH_DB_HOST}
       - DB_PORT=${AUTH_DB_PORT}
       - DB_USER=${AUTH_DB_USER}

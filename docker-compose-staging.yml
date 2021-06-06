@@ -3,19 +3,10 @@ services:
   # Frontend
   web-staging:
     image: ${DOCKER_USERNAME}/web-staging:latest
-    ports:
-      - "9081:80"
-    environment:
-      - VIRTUAL_HOST=www.staging.allgame.fun,staging.allgame.fun
-      - VIRTUAL_PORT=9081
   # Backend
   calendar-staging:
     image: ${DOCKER_USERNAME}/calendar-staging:latest
-    ports:
-      - "9082:8080"
     environment:
-      - VIRTUAL_HOST=calendar.api.staging.allgame.fun
-      - VIRTUAL_PORT=9082
       - GRAPHQL_SERVER_PORT=8080
       - DB_HOST=${CALENDAR_STAGING_DB_HOST}
       - DB_PORT=${CALENDAR_STAGING_DB_PORT}
@@ -24,25 +15,11 @@ services:
       - DB_NAME=${CALENDAR_STAGING_DB_NAME}
   chat-staging:
     image: ${DOCKER_USERNAME}/chat-staging:latest
-    ports:
-      - "9083:8080"
-    environment:
-      - VIRTUAL_HOST=chat.api.staging.allgame.fun
-      - VIRTUAL_PORT=9083
   dashboard-staging:
     image: ${DOCKER_USERNAME}/dashboard-staging:latest
-    ports:
-      - "9084:8080"
-    environment:
-      - VIRTUAL_HOST=dashboard.api.staging.allgame.fun
-      - VIRTUAL_PORT=9084
   discussion-staging:
     image: ${DOCKER_USERNAME}/discussion-staging:latest
-    ports:
-      - "9085:8080"
     environment:
-      - VIRTUAL_HOST=discussion.api.staging.allgame.fun
-      - VIRTUAL_PORT=9085
       - DB_HOST=${DISCUSSION_STAGING_DB_HOST}
       - DB_PORT=${DISCUSSION_STAGING_DB_PORT}
       - DB_USER=${DISCUSSION_STAGING_DB_USER}
@@ -51,19 +28,9 @@ services:
       - API_PORT=8080
   payment-staging:
     image: ${DOCKER_USERNAME}/payment-staging:latest
-    ports:
-      - "9086:8080"
-    environment:
-      - VIRTUAL_HOST=payment.api.staging.allgame.fun
-      - VIRTUAL_PORT=9086
   auth-staging:
     image: ${DOCKER_USERNAME}/auth-staging:latest
-    ports:
-      - "9087:8080"
-      - "12087:8081"
     environment:
-      - VIRTUAL_HOST=auth.api.staging.allgame.fun
-      - VIRTUAL_PORT=9087
       - DB_HOST=${AUTH_STAGING_DB_HOST}
       - DB_PORT=${AUTH_STAGING_DB_PORT}
       - DB_USER=${AUTH_STAGING_DB_USER}

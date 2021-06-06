@@ -22,15 +22,27 @@ type UserSQL struct {
 
 func (u UserSQL) CreateUser(tx tx.Transaction, user entity.User) error {
 	_, err := tx.DBTransaction.Exec(`
-INSERT INTO user
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
-`, user.ID, user.LastName, user.FirstName, user.Username, user.Email, user.EncryptedPassword, nil, user.Unit.Address, user.Unit.AptNumber)
+INSERT INTO 
+    user(id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number, email, phone)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+`,
+		user.ID,
+		user.LastName,
+		user.FirstName,
+		user.Username,
+		user.EncryptedPassword,
+		nil,
+		user.Unit.Address,
+		user.Unit.AptNumber,
+		user.Email,
+		user.Phone,
+	)
 	return err
 }
 
 func (u UserSQL) FindUserByID(tx tx.Transaction, id *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number, email, phone
 FROM user
 WHERE id = ?;
 `, id)
@@ -39,7 +51,7 @@ WHERE id = ?;
 
 func (u UserSQL) FindUserByUsername(tx tx.Transaction, username *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number, email, phone
 FROM user
 WHERE username = ?;
 `, username)
@@ -48,7 +60,7 @@ WHERE username = ?;
 
 func (u UserSQL) FindUserByEmail(tx tx.Transaction, email *string) (entity.User, error) {
 	row := tx.DBTransaction.QueryRow(`
-SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number
+SELECT id, last_name, first_name, username, encrypted_password, last_signed_in_at, address, apt_number, email, phone
 FROM user
 WHERE email = ?;
 `, email)
@@ -66,6 +78,8 @@ func findUser(row *sql.Row) (entity.User, error) {
 		&user.LastSignedInAt,
 		&user.Unit.Address,
 		&user.Unit.AptNumber,
+		&user.Email,
+		&user.Phone,
 	)
 	if err == sql.ErrNoRows {
 		return entity.User{}, NotFound{}

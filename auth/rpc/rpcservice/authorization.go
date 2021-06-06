@@ -20,7 +20,11 @@ type Authorization struct {
 func (a Authorization) HasPermission(_ context.Context, request *proto.HasPermissionRequest) (*proto.HasPermissionResponse, error) {
 	permission := entity.Permission{ID: (entity.ID)(request.PermissionId)}
 	user := entity.User{ID: (entity.ID)(request.UserId)}
-	resource := entity.Resource{ID: (entity.ID)(request.ResourceId)}
+	resourceType := entity.ResourceType{ID: (entity.ID)(request.ResourceTypeId)}
+	resource := entity.Resource{
+		ID:   (entity.ID)(request.ResourceId),
+		Type: resourceType,
+	}
 	hasPermission, err := a.authorizationService.HasPermission(permission, user, resource)
 	if err != nil {
 		return nil, err

@@ -21,8 +21,8 @@ func (p PermissionBindingSQL) CountPermissionBindings(tx tx.Transaction, binding
 	row := tx.DBTransaction.QueryRow(`
 SELECT COUNT(*)
 FROM permission_binding
-WHERE permission_id = ? AND user_id = ? AND resource_id = ?;
-`, binding.Permission.ID, binding.User.ID, binding.Resource.ID)
+WHERE permission_id = ? AND user_id = ? AND resource_type = ? AND resource_id = ?;
+`, binding.Permission.ID, binding.User.ID, binding.Resource.Type.ID, binding.Resource.ID)
 
 	var count int
 	err := row.Scan(&count)

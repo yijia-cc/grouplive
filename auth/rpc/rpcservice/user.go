@@ -29,6 +29,8 @@ func (u User) GetUser(_ context.Context, request *proto.GetUserRequest) (*proto.
 			Address:   user.Unit.Address,
 			AptNumber: user.Unit.AptNumber,
 		},
+		Email: user.Email,
+		Phone: user.Phone,
 	}, nil
 }
 

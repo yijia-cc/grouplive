@@ -2,8 +2,9 @@ package entity
 
 import (
 	"errors"
-	"github.com/yijia-cc/grouplive/auth/validator"
 	"time"
+
+	"github.com/yijia-cc/grouplive/auth/validator"
 )
 
 type User struct {

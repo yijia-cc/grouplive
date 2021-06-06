@@ -2,8 +2,9 @@ package service
 
 import (
 	"errors"
-	"github.com/yijia-cc/grouplive/auth/validator"
 	"time"
+
+	"github.com/yijia-cc/grouplive/auth/validator"
 
 	"github.com/yijia-cc/grouplive/auth/entity"
 	"github.com/yijia-cc/grouplive/auth/idgen"
@@ -121,7 +122,7 @@ func (a Authentication) VerifyIdentity(authToken string) (string, error) {
 	}
 
 	expiredAt := payload.IssuedAt.Add(authTokenValidDuration)
-	if  expiredAt.Before(a.timer.Now()) {
+	if expiredAt.Before(a.timer.Now()) {
 		return "", errors.New("auth token expired")
 	}
 

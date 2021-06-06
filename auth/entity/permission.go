@@ -1,6 +1,6 @@
 package entity
 
 type Permission struct {
-	ID ID
+	ID   ID
 	Name string
 }

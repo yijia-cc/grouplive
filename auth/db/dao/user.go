@@ -7,8 +7,6 @@ import (
 	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
-
-
 type User interface {
 	FindUserByID(tx tx.Transaction, id *string) (entity.User, error)
 	FindUserByUsername(tx tx.Transaction, username *string) (entity.User, error)

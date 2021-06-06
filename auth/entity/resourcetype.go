@@ -1,6 +1,6 @@
 package entity
 
 type ResourceType struct {
-	ID ID
+	ID   ID
 	Name string
 }

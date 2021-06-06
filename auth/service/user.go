@@ -9,7 +9,7 @@ import (
 
 type User struct {
 	txFactory tx.TransactionFactory
-	userRepo repo.User
+	userRepo  repo.User
 }
 
 func (u User) GetUser(userID string) (entity.User, error) {
@@ -24,6 +24,6 @@ func (u User) GetUser(userID string) (entity.User, error) {
 func NewUser(txFactory tx.TransactionFactory, userDao dao.User) User {
 	return User{
 		txFactory: txFactory,
-		userRepo: repo.NewUser(userDao),
+		userRepo:  repo.NewUser(userDao),
 	}
 }

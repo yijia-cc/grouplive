@@ -7,7 +7,7 @@ import (
 )
 
 type Authorization struct {
-	txFactory tx.TransactionFactory
+	txFactory            tx.TransactionFactory
 	permissionBindingDao dao.PermissionBinding
 }
 
@@ -39,7 +39,7 @@ func (a Authorization) HasPermission(permission entity.Permission, user entity.U
 
 func NewAuthorization(txFactory tx.TransactionFactory, permissionBindingDao dao.PermissionBinding) Authorization {
 	return Authorization{
-		txFactory: txFactory,
+		txFactory:            txFactory,
 		permissionBindingDao: permissionBindingDao,
 	}
 }

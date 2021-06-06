@@ -22,7 +22,7 @@ func (j JWTAuthority) IssueToken(payload interface{}) (string, error) {
 }
 
 func (j JWTAuthority) GetPayload(tokenStr string, output interface{}) error {
-	token, err := jwt.Parse(tokenStr, func(token *jwt.Token)(interface{}, error) {
+	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
 		return j.signingKey, nil
 	})
 	if err != nil {

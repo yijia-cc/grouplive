@@ -1,8 +1,6 @@
 package main
 
 import (
-	"database/sql"
-	"github.com/yijia-cc/grouplive/auth/seeds"
 	"sync"
 
 	"github.com/yijia-cc/grouplive/auth/rpc/rpcentry"
@@ -26,8 +24,6 @@ func main() {
 		panic(err)
 	}
 
-	//seedDatabase(cfg, sqlDB)
-
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {
@@ -40,12 +36,4 @@ func main() {
 		rpcentry.StartServer(cfg, sqlDB)
 	}()
 	wg.Wait()
-}
-
-func seedDatabase(cfn config.Config, sqlDB *sql.DB) {
-	if cfn.Env != config.Development {
-		return
-	}
-	seeder := seeds.Seed{Db: sqlDB}
-	seeds.Execute(seeder)
 }

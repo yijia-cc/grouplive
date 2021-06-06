@@ -21,7 +21,7 @@ cp .env.dist .env
 Start local server
 
 ```bash
-docker run --env-file .env -p 8080:8080 --network="host" web
+docker run -p 8080:80 --network="host" web
 ```
 
 You can visit your service at [http://127.0.0.1:8080](http://127.0.0.1:8080).

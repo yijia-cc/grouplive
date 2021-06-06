@@ -112,6 +112,7 @@ steps:
   - name: Run unit tests
     image: node:16.0.0-alpine3.13
     commands:
+      - apk add --no-cache g++ make python3
       - cd web
       - npm ci
       - CI=true npm test

@@ -25,9 +25,9 @@ message VerifyIdentityResponse {
 }
 
 message HasPermissionRequest {
-    optional string user_id = 1;
+    string user_id = 1;
     string permission_id = 2;
-    optional string resource_id = 3;
+    string resource_id = 3;
 }
 
 message HasPermissionResponse {

@@ -8,6 +8,7 @@ import (
 )
 
 type Config struct {
+	Env                string `envconfig:"ENV"`
 	DbMigrationDir     string `envconfig:"DB_MIGRATION_DIR"`
 	DbHost             string `envconfig:"DB_HOST"`
 	DbPort             int    `envconfig:"DB_PORT"`

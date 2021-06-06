@@ -7,14 +7,6 @@ import (
 	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
-var _ error = (*UserNotFound)(nil)
-
-type UserNotFound struct{}
-
-func (u UserNotFound) Error() string {
-	return "user not found"
-}
-
 type User interface {
 	FindUserByID(tx tx.Transaction, id *string) (entity.User, error)
 	FindUserByUsername(tx tx.Transaction, username *string) (entity.User, error)
@@ -76,7 +68,7 @@ func findUser(row *sql.Row) (entity.User, error) {
 		&user.Unit.AptNumber,
 	)
 	if err == sql.ErrNoRows {
-		return entity.User{}, UserNotFound{}
+		return entity.User{}, NotFound{}
 	}
 	return user, err
 }

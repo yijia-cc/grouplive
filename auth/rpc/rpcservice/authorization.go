@@ -3,9 +3,11 @@ package rpcservice
 import (
 	"context"
 
+	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/entity"
 	"github.com/yijia-cc/grouplive/auth/rpc/proto"
 	"github.com/yijia-cc/grouplive/auth/service"
+	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
 var _ proto.AuthorizationServiceServer = (*Authorization)(nil)
@@ -16,10 +18,16 @@ type Authorization struct {
 }
 
 func (a Authorization) HasPermission(_ context.Context, request *proto.HasPermissionRequest) (*proto.HasPermissionResponse, error) {
-	hasPermission := a.authorizationService.HasPermission(request.PermissionId, (*entity.ID)(request.UserId), (*entity.ID)(request.ResourceId))
+	permission := entity.Permission{ID: (entity.ID)(request.PermissionId)}
+	user := entity.User{ID: (entity.ID)(request.UserId)}
+	resource := entity.Resource{ID: (entity.ID)(request.ResourceId)}
+	hasPermission, err := a.authorizationService.HasPermission(permission, user, resource)
+	if err != nil {
+		return nil, err
+	}
 	return &proto.HasPermissionResponse{HasPermission: hasPermission}, nil
 }
 
-func NewAuthorization() Authorization {
-	return Authorization{authorizationService: service.NewAuthorization()}
+func NewAuthorization(txFactory tx.TransactionFactory, permissionBindingDao dao.PermissionBinding) Authorization {
+	return Authorization{authorizationService: service.NewAuthorization(txFactory, permissionBindingDao)}
 }

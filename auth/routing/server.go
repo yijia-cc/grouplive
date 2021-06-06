@@ -3,15 +3,14 @@ package routing
 import (
 	"net/http"
 
-	"github.com/yijia-cc/grouplive/auth/idgen"
-
 	"github.com/gorilla/mux"
 	"github.com/yijia-cc/grouplive/auth/db/dao"
+	"github.com/yijia-cc/grouplive/auth/idgen"
 	"github.com/yijia-cc/grouplive/auth/tm"
 	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
-func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int) *http.ServeMux {
+func NewServer(timer tm.Timer, idGenerator idgen.IDGenerator, txFactory tx.TransactionFactory, userDao dao.User, jwtSigningKey string, caesarCipherOffset int, permissionBinding dao.PermissionBinding) *http.ServeMux {
 	serveMux := http.NewServeMux()
 	router := mux.NewRouter()
 	routes := getRoutes(timer, idGenerator, txFactory, userDao, jwtSigningKey, caesarCipherOffset)

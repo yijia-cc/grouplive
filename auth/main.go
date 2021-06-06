@@ -3,12 +3,11 @@ package main
 import (
 	"sync"
 
-	"github.com/yijia-cc/grouplive/auth/rpc/rpcentry"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/yijia-cc/grouplive/auth/config"
 	"github.com/yijia-cc/grouplive/auth/db"
 	"github.com/yijia-cc/grouplive/auth/routing/routingentry"
+	"github.com/yijia-cc/grouplive/auth/rpc/rpcentry"
 )
 
 func main() {

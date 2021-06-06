@@ -13,9 +13,9 @@ type User struct {
 }
 
 type FindUserQuery struct {
-	Username *string
-	ID       *string
-	Email    *string
+	Username *string `json:"username"`
+	ID       *string `json:"user_id"`
+	Email    *string `json:"user_email"`
 }
 
 func (u User) FindUser(tx tx.Transaction, query FindUserQuery) (entity.User, error) {

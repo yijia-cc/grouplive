@@ -27,7 +27,8 @@ message VerifyIdentityResponse {
 message HasPermissionRequest {
     string user_id = 1;
     string permission_id = 2;
-    string resource_id = 3;
+    string resource_type_id = 3;
+    string resource_id = 4;
 }
 
 message HasPermissionResponse {
@@ -40,9 +41,12 @@ message GetUserRequest {
 
 message User {
     string id = 1;
-    optional string lastname = 2;
-    optional string firstname = 3;
-    Unit unit = 4;
+    string username = 2;
+    optional string lastname = 3;
+    optional string firstname = 4;
+    optional string email = 5;
+    optional string phone = 6;
+    Unit unit = 7;
 }
 
 message Unit {

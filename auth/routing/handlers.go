@@ -25,6 +25,7 @@ func newSignUpHandlerFunc(authenticationService service.Authentication) http.Han
 			Email     string `json:"email"`
 			Address   string `json:"address"`
 			AptNumber string `json:"apt_number"`
+			Phone     string `json:"phone"`
 		}{}
 
 		err = json.Unmarshal(buf, &jsonReqBody)
@@ -37,7 +38,8 @@ func newSignUpHandlerFunc(authenticationService service.Authentication) http.Han
 			LastName:  jsonReqBody.Lastname,
 			FirstName: jsonReqBody.Firstname,
 			Username:  jsonReqBody.Username,
-			Email:     jsonReqBody.Email,
+			Email:     &jsonReqBody.Email,
+			Phone:     &jsonReqBody.Phone,
 			Unit: entity.Unit{
 				AptNumber: jsonReqBody.AptNumber,
 				Address:   jsonReqBody.Address,

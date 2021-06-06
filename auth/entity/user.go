@@ -13,7 +13,8 @@ type User struct {
 	FirstName         string
 	Unit              Unit
 	Username          string
-	Email             string
+	Email             *string
+	Phone             *string
 	EncryptedPassword string
 	LastSignedInAt    *time.Time
 }

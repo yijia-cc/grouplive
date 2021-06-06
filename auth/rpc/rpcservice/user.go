@@ -4,10 +4,9 @@ import (
 	"context"
 
 	"github.com/yijia-cc/grouplive/auth/db/dao"
-	"github.com/yijia-cc/grouplive/auth/tx"
-
 	"github.com/yijia-cc/grouplive/auth/rpc/proto"
 	"github.com/yijia-cc/grouplive/auth/service"
+	"github.com/yijia-cc/grouplive/auth/tx"
 )
 
 var _ proto.UserServiceServer = (*User)(nil)

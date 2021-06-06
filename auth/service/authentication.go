@@ -4,16 +4,14 @@ import (
 	"errors"
 	"time"
 
-	"github.com/yijia-cc/grouplive/auth/validator"
-
+	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/entity"
 	"github.com/yijia-cc/grouplive/auth/idgen"
-
-	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/repo"
 	"github.com/yijia-cc/grouplive/auth/security"
 	"github.com/yijia-cc/grouplive/auth/tm"
 	"github.com/yijia-cc/grouplive/auth/tx"
+	"github.com/yijia-cc/grouplive/auth/validator"
 	"golang.org/x/crypto/bcrypt"
 )
 

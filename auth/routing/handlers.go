@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/yijia-cc/grouplive/auth/entity"
-
 	"github.com/yijia-cc/grouplive/auth/service"
 )
 

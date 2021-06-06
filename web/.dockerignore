@@ -3,3 +3,7 @@ node_modules
 
 # Generated
 build
+
+Dockerfile
+
+README.md

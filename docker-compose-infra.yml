@@ -37,5 +37,5 @@ services:
       - "drone-server"
   lb:
     build: ./proxy
-      ports:
-        - "80:80"
+    ports:
+      - "80:80"

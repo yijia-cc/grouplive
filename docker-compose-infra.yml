@@ -39,3 +39,4 @@ services:
     build: ./proxy
     ports:
       - "80:80"
+      - "8000:8000"

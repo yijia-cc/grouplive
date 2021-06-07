@@ -20,4 +20,3 @@ type Event struct {
 	RsvpRequired bool      `json:"rsvp_required"`
 	CreatedAt    time.Time `json:"created_at"`
 }
-

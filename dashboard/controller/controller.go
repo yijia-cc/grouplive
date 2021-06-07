@@ -1,11 +1,12 @@
 package controller
 
 import (
+	"net/http"
+
 	jwtmiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/form3tech-oss/jwt-go"
 	"github.com/gorilla/mux"
 	"github.com/yijia-cc/grouplive/dashboard/config"
-	"net/http"
 )
 
 var SigningKey []byte
@@ -23,7 +24,7 @@ func StartupJWT() *jwtmiddleware.JWTMiddleware {
 			return SigningKey, nil
 		},
 		SigningMethod: jwt.SigningMethodHS256,
-		UserProperty: "userToken",
+		UserProperty:  "userToken",
 	})
 
 	return jwtMiddleware

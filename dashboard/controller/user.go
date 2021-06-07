@@ -2,10 +2,11 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/form3tech-oss/jwt-go"
-	"github.com/yijia-cc/grouplive/dashboard/model"
 	"log"
 	"net/http"
+
+	"github.com/form3tech-oss/jwt-go"
+	"github.com/yijia-cc/grouplive/dashboard/model"
 )
 
 func userHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,10 +28,7 @@ func userHandler(w http.ResponseWriter, r *http.Request) {
 	//}
 	//
 	//var userid string
- 	//resp.Body.Read(&userid)
-
-
-
+	//resp.Body.Read(&userid)
 
 	// Query event db for the specific user
 
@@ -47,7 +45,6 @@ func userHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Received a GET request for search")
 }
-
 
 func getUserNameFromToken(r *http.Request) string {
 	userToken := r.Context().Value("userToken")

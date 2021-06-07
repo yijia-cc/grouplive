@@ -6,7 +6,7 @@ import (
 )
 
 type Config struct {
-	DbDriver     string `envconfig:"DB_DRIVER"`
+	DbDriver       string `envconfig:"DB_DRIVER"`
 	DbHost         string `envconfig:"DB_HOST"`
 	DbPort         string `envconfig:"DB_PORT"`
 	DBName         string `envconfig:"DB_NAME"`
@@ -15,11 +15,8 @@ type Config struct {
 	TokenSecretKey string `envconfig:"TOKEN_SECRET_KEY"`
 }
 
-
 func LoadEnv() (*Config, *Config) {
-	if err := godotenv.Load(); err != nil {
-		panic(err)
-	}
+	godotenv.Load()
 
 	userDBConfig := Config{}
 	if err := envconfig.Process("USER", &userDBConfig); err != nil {

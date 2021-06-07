@@ -10,7 +10,6 @@ type User struct {
 	Role      string `json:"role"`
 }
 
-
 func GetUserById(userName string) (*User, error) {
 	var user User
 	sql := "SELECT username, password, first_name, last_name, email, apt, role from users where username = ?"

@@ -3,10 +3,10 @@ package rpc
 import (
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/idgen"
-	"github.com/yijia-cc/grouplive/auth/rpc/proto"
 	"github.com/yijia-cc/grouplive/auth/rpc/rpcservice"
 	"github.com/yijia-cc/grouplive/auth/tm"
 	"github.com/yijia-cc/grouplive/auth/tx"
+	proto "github.com/yijia-cc/grouplive/proto/golang"
 	"google.golang.org/grpc"
 )
 

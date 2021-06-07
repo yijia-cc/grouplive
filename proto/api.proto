@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package proto;
 
-option go_package = "github.com/yijia-cc/grouplive/auth/rpc/proto";
+option go_package = "github.com/yijia-cc/grouplive/proto/golang";
+option java_package = "info.grouplive.proto";
 
 service AuthenticationService {
     rpc VerifyIdentity(VerifyIdentityRequest) returns (VerifyIdentityResponse);

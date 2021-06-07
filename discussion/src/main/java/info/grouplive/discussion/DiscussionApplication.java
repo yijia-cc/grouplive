@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-@PropertySource("classpath:.env")
+@PropertySource({".env", ".env_local"})
 public class DiscussionApplication {
 
 	public static void main(String[] args) {

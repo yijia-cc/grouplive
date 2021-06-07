@@ -11,13 +11,13 @@ const { Content } = Layout;
 const avatar = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
 const altLogo = 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png';
 
-const IconText = ({ icon, text, item, that }) => {    
+const IconText = ({ icon, text, item, that, fieldType }) => {    
     return (        
         <Space>
-            <a onClick={() => that.iconClick(text, item, that, icon)}>
-                {React.createElement(icon) }                 
-            </a>     
-            {text !== 'like' && text !== 'dislike' ? text : ''}                
+            <a onClick={() => that.iconClick(fieldType, item, that)}>
+                { React.createElement(icon) }                                 
+            </a>
+            <span>{text}</span>
         </Space>
     );    
 };
@@ -69,14 +69,14 @@ class DiscussMain extends React.Component {
         this.props.dispatch({ type: ACTION_TYPES.RESET_NEW_TOPIC });
     }
 
-    iconClick = (text, item, that) => {
+    iconClick = (fieldType, item, that) => {
         this.setState({ selectedItem: item });
-        if (text === 'like' || text === 'dislike') {
+        if (fieldType === 'like' || fieldType === 'dislike') {
             const payload = {
-                voteType: VOTE[text],
+                voteType: VOTE[fieldType],
                 postId: item.id
             };        
-            that.props.voting(payload, item, text);
+            that.props.voting(payload, item, fieldType);
         }
     }
    
@@ -98,10 +98,15 @@ class DiscussMain extends React.Component {
                             <List.Item
                                 key={item.id}
                                 actions={[
-                                    <IconText icon={StarOutlined} text={item.voteCount} item={item} that={this} key="voteCnt" />,
-                                    <IconText icon={item.upVote ? POST_ICON_MAP.LIKE_CLICKED_ICON : POST_ICON_MAP.LIKE_ICON} text="like" item={item} that={this} key='like' />,                                    
-                                    <IconText icon={item.downVote ? POST_ICON_MAP.DISLIKE_CLICKED_ICON : POST_ICON_MAP.DISLIKE_ICON} text="dislike" item={item} that={this} key='dislike' />,
-                                    <IconText icon={MessageOutlined} text={item.commentCount} item={item} that={this} key="commentsCnt" />,
+                                    // <IconText icon={StarOutlined} text={item.voteCount} item={item} that={this} key="voteCnt" />,
+                                    <IconText icon={item.upVote ? POST_ICON_MAP.LIKE_CLICKED_ICON : POST_ICON_MAP.LIKE_ICON} 
+                                        text={item.voteUpCount} item={item} that={this} 
+                                        fieldType='like' key='like' />,                                    
+                                    <IconText icon={item.downVote ? POST_ICON_MAP.DISLIKE_CLICKED_ICON : POST_ICON_MAP.DISLIKE_ICON} 
+                                        text={item.voteDownCount} item={item} that={this} 
+                                        fieldType='dislike' key='dislike' />,
+                                    <IconText icon={MessageOutlined} text={item.commentCount} item={item} that={this} 
+                                        fieldType="comment" key="commentsCnt" />,
                                 ]}
                                 extra={
                                     <img

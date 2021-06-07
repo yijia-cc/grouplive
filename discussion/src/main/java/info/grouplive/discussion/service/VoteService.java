@@ -7,6 +7,7 @@ import info.grouplive.discussion.exceptions.PostNotFoundException;
 import info.grouplive.discussion.model.Post;
 import info.grouplive.discussion.model.User;
 import info.grouplive.discussion.model.Vote;
+import info.grouplive.discussion.model.VoteType;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,36 @@ public class VoteService {
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);
         if (voteByPostAndUser.isPresent() &&
                 voteByPostAndUser.get().getVoteType()
-                        .equals(voteDto.getVoteType())) {
-            throw new DisabledException("You have already "
-                    + voteDto.getVoteType() + "'d for this post");
+                        .equals(voteDto.getVoteType())) { // case1: duplicate vote type
+            if (UPVOTE.equals(voteDto.getVoteType())) {
+                post.setVoteUpCount(post.getVoteUpCount() - 1);
+                voteDto.setVoteType(VoteType.NULLVOTE);
+            } else {
+                post.setVoteDownCount(post.getVoteDownCount() - 1);
+                voteDto.setVoteType(VoteType.NULLVOTE);
+            }
         }
-        if (UPVOTE.equals(voteDto.getVoteType())) {
-            post.setVoteCount(post.getVoteCount() + 1);
-        } else {
-            post.setVoteCount(post.getVoteCount() - 1);
+        else if (voteByPostAndUser.isPresent() &&
+                    !voteByPostAndUser.get().getVoteType()
+                            .equals(VoteType.NULLVOTE) &&
+                    !voteByPostAndUser.get().getVoteType()
+                        .equals(voteDto.getVoteType())) { // case2: contradictory vote type
+            if (UPVOTE.equals(voteDto.getVoteType())) {
+                post.setVoteUpCount(post.getVoteUpCount() + 1);
+                post.setVoteDownCount(post.getVoteDownCount() - 1);
+                voteDto.setVoteType(VoteType.UPVOTE);
+            } else {
+                post.setVoteDownCount(post.getVoteDownCount() + 1);
+                post.setVoteUpCount(post.getVoteUpCount() - 1);
+                voteDto.setVoteType(VoteType.DOWNVOTE);
+            }
+        }
+        else {
+            if (UPVOTE.equals(voteDto.getVoteType())) { // case3: new vote
+                post.setVoteUpCount(post.getVoteUpCount() + 1);
+            } else {
+                post.setVoteDownCount(post.getVoteDownCount() + 1);
+            }
         }
         voteRepository.save(mapToVote(voteDto, post));
         postRepository.save(post);

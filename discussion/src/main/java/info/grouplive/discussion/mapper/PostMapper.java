@@ -28,7 +28,8 @@ public abstract class PostMapper {
     @Mapping(target = "description", source = "postRequest.description")
     @Mapping(target = "subreddit", source = "subreddit")
     @Mapping(target = "user", source = "user")
-    @Mapping(target = "voteCount", constant = "0")
+    @Mapping(target = "voteUpCount", constant = "0")
+    @Mapping(target = "voteDownCount", constant = "0")
     public abstract Post map(PostRequest postRequest, Subreddit subreddit, User user);
 
     @Mapping(target = "id", source = "postId")
@@ -60,6 +61,7 @@ public abstract class PostMapper {
     }
 
     private boolean checkVoteType(Post post, VoteType voteType) {
+        // TODO: replace with authService.getCurrentUser() after authService complete
         User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
         Optional<Vote> voteForPostByUser =
                 voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);

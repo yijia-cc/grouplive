@@ -34,3 +34,4 @@ build/
 
 ### Environmental variables ###
 src/main/resources/.env
+src/main/resources/.env_local

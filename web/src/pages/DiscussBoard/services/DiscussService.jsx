@@ -1,15 +1,16 @@
 import axios from "axios";
 import { BASE_URL, TOKEN_KEY } from "../../../constants";
 
-const ROOT_URL = 'http://localhost:8080';
+const ROOT_LOCAL_URL = 'http://localhost:8080';
+const ROOT_URL = ROOT_LOCAL_URL;
 const CREATE_POST_URL = `${ROOT_URL}/api/posts/`;
 const GET_ALL_POSTS_SUCCESS_URL = `${ROOT_URL}/api/posts/`;
-const GET_SINGLE_POST_URL = `${BASE_URL}/api/posts/`;
-const CREATE_TOPIC_URL = `${BASE_URL}/api/subreddit`;
+const GET_SINGLE_POST_URL = `${ROOT_URL}/api/posts/`;
+const CREATE_TOPIC_URL = `${ROOT_URL}/api/subreddit`;
 const GET_ALL_TOPICS_URL = `${ROOT_URL}/api/subreddit`;
-const VOTE_URL = `${BASE_URL}/api/votes/`;
-const GET_POST_COMMENTS_URL = `${BASE_URL}/api/comments/by-post/`;
-const CREATE_COMMENT_URL = `${BASE_URL}/api/comments/`;
+const VOTE_URL = `${ROOT_URL}/api/votes/`;
+const GET_POST_COMMENTS_URL = `${ROOT_URL}/api/comments/by-post/`;
+const CREATE_COMMENT_URL = `${ROOT_URL}/api/comments/`;
 
 const TOKEN = localStorage.getItem(TOKEN_KEY);
 const axios_instance = axios.create();

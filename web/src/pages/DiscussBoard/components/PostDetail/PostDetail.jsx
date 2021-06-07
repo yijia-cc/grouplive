@@ -47,7 +47,7 @@ const openNotificationWithIcon = (type, title, msg) => {
     });
 };
 
-class PostDefail extends React.Component {
+class PostDetail extends React.Component {
     state = { 
         post: {}, 
         comments: [], 
@@ -154,4 +154,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDefail));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetail));

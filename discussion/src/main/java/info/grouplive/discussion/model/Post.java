@@ -29,7 +29,8 @@ public class Post {
     @Nullable
     @Lob
     private String description;
-    private Integer voteCount = 0;
+    private Integer voteUpCount = 0;
+    private Integer voteDownCount = 0;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;

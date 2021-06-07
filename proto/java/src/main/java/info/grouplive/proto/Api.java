@@ -5650,9 +5650,9 @@ public final class Api {
       "sPermission\022\033.proto.HasPermissionRequest" +
       "\032\034.proto.HasPermissionResponse2<\n\013UserSe" +
       "rvice\022-\n\007GetUser\022\025.proto.GetUserRequest\032" +
-      "\013.proto.UserBD\n\024info.grouplive.protoZ,gi" +
-      "thub.com/yijia-cc/grouplive/auth/rpc/pro" +
-      "tob\006proto3"
+      "\013.proto.UserBB\n\024info.grouplive.protoZ*gi" +
+      "thub.com/yijia-cc/grouplive/proto/golang" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -7,22 +7,30 @@ package dep
 
 import (
 	"database/sql"
-	"net/http"
-
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
 	"github.com/yijia-cc/grouplive/calendar/gql/server"
 	"github.com/yijia-cc/grouplive/calendar/tx"
+	"net/http"
 )
 
-// Injectors from dep.go:
+// Injectors from wire.go:
 
-func InitGraphQLServer(cfg config.Config, db *sql.DB) *http.ServeMux {
-	client := auth.NewClient()
+func InitGraphQLServer(cfg config.Config, db *sql.DB) (*http.ServeMux, error) {
+	groupLiveAuthClient, err := newGroupLiveAuthClient(cfg)
+	if err != nil {
+		return nil, err
+	}
 	safeTransactionFactory := tx.NewSafeTransactionFactory(db)
 	amenitySQL := dao.NewAmenitySQL(db)
 	amenityTypeSQL := dao.NewAmenityTypeSQL(db)
-	serveMux := server.NewServer(cfg, client, client, safeTransactionFactory, amenitySQL, amenityTypeSQL)
-	return serveMux
+	serveMux := server.NewServer(cfg, groupLiveAuthClient, groupLiveAuthClient, groupLiveAuthClient, safeTransactionFactory, amenitySQL, amenityTypeSQL)
+	return serveMux, nil
+}
+
+// wire.go:
+
+func newGroupLiveAuthClient(cfg config.Config) (auth.GroupLiveAuthClient, error) {
+	return auth.NewGroupLiveAuthClient(cfg.AuthGRPCEndpoint)
 }

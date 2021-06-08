@@ -14,19 +14,24 @@ import (
 	"github.com/yijia-cc/grouplive/calendar/tx"
 )
 
-func InitGraphQLServer(cfg config.Config, db *sql.DB) *http.ServeMux {
+func InitGraphQLServer(cfg config.Config, db *sql.DB) (*http.ServeMux, error) {
 	wire.Build(
-		wire.Bind(new(auth.Authorizer), new(auth.Client)),
-		wire.Bind(new(auth.Authenticator), new(auth.Client)),
+		wire.Bind(new(auth.Authorizer), new(auth.GroupLiveAuthClient)),
+		wire.Bind(new(auth.Authenticator), new(auth.GroupLiveAuthClient)),
+		wire.Bind(new(auth.UserProvider), new(auth.GroupLiveAuthClient)),
 		wire.Bind(new(tx.TransactionFactory), new(tx.SafeTransactionFactory)),
 		wire.Bind(new(dao.Amenity), new(dao.AmenitySQL)),
 		wire.Bind(new(dao.AmenityType), new(dao.AmenityTypeSQL)),
 
-		auth.NewClient,
+		newGroupLiveAuthClient,
 		tx.NewSafeTransactionFactory,
 		dao.NewAmenitySQL,
 		dao.NewAmenityTypeSQL,
 		server.NewServer,
 	)
-	return &http.ServeMux{}
+	return &http.ServeMux{}, nil
+}
+
+func newGroupLiveAuthClient(cfg config.Config) (auth.GroupLiveAuthClient, error) {
+	return auth.NewGroupLiveAuthClient(cfg.AuthGRPCEndpoint)
 }

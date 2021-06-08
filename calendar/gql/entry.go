@@ -12,7 +12,10 @@ import (
 )
 
 func StartServer(cfg config.Config, db *sql.DB) {
-	gqlAPIServer := dep.InitGraphQLServer(cfg, db)
+	gqlAPIServer, err := dep.InitGraphQLServer(cfg, db)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Printf("GraphQL API started at port %d\n", cfg.GraphQLServerPort)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.GraphQLServerPort), gqlAPIServer))
 }

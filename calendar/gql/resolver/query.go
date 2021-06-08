@@ -2,6 +2,7 @@ package resolver
 
 import (
 	"context"
+	"errors"
 
 	"github.com/graph-gophers/graphql-go"
 	"github.com/yijia-cc/grouplive/calendar/auth"
@@ -15,7 +16,7 @@ type query struct {
 func (q query) AmenityTypes(ctx context.Context) ([]AmenityType, error) {
 	user, err := auth.UserFromContext(ctx)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("user is unauthorized")
 	}
 
 	types, err := q.calendarService.ListAmenityTypes(user)

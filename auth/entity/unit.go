@@ -4,3 +4,4 @@ type Unit struct {
 	Address   string
 	AptNumber string
 }
+

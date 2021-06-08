@@ -35,6 +35,10 @@ type Authentication struct {
 }
 
 func (a Authentication) SignUp(user entity.User, password string) error {
+	if !validator.ValidatePassword(password) {
+		return errors.New("password is invalid")
+	}
+
 	err := user.Validate()
 	if err != nil {
 		return err
@@ -106,7 +110,7 @@ func (a Authentication) SignIn(username string, password string) (string, error)
 	}
 
 	payload := tokenPayload{
-		EncryptedUserID: a.cipher.Encrypt(username),
+		EncryptedUserID: a.cipher.Encrypt(string(user.ID)),
 		IssuedAt:        a.timer.Now(),
 	}
 	return a.jwtAuthority.IssueToken(payload)

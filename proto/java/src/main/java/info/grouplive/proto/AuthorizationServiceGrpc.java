@@ -11,7 +11,7 @@ public final class AuthorizationServiceGrpc {
 
   private AuthorizationServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "proto.AuthorizationService";
+  public static final String SERVICE_NAME = "pb.AuthorizationService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<info.grouplive.proto.Api.HasPermissionRequest,

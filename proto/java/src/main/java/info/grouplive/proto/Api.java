@@ -15,7 +15,7 @@ public final class Api {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface VerifyIdentityRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.VerifyIdentityRequest)
+      // @@protoc_insertion_point(interface_extends:pb.VerifyIdentityRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -31,11 +31,11 @@ public final class Api {
         getAuthTokenBytes();
   }
   /**
-   * Protobuf type {@code proto.VerifyIdentityRequest}
+   * Protobuf type {@code pb.VerifyIdentityRequest}
    */
   public static final class VerifyIdentityRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.VerifyIdentityRequest)
+      // @@protoc_insertion_point(message_implements:pb.VerifyIdentityRequest)
       VerifyIdentityRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use VerifyIdentityRequest.newBuilder() to construct.
@@ -103,13 +103,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityRequest_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityRequest_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.VerifyIdentityRequest.class, info.grouplive.proto.Api.VerifyIdentityRequest.Builder.class);
     }
@@ -307,21 +307,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.VerifyIdentityRequest}
+     * Protobuf type {@code pb.VerifyIdentityRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.VerifyIdentityRequest)
+        // @@protoc_insertion_point(builder_implements:pb.VerifyIdentityRequest)
         info.grouplive.proto.Api.VerifyIdentityRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityRequest_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.VerifyIdentityRequest.class, info.grouplive.proto.Api.VerifyIdentityRequest.Builder.class);
       }
@@ -352,7 +352,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityRequest_descriptor;
       }
 
       @java.lang.Override
@@ -542,10 +542,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.VerifyIdentityRequest)
+      // @@protoc_insertion_point(builder_scope:pb.VerifyIdentityRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.VerifyIdentityRequest)
+    // @@protoc_insertion_point(class_scope:pb.VerifyIdentityRequest)
     private static final info.grouplive.proto.Api.VerifyIdentityRequest DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.VerifyIdentityRequest();
@@ -583,7 +583,7 @@ public final class Api {
   }
 
   public interface VerifyIdentityResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.VerifyIdentityResponse)
+      // @@protoc_insertion_point(interface_extends:pb.VerifyIdentityResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -599,11 +599,11 @@ public final class Api {
         getUserIdBytes();
   }
   /**
-   * Protobuf type {@code proto.VerifyIdentityResponse}
+   * Protobuf type {@code pb.VerifyIdentityResponse}
    */
   public static final class VerifyIdentityResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.VerifyIdentityResponse)
+      // @@protoc_insertion_point(message_implements:pb.VerifyIdentityResponse)
       VerifyIdentityResponseOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use VerifyIdentityResponse.newBuilder() to construct.
@@ -671,13 +671,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityResponse_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityResponse_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.VerifyIdentityResponse.class, info.grouplive.proto.Api.VerifyIdentityResponse.Builder.class);
     }
@@ -875,21 +875,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.VerifyIdentityResponse}
+     * Protobuf type {@code pb.VerifyIdentityResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.VerifyIdentityResponse)
+        // @@protoc_insertion_point(builder_implements:pb.VerifyIdentityResponse)
         info.grouplive.proto.Api.VerifyIdentityResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityResponse_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityResponse_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.VerifyIdentityResponse.class, info.grouplive.proto.Api.VerifyIdentityResponse.Builder.class);
       }
@@ -920,7 +920,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_VerifyIdentityResponse_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_VerifyIdentityResponse_descriptor;
       }
 
       @java.lang.Override
@@ -1110,10 +1110,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.VerifyIdentityResponse)
+      // @@protoc_insertion_point(builder_scope:pb.VerifyIdentityResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.VerifyIdentityResponse)
+    // @@protoc_insertion_point(class_scope:pb.VerifyIdentityResponse)
     private static final info.grouplive.proto.Api.VerifyIdentityResponse DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.VerifyIdentityResponse();
@@ -1151,7 +1151,7 @@ public final class Api {
   }
 
   public interface HasPermissionRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.HasPermissionRequest)
+      // @@protoc_insertion_point(interface_extends:pb.HasPermissionRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1203,11 +1203,11 @@ public final class Api {
         getResourceIdBytes();
   }
   /**
-   * Protobuf type {@code proto.HasPermissionRequest}
+   * Protobuf type {@code pb.HasPermissionRequest}
    */
   public static final class HasPermissionRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.HasPermissionRequest)
+      // @@protoc_insertion_point(message_implements:pb.HasPermissionRequest)
       HasPermissionRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use HasPermissionRequest.newBuilder() to construct.
@@ -1296,13 +1296,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_HasPermissionRequest_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_HasPermissionRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_HasPermissionRequest_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_HasPermissionRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.HasPermissionRequest.class, info.grouplive.proto.Api.HasPermissionRequest.Builder.class);
     }
@@ -1644,21 +1644,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.HasPermissionRequest}
+     * Protobuf type {@code pb.HasPermissionRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.HasPermissionRequest)
+        // @@protoc_insertion_point(builder_implements:pb.HasPermissionRequest)
         info.grouplive.proto.Api.HasPermissionRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionRequest_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.HasPermissionRequest.class, info.grouplive.proto.Api.HasPermissionRequest.Builder.class);
       }
@@ -1695,7 +1695,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionRequest_descriptor;
       }
 
       @java.lang.Override
@@ -2128,10 +2128,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.HasPermissionRequest)
+      // @@protoc_insertion_point(builder_scope:pb.HasPermissionRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.HasPermissionRequest)
+    // @@protoc_insertion_point(class_scope:pb.HasPermissionRequest)
     private static final info.grouplive.proto.Api.HasPermissionRequest DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.HasPermissionRequest();
@@ -2169,7 +2169,7 @@ public final class Api {
   }
 
   public interface HasPermissionResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.HasPermissionResponse)
+      // @@protoc_insertion_point(interface_extends:pb.HasPermissionResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2179,11 +2179,11 @@ public final class Api {
     boolean getHasPermission();
   }
   /**
-   * Protobuf type {@code proto.HasPermissionResponse}
+   * Protobuf type {@code pb.HasPermissionResponse}
    */
   public static final class HasPermissionResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.HasPermissionResponse)
+      // @@protoc_insertion_point(message_implements:pb.HasPermissionResponse)
       HasPermissionResponseOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use HasPermissionResponse.newBuilder() to construct.
@@ -2249,13 +2249,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_HasPermissionResponse_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_HasPermissionResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_HasPermissionResponse_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_HasPermissionResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.HasPermissionResponse.class, info.grouplive.proto.Api.HasPermissionResponse.Builder.class);
     }
@@ -2428,21 +2428,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.HasPermissionResponse}
+     * Protobuf type {@code pb.HasPermissionResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.HasPermissionResponse)
+        // @@protoc_insertion_point(builder_implements:pb.HasPermissionResponse)
         info.grouplive.proto.Api.HasPermissionResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionResponse_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionResponse_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.HasPermissionResponse.class, info.grouplive.proto.Api.HasPermissionResponse.Builder.class);
       }
@@ -2473,7 +2473,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_HasPermissionResponse_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_HasPermissionResponse_descriptor;
       }
 
       @java.lang.Override
@@ -2617,10 +2617,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.HasPermissionResponse)
+      // @@protoc_insertion_point(builder_scope:pb.HasPermissionResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.HasPermissionResponse)
+    // @@protoc_insertion_point(class_scope:pb.HasPermissionResponse)
     private static final info.grouplive.proto.Api.HasPermissionResponse DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.HasPermissionResponse();
@@ -2658,7 +2658,7 @@ public final class Api {
   }
 
   public interface GetUserRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.GetUserRequest)
+      // @@protoc_insertion_point(interface_extends:pb.GetUserRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2674,11 +2674,11 @@ public final class Api {
         getUserIdBytes();
   }
   /**
-   * Protobuf type {@code proto.GetUserRequest}
+   * Protobuf type {@code pb.GetUserRequest}
    */
   public static final class GetUserRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.GetUserRequest)
+      // @@protoc_insertion_point(message_implements:pb.GetUserRequest)
       GetUserRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use GetUserRequest.newBuilder() to construct.
@@ -2746,13 +2746,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_GetUserRequest_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_GetUserRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_GetUserRequest_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_GetUserRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.GetUserRequest.class, info.grouplive.proto.Api.GetUserRequest.Builder.class);
     }
@@ -2950,21 +2950,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.GetUserRequest}
+     * Protobuf type {@code pb.GetUserRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.GetUserRequest)
+        // @@protoc_insertion_point(builder_implements:pb.GetUserRequest)
         info.grouplive.proto.Api.GetUserRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_GetUserRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_GetUserRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_GetUserRequest_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_GetUserRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.GetUserRequest.class, info.grouplive.proto.Api.GetUserRequest.Builder.class);
       }
@@ -2995,7 +2995,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_GetUserRequest_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_GetUserRequest_descriptor;
       }
 
       @java.lang.Override
@@ -3185,10 +3185,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.GetUserRequest)
+      // @@protoc_insertion_point(builder_scope:pb.GetUserRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.GetUserRequest)
+    // @@protoc_insertion_point(class_scope:pb.GetUserRequest)
     private static final info.grouplive.proto.Api.GetUserRequest DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.GetUserRequest();
@@ -3226,7 +3226,7 @@ public final class Api {
   }
 
   public interface UserOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.User)
+      // @@protoc_insertion_point(interface_extends:pb.User)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -3322,26 +3322,26 @@ public final class Api {
         getPhoneBytes();
 
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      * @return Whether the unit field is set.
      */
     boolean hasUnit();
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      * @return The unit.
      */
     info.grouplive.proto.Api.Unit getUnit();
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      */
     info.grouplive.proto.Api.UnitOrBuilder getUnitOrBuilder();
   }
   /**
-   * Protobuf type {@code proto.User}
+   * Protobuf type {@code pb.User}
    */
   public static final class User extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.User)
+      // @@protoc_insertion_point(message_implements:pb.User)
       UserOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use User.newBuilder() to construct.
@@ -3458,13 +3458,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_User_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_User_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_User_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_User_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.User.class, info.grouplive.proto.Api.User.Builder.class);
     }
@@ -3733,7 +3733,7 @@ public final class Api {
     public static final int UNIT_FIELD_NUMBER = 7;
     private info.grouplive.proto.Api.Unit unit_;
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      * @return Whether the unit field is set.
      */
     @java.lang.Override
@@ -3741,7 +3741,7 @@ public final class Api {
       return unit_ != null;
     }
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      * @return The unit.
      */
     @java.lang.Override
@@ -3749,7 +3749,7 @@ public final class Api {
       return unit_ == null ? info.grouplive.proto.Api.Unit.getDefaultInstance() : unit_;
     }
     /**
-     * <code>.proto.Unit unit = 7;</code>
+     * <code>.pb.Unit unit = 7;</code>
      */
     @java.lang.Override
     public info.grouplive.proto.Api.UnitOrBuilder getUnitOrBuilder() {
@@ -3997,21 +3997,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.User}
+     * Protobuf type {@code pb.User}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.User)
+        // @@protoc_insertion_point(builder_implements:pb.User)
         info.grouplive.proto.Api.UserOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_User_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_User_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_User_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_User_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.User.class, info.grouplive.proto.Api.User.Builder.class);
       }
@@ -4058,7 +4058,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_User_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_User_descriptor;
       }
 
       @java.lang.Override
@@ -4701,14 +4701,14 @@ public final class Api {
       private com.google.protobuf.SingleFieldBuilderV3<
           info.grouplive.proto.Api.Unit, info.grouplive.proto.Api.Unit.Builder, info.grouplive.proto.Api.UnitOrBuilder> unitBuilder_;
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        * @return Whether the unit field is set.
        */
       public boolean hasUnit() {
         return unitBuilder_ != null || unit_ != null;
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        * @return The unit.
        */
       public info.grouplive.proto.Api.Unit getUnit() {
@@ -4719,7 +4719,7 @@ public final class Api {
         }
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public Builder setUnit(info.grouplive.proto.Api.Unit value) {
         if (unitBuilder_ == null) {
@@ -4735,7 +4735,7 @@ public final class Api {
         return this;
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public Builder setUnit(
           info.grouplive.proto.Api.Unit.Builder builderForValue) {
@@ -4749,7 +4749,7 @@ public final class Api {
         return this;
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public Builder mergeUnit(info.grouplive.proto.Api.Unit value) {
         if (unitBuilder_ == null) {
@@ -4767,7 +4767,7 @@ public final class Api {
         return this;
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public Builder clearUnit() {
         if (unitBuilder_ == null) {
@@ -4781,7 +4781,7 @@ public final class Api {
         return this;
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public info.grouplive.proto.Api.Unit.Builder getUnitBuilder() {
         
@@ -4789,7 +4789,7 @@ public final class Api {
         return getUnitFieldBuilder().getBuilder();
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       public info.grouplive.proto.Api.UnitOrBuilder getUnitOrBuilder() {
         if (unitBuilder_ != null) {
@@ -4800,7 +4800,7 @@ public final class Api {
         }
       }
       /**
-       * <code>.proto.Unit unit = 7;</code>
+       * <code>.pb.Unit unit = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           info.grouplive.proto.Api.Unit, info.grouplive.proto.Api.Unit.Builder, info.grouplive.proto.Api.UnitOrBuilder> 
@@ -4828,10 +4828,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.User)
+      // @@protoc_insertion_point(builder_scope:pb.User)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.User)
+    // @@protoc_insertion_point(class_scope:pb.User)
     private static final info.grouplive.proto.Api.User DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.User();
@@ -4869,7 +4869,7 @@ public final class Api {
   }
 
   public interface UnitOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.Unit)
+      // @@protoc_insertion_point(interface_extends:pb.Unit)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -4897,11 +4897,11 @@ public final class Api {
         getAptNumberBytes();
   }
   /**
-   * Protobuf type {@code proto.Unit}
+   * Protobuf type {@code pb.Unit}
    */
   public static final class Unit extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.Unit)
+      // @@protoc_insertion_point(message_implements:pb.Unit)
       UnitOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Unit.newBuilder() to construct.
@@ -4976,13 +4976,13 @@ public final class Api {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return info.grouplive.proto.Api.internal_static_proto_Unit_descriptor;
+      return info.grouplive.proto.Api.internal_static_pb_Unit_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return info.grouplive.proto.Api.internal_static_proto_Unit_fieldAccessorTable
+      return info.grouplive.proto.Api.internal_static_pb_Unit_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               info.grouplive.proto.Api.Unit.class, info.grouplive.proto.Api.Unit.Builder.class);
     }
@@ -5228,21 +5228,21 @@ public final class Api {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.Unit}
+     * Protobuf type {@code pb.Unit}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.Unit)
+        // @@protoc_insertion_point(builder_implements:pb.Unit)
         info.grouplive.proto.Api.UnitOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return info.grouplive.proto.Api.internal_static_proto_Unit_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_Unit_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return info.grouplive.proto.Api.internal_static_proto_Unit_fieldAccessorTable
+        return info.grouplive.proto.Api.internal_static_pb_Unit_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 info.grouplive.proto.Api.Unit.class, info.grouplive.proto.Api.Unit.Builder.class);
       }
@@ -5275,7 +5275,7 @@ public final class Api {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return info.grouplive.proto.Api.internal_static_proto_Unit_descriptor;
+        return info.grouplive.proto.Api.internal_static_pb_Unit_descriptor;
       }
 
       @java.lang.Override
@@ -5546,10 +5546,10 @@ public final class Api {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:proto.Unit)
+      // @@protoc_insertion_point(builder_scope:pb.Unit)
     }
 
-    // @@protoc_insertion_point(class_scope:proto.Unit)
+    // @@protoc_insertion_point(class_scope:pb.Unit)
     private static final info.grouplive.proto.Api.Unit DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new info.grouplive.proto.Api.Unit();
@@ -5587,40 +5587,40 @@ public final class Api {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_VerifyIdentityRequest_descriptor;
+    internal_static_pb_VerifyIdentityRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_VerifyIdentityRequest_fieldAccessorTable;
+      internal_static_pb_VerifyIdentityRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_VerifyIdentityResponse_descriptor;
+    internal_static_pb_VerifyIdentityResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_VerifyIdentityResponse_fieldAccessorTable;
+      internal_static_pb_VerifyIdentityResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_HasPermissionRequest_descriptor;
+    internal_static_pb_HasPermissionRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_HasPermissionRequest_fieldAccessorTable;
+      internal_static_pb_HasPermissionRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_HasPermissionResponse_descriptor;
+    internal_static_pb_HasPermissionResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_HasPermissionResponse_fieldAccessorTable;
+      internal_static_pb_HasPermissionResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_GetUserRequest_descriptor;
+    internal_static_pb_GetUserRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_GetUserRequest_fieldAccessorTable;
+      internal_static_pb_GetUserRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_User_descriptor;
+    internal_static_pb_User_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_User_fieldAccessorTable;
+      internal_static_pb_User_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_Unit_descriptor;
+    internal_static_pb_Unit_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_Unit_fieldAccessorTable;
+      internal_static_pb_Unit_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5630,75 +5630,74 @@ public final class Api {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tapi.proto\022\005proto\"+\n\025VerifyIdentityRequ" +
-      "est\022\022\n\nauth_token\030\001 \001(\t\")\n\026VerifyIdentit" +
-      "yResponse\022\017\n\007user_id\030\001 \001(\t\"m\n\024HasPermiss" +
-      "ionRequest\022\017\n\007user_id\030\001 \001(\t\022\025\n\rpermissio" +
-      "n_id\030\002 \001(\t\022\030\n\020resource_type_id\030\003 \001(\t\022\023\n\013" +
-      "resource_id\030\004 \001(\t\"/\n\025HasPermissionRespon" +
-      "se\022\026\n\016has_permission\030\001 \001(\010\"!\n\016GetUserReq" +
-      "uest\022\017\n\007user_id\030\001 \001(\t\"\305\001\n\004User\022\n\n\002id\030\001 \001" +
-      "(\t\022\020\n\010username\030\002 \001(\t\022\025\n\010lastname\030\003 \001(\tH\000" +
-      "\210\001\001\022\026\n\tfirstname\030\004 \001(\tH\001\210\001\001\022\022\n\005email\030\005 \001" +
-      "(\tH\002\210\001\001\022\022\n\005phone\030\006 \001(\tH\003\210\001\001\022\031\n\004unit\030\007 \001(" +
-      "\0132\013.proto.UnitB\013\n\t_lastnameB\014\n\n_firstnam" +
-      "eB\010\n\006_emailB\010\n\006_phone\"+\n\004Unit\022\017\n\007address" +
-      "\030\001 \001(\t\022\022\n\napt_number\030\002 \001(\t2f\n\025Authentica" +
-      "tionService\022M\n\016VerifyIdentity\022\034.proto.Ve" +
-      "rifyIdentityRequest\032\035.proto.VerifyIdenti" +
-      "tyResponse2b\n\024AuthorizationService\022J\n\rHa" +
-      "sPermission\022\033.proto.HasPermissionRequest" +
-      "\032\034.proto.HasPermissionResponse2<\n\013UserSe" +
-      "rvice\022-\n\007GetUser\022\025.proto.GetUserRequest\032" +
-      "\013.proto.UserBB\n\024info.grouplive.protoZ*gi" +
-      "thub.com/yijia-cc/grouplive/proto/golang" +
-      "b\006proto3"
+      "\n\tapi.proto\022\002pb\"+\n\025VerifyIdentityRequest" +
+      "\022\022\n\nauth_token\030\001 \001(\t\")\n\026VerifyIdentityRe" +
+      "sponse\022\017\n\007user_id\030\001 \001(\t\"m\n\024HasPermission" +
+      "Request\022\017\n\007user_id\030\001 \001(\t\022\025\n\rpermission_i" +
+      "d\030\002 \001(\t\022\030\n\020resource_type_id\030\003 \001(\t\022\023\n\013res" +
+      "ource_id\030\004 \001(\t\"/\n\025HasPermissionResponse\022" +
+      "\026\n\016has_permission\030\001 \001(\010\"!\n\016GetUserReques" +
+      "t\022\017\n\007user_id\030\001 \001(\t\"\302\001\n\004User\022\n\n\002id\030\001 \001(\t\022" +
+      "\020\n\010username\030\002 \001(\t\022\025\n\010lastname\030\003 \001(\tH\000\210\001\001" +
+      "\022\026\n\tfirstname\030\004 \001(\tH\001\210\001\001\022\022\n\005email\030\005 \001(\tH" +
+      "\002\210\001\001\022\022\n\005phone\030\006 \001(\tH\003\210\001\001\022\026\n\004unit\030\007 \001(\0132\010" +
+      ".pb.UnitB\013\n\t_lastnameB\014\n\n_firstnameB\010\n\006_" +
+      "emailB\010\n\006_phone\"+\n\004Unit\022\017\n\007address\030\001 \001(\t" +
+      "\022\022\n\napt_number\030\002 \001(\t2`\n\025AuthenticationSe" +
+      "rvice\022G\n\016VerifyIdentity\022\031.pb.VerifyIdent" +
+      "ityRequest\032\032.pb.VerifyIdentityResponse2\\" +
+      "\n\024AuthorizationService\022D\n\rHasPermission\022" +
+      "\030.pb.HasPermissionRequest\032\031.pb.HasPermis" +
+      "sionResponse26\n\013UserService\022\'\n\007GetUser\022\022" +
+      ".pb.GetUserRequest\032\010.pb.UserB>\n\024info.gro" +
+      "uplive.protoZ&github.com/yijia-cc/groupl" +
+      "ive/proto/pbb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_proto_VerifyIdentityRequest_descriptor =
+    internal_static_pb_VerifyIdentityRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_proto_VerifyIdentityRequest_fieldAccessorTable = new
+    internal_static_pb_VerifyIdentityRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_VerifyIdentityRequest_descriptor,
+        internal_static_pb_VerifyIdentityRequest_descriptor,
         new java.lang.String[] { "AuthToken", });
-    internal_static_proto_VerifyIdentityResponse_descriptor =
+    internal_static_pb_VerifyIdentityResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_proto_VerifyIdentityResponse_fieldAccessorTable = new
+    internal_static_pb_VerifyIdentityResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_VerifyIdentityResponse_descriptor,
+        internal_static_pb_VerifyIdentityResponse_descriptor,
         new java.lang.String[] { "UserId", });
-    internal_static_proto_HasPermissionRequest_descriptor =
+    internal_static_pb_HasPermissionRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_proto_HasPermissionRequest_fieldAccessorTable = new
+    internal_static_pb_HasPermissionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_HasPermissionRequest_descriptor,
+        internal_static_pb_HasPermissionRequest_descriptor,
         new java.lang.String[] { "UserId", "PermissionId", "ResourceTypeId", "ResourceId", });
-    internal_static_proto_HasPermissionResponse_descriptor =
+    internal_static_pb_HasPermissionResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_proto_HasPermissionResponse_fieldAccessorTable = new
+    internal_static_pb_HasPermissionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_HasPermissionResponse_descriptor,
+        internal_static_pb_HasPermissionResponse_descriptor,
         new java.lang.String[] { "HasPermission", });
-    internal_static_proto_GetUserRequest_descriptor =
+    internal_static_pb_GetUserRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_proto_GetUserRequest_fieldAccessorTable = new
+    internal_static_pb_GetUserRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_GetUserRequest_descriptor,
+        internal_static_pb_GetUserRequest_descriptor,
         new java.lang.String[] { "UserId", });
-    internal_static_proto_User_descriptor =
+    internal_static_pb_User_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_proto_User_fieldAccessorTable = new
+    internal_static_pb_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_User_descriptor,
+        internal_static_pb_User_descriptor,
         new java.lang.String[] { "Id", "Username", "Lastname", "Firstname", "Email", "Phone", "Unit", "Lastname", "Firstname", "Email", "Phone", });
-    internal_static_proto_Unit_descriptor =
+    internal_static_pb_Unit_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_proto_Unit_fieldAccessorTable = new
+    internal_static_pb_Unit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_Unit_descriptor,
+        internal_static_pb_Unit_descriptor,
         new java.lang.String[] { "Address", "AptNumber", });
   }
 

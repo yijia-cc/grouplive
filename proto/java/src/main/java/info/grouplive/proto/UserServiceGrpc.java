@@ -11,7 +11,7 @@ public final class UserServiceGrpc {
 
   private UserServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "proto.UserService";
+  public static final String SERVICE_NAME = "pb.UserService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<info.grouplive.proto.Api.GetUserRequest,

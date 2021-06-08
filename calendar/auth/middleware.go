@@ -31,5 +31,3 @@ func WithMiddleware(authenticator Authenticator, userProvider UserProvider, hand
 		handleFunc(writer, req)
 	}
 }
-
-

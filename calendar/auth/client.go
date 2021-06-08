@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+
 	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/entity"
 	pb "github.com/yijia-cc/grouplive/proto/golang"
@@ -69,7 +70,7 @@ func NewGroupLiveAuthClient(gRPCEndpoint string) (GroupLiveAuthClient, error) {
 	}
 	return GroupLiveAuthClient{
 		authenticationClient: pb.NewAuthenticationServiceClient(conn),
-		authorizationClient: pb.NewAuthorizationServiceClient(conn),
-		userProviderClient: pb.NewUserServiceClient(conn),
+		authorizationClient:  pb.NewAuthorizationServiceClient(conn),
+		userProviderClient:   pb.NewUserServiceClient(conn),
 	}, nil
 }

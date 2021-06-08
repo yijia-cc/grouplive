@@ -8,8 +8,8 @@ type Unit struct {
 }
 
 func NewUnitFromProto(pbUnit *pb.Unit) Unit {
-	return Unit {
-		Address: pbUnit.GetAddress(),
+	return Unit{
+		Address:   pbUnit.GetAddress(),
 		AptNumber: pbUnit.GetAptNumber(),
 	}
 }

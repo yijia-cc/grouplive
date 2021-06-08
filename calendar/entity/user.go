@@ -1,8 +1,9 @@
 package entity
 
 import (
-	pb "github.com/yijia-cc/grouplive/proto/golang"
 	"time"
+
+	pb "github.com/yijia-cc/grouplive/proto/golang"
 )
 
 type User struct {
@@ -18,13 +19,13 @@ type User struct {
 }
 
 func NewUserFromProto(pbUser *pb.User) User {
-	return User {
-		ID: ID(pbUser.GetId()),
-		LastName: pbUser.GetLastname(),
+	return User{
+		ID:        ID(pbUser.GetId()),
+		LastName:  pbUser.GetLastname(),
 		FirstName: pbUser.GetFirstname(),
-		Unit : NewUnitFromProto(pbUser.Unit),
-		Username: pbUser.GetUsername(),
-		Email: pbUser.GetEmail(),
-		Phone: pbUser.GetPhone(),
+		Unit:      NewUnitFromProto(pbUser.Unit),
+		Username:  pbUser.GetUsername(),
+		Email:     pbUser.GetEmail(),
+		Phone:     pbUser.GetPhone(),
 	}
 }

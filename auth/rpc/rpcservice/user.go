@@ -6,7 +6,7 @@ import (
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/service"
 	"github.com/yijia-cc/grouplive/auth/tx"
-	"github.com/yijia-cc/grouplive/proto/golang"
+	pb "github.com/yijia-cc/grouplive/proto/golang"
 )
 
 var _ pb.UserServiceServer = (*User)(nil)
@@ -25,7 +25,7 @@ func (u User) GetUser(_ context.Context, request *pb.GetUserRequest) (*pb.User, 
 		Id:        string(user.ID),
 		Lastname:  &user.LastName,
 		Firstname: &user.FirstName,
-		Username: user.Username,
+		Username:  user.Username,
 		Unit: &pb.Unit{
 			Address:   user.Unit.Address,
 			AptNumber: user.Unit.AptNumber,

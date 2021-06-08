@@ -12,7 +12,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/rubenv/sql-migrate v0.0.0-20210408115534-a32ed26c37ea
 	github.com/stretchr/testify v1.7.0 // indirect
-	github.com/yijia-cc/grouplive/proto/golang v0.0.0-20210607085841-6044ad68d38e
+	github.com/yijia-cc/grouplive/proto/golang v0.0.0-20210608032703-00ed2843c8f8
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	golang.org/x/net v0.0.0-20210525063256-abc453219eb5 // indirect

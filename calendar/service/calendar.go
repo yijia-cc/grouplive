@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"

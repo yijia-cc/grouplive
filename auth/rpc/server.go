@@ -6,7 +6,7 @@ import (
 	"github.com/yijia-cc/grouplive/auth/rpc/rpcservice"
 	"github.com/yijia-cc/grouplive/auth/tm"
 	"github.com/yijia-cc/grouplive/auth/tx"
-	"github.com/yijia-cc/grouplive/proto/golang"
+	pb "github.com/yijia-cc/grouplive/proto/golang"
 	"google.golang.org/grpc"
 )
 

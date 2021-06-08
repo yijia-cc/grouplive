@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/yijia-cc/grouplive/calendar/obs"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -116,7 +117,8 @@ func TestCalendar_ListAmenityTypes(t *testing.T) {
 			fakeAmenity := daotest.NewFakeAmenity(testCase.amenityInfosFixture)
 			fakeTransactionFactory := txtest.NewFakeTransactionFactory()
 			stubAuthorizer := authtest.NewStubAuthorizer()
-			calendarService := NewCalendar(stubAuthorizer, fakeTransactionFactory, fakeAmenity, fakeAmenityType)
+			logger := obs.Logger{}
+			calendarService := NewCalendar(logger, stubAuthorizer, fakeTransactionFactory, fakeAmenity, fakeAmenityType)
 
 			actual, err := calendarService.ListAmenityTypes(testCase.inputUser)
 			if testCase.expectedHasError {

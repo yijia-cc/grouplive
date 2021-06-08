@@ -22,7 +22,7 @@ func (a AmenitySQL) FindAmenityInfo(transaction tx.Transaction, amenityTypeId en
 		`
 SELECT id, name, type_id 
 FROM amenity 
-WHERE type_id = "?";
+WHERE type_id = ?;
 `)
 	if err != nil {
 		return nil, err

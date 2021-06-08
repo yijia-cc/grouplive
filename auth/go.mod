@@ -21,4 +21,5 @@ require (
 	google.golang.org/grpc v1.38.0
 )
 
-//replace github.com/yijia-cc/grouplive/proto/golang => ../proto/golang // for local deployment
+// for local deployment
+replace github.com/yijia-cc/grouplive/proto/golang => ../proto/golang

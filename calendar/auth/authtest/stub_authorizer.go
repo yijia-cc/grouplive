@@ -11,7 +11,7 @@ var _ auth.Authorizer = (*StubAuthorizer)(nil)
 type StubAuthorizer struct {
 }
 
-func (s StubAuthorizer) HasPermission(user *entity.User, permission permission.Permission, resourceID *string) bool {
+func (s StubAuthorizer) HasPermission(user *entity.User, permission permission.Permission) bool {
 	return true
 }
 

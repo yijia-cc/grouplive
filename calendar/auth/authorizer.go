@@ -6,5 +6,5 @@ import (
 )
 
 type Authorizer interface {
-	HasPermission(user *entity.User, permission permission.Permission, resourceID *string) bool
+	HasPermission(user *entity.User, permission permission.Permission) bool
 }

@@ -11,7 +11,7 @@ public final class AuthenticationServiceGrpc {
 
   private AuthenticationServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "proto.AuthenticationService";
+  public static final String SERVICE_NAME = "pb.AuthenticationService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<info.grouplive.proto.Api.VerifyIdentityRequest,

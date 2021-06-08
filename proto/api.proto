@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package proto;
+package pb;
 
-option go_package = "github.com/yijia-cc/grouplive/proto/golang";
+option go_package = "github.com/yijia-cc/grouplive/proto/pb";
 option java_package = "info.grouplive.proto";
 
 service AuthenticationService {

@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
@@ -18,7 +17,7 @@ type Calendar struct {
 }
 
 func (c Calendar) ListAmenityTypes(user *entity.User) ([]entity.AmenityType, error) {
-	if !c.authorizer.HasPermission(user, permission.ViewAmenityTypes, nil) {
+	if !c.authorizer.HasPermission(user, permission.ViewAmenityTypes()) {
 		return nil, errors.New("user is not allowed to view amenity types")
 	}
 

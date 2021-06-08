@@ -18,6 +18,7 @@ func NewServer(
 	cfg config.Config,
 	authenticator auth.Authenticator,
 	authorizer auth.Authorizer,
+	userProvider auth.UserProvider,
 	transactionFactory tx.TransactionFactory,
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
@@ -30,7 +31,7 @@ func NewServer(
 	schema := graphql.MustParseSchema(content, resolver.NewResolver(authorizer, transactionFactory, amenityDao, amenityTypeDao))
 	mux := http.NewServeMux()
 	relayHandler := &relay.Handler{Schema: schema}
-	mux.HandleFunc("/", auth.WithMiddleware(authenticator, relayHandler.ServeHTTP))
+	mux.HandleFunc("/", auth.WithMiddleware(authenticator, userProvider, relayHandler.ServeHTTP))
 	return mux
 }
 

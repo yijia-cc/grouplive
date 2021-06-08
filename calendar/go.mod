@@ -19,4 +19,4 @@ require (
 )
 
 // for local deployment
-replace github.com/yijia-cc/grouplive/proto/golang => ../proto/golang
+//replace github.com/yijia-cc/grouplive/proto/golang => ../proto/golang

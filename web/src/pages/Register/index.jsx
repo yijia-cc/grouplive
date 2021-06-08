@@ -31,14 +31,28 @@ function Register(props) {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    const { username, password } = values;
+    const {
+      username,
+      password,
+      firstname,
+      lastname,
+      email,
+      address,
+      apt_number,
+      phone,
+    } = values;
     const opt = {
       method: "POST",
-      url: `${BASE_URL}/signup`,
+      url: `${BASE_URL}/sign-up`,
       data: {
-        username: username,
-        password: password,
+        username,
+        password,
+        firstname,
+        lastname,
+        email,
+        address,
+        apt_number,
+        phone,
       },
       headers: { "content-type": "application/json" },
     };
@@ -79,14 +93,90 @@ function Register(props) {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        name="email"
+        label="Email"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+          { type: "email" },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="firstname"
+        label="FirsetName"
+        rules={[
+          {
+            required: true,
+            message: "Please input your firsetName!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="lastname"
+        label="LastName"
+        rules={[
+          {
+            required: true,
+            message: "Please input your lastName!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="phone"
+        label="Phone Number"
+        rules={[{ required: true, message: "Please input your phone number!" }]}
+      >
+        <Input style={{ width: "100%" }} />
+      </Form.Item>
+      <Form.Item
+        name="apt_number"
+        label="Apartment Number"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Apartment Number!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="address"
+        label="Address"
+        rules={[
+          {
+            required: true,
+            message: "Please input your address!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item
         name="password"
         label="Password"
+        tooltip="Password length must be at least 8 characters"
         rules={[
           {
             required: true,
             message: "Please input your password!",
+          },
+          {
+            min: 8,
+            message: "Password length must be at least 8 characters",
           },
         ]}
         hasFeedback

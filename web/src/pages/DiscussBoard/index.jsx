@@ -1,18 +1,15 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import DiscussHome from './components/DiscussHome/DiscussHome';
-import DiscussSider from './components/DiscussSider/DiscussSider';
+import DiscussHeader from './components/DiscussHeader/DiscussHeader';
+import DiscussNav from './components/DiscussNav/DiscussNav';
 
 
 
 const DiscussBoard = () => {
   return (
-    <Layout>      
-      <Layout>
-        <DiscussSider />
-        <DiscussHome />
-      </Layout>
-    </Layout>
+    <>
+      <DiscussHeader />
+      <DiscussNav />     
+    </>
   );
 };
 

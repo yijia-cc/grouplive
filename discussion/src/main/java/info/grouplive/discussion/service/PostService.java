@@ -13,6 +13,7 @@ import info.grouplive.discussion.model.Subreddit;
 import info.grouplive.discussion.model.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,13 +31,13 @@ public class PostService {
     private final PostRepository postRepository;
     private final SubredditRepository subredditRepository;
     private final UserRepository userRepository;
-//    private final AuthService authService;
     private final PostMapper postMapper;
 
     public Post save(PostRequest postRequest) {
         Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName())
                 .orElseThrow(() -> new SubredditNotFoundException(postRequest.getSubredditName()));
-        User currentUser = new User(123l, "admin", "123", "", null, true); // authService.getCurrentUser()
+        // TODO: replace with authService.getCurrentUser() after authService complete
+        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
         postRepository.save(postMapper.map(postRequest, subreddit, currentUser));
         return postMapper.map(postRequest, subreddit, currentUser);
     }
@@ -50,10 +51,10 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public List<PostResponse> getAllPosts() {
-        return postRepository.findAll()
-                .stream()
-                .map(postMapper::mapToDto)
-                .collect(toList());
+         return postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"))
+                                    .stream()
+                                    .map(postMapper::mapToDto)
+                                    .collect(toList());
     }
 
     @Transactional(readOnly = true)

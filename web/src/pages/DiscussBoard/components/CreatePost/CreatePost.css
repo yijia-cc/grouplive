@@ -1,9 +1,9 @@
-.topicForm-container {
+.postForm-container {
     display: flex;
     justify-content: center;    
 }
 
-.topicForm {
+.postForm {
     margin-top: 10vh;
     width: 70vw;
 }

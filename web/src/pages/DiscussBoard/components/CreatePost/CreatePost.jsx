@@ -1,16 +1,19 @@
 import React from 'react';
-import { Form, Input, Select } from 'antd';
-import * as $u from '../../services/DiscussService';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux'
-import { ACTION_TYPES } from '../../../../redux/actions/actionType';
-import { topicActions } from '../../../../redux/actions/createTopic';
+import { Form, Input, Select, Button } from 'antd';
+import { topicActions } from '../../../../redux/actions/topicAction';
+import { postActions } from '../../../../redux/actions/postAction';
+import './CreatePost.css';
 
 const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 16 },
 };
 
-const { Option } = Select;
+const tailLayout = {    
+    wrapperCol: { offset: 10, span: 16 },
+}
 
 const validateMessages = {
     required: '${label} is required!'    
@@ -23,68 +26,80 @@ const PAYLOAD = {
     description: 'description'
 };
 
-class CreatePost extends React.Component {    
+class CreatePost extends React.Component { 
+    formRef = React.createRef();
+    state = {
+        topic: '',
+        postTitle: '',
+        uploadImgUrl: '',
+        postContent: ''
+    };    
+
     componentDidMount() {                
-        this.props.getAllTopics();
+        this.props.getAllTopics();        
+    }    
+
+    onReset = () => {
+        this.formRef.current.resetFields();     
     }
 
-    /** e is the input element ref or id of post (1-based) */
-    onChange = (e, field) => {
-        let val = '';
-        let isValid = true;
-        if (field === 'topic') { // dropdown field type
-            const idx = this.props.topic.topicList.length - e; // reversed idx
-            val = this.props.topic.topicList[idx].name;            
-        } else { // input field type
-            val = e.target.value;            
-        }
+    onFormChange(val, type) {
+        this.setState({ [type]: val});        
+    }
 
-        if (this.props.post[field].isRequired) {
-            isValid = val != null && val != undefined && val != '';
+    submitPost() {                      
+        if (this.isValid()) {
+            const redirectTo = '/discussion/postList';
+            const payload = {
+                [PAYLOAD.topic]: this.state.topic,
+                [PAYLOAD.title]: this.state.postTitle,
+                [PAYLOAD.url]: this.state.uploadImgUrl,
+                [PAYLOAD.description]: this.state.postContent
+            };
+            this.props.createPost(payload, this.props.history, redirectTo);
         }
+    }
 
-        const data = {
-            ...this.props.post,
-            payload: {
-                ...this.props.post.payload,
-                [PAYLOAD[field]]: val
-            },
-            [field]: {...this.props.post[field], isValid, value: val}
-        }
-        this.props.dispatch({ type: ACTION_TYPES.CREATE_POST,  data });   
-    };
+    isValid() {
+        return this.state.topic !== '' && this.state.postTitle !== '';
+    }
 
     render() {
         return (
-            <Form {...layout} name="nest-messages" validateMessages={validateMessages}>
-                <Form.Item name='title' label="Title" rules={[{ required: true }]}>
-                    <Input onChange={(e) => this.onChange(e, 'title')}/>
-                </Form.Item>
-                <Form.Item name='url' label="URL">
-                    <Input onChange={(e) => this.onChange(e, 'url')} />
-                </Form.Item>                        
-                <Form.Item name='topic' label="Select Topic" rules={[{ required: true }]}>
-                    <Select
-                        showSearch
-                        placeholder="Select a Topic"
-                        optionFilterProp="name"
-                        onChange={(e) => this.onChange(e, 'topic')}
-                        options={this.props.topic.topicList.map((topic) => { return { label: topic.name, value: topic.id } })}                                         
-                        filterOption={(input, option) =>
-                            option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0}>                            
-                    </Select>
-                </Form.Item>
-                <Form.Item name='description' label="Description">
-                    <Input.TextArea onChange={(e) => this.onChange(e, 'description')} />
-                </Form.Item>                
-            </Form>            
+            <div className="postForm-container">                
+                <Form {...layout} ref={this.formRef} name="postForm" 
+                    className="postForm" validateMessages={validateMessages}>
+                    <Form.Item name='topic' label="Topic" rules={[{ required: true }]}>
+                        <Select
+                            showSearch
+                            placeholder="Please Select a Topic"
+                            optionFilterProp="label"
+                            onChange={(val) => this.onFormChange(val, 'topic')}
+                            options={this.props.topic.topicList.map((topic) => { return { label: topic.name, value: topic.name } })}                                         
+                            filterOption={(input, option) => option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0}>                            
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name='postTitle' label="Title" rules={[{ required: true }]}>
+                        <Input onChange={(e) => this.onFormChange(e.target.value, 'postTitle')}/>
+                    </Form.Item>
+                    <Form.Item name='uploadImgUrl' label="Image URL">
+                        <Input onChange={(e) => this.onFormChange(e.target.value, 'uploadImgUrl')} />
+                    </Form.Item>                                            
+                    <Form.Item name='postContent' label="Content">
+                        <Input.TextArea onChange={(e) => this.onFormChange(e.target.value, 'postContent')} />
+                    </Form.Item>   
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit" onClick={() => this.submitPost()}>Submit</Button>
+                        <Button htmlType="button" onClick={this.onReset}>Reset</Button>
+                    </Form.Item>
+                </Form>   
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        post: state.postReducer,
+    return {        
         topic: state.getAllTopicReducer
     }
 }
@@ -92,8 +107,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllTopics: () => dispatch(topicActions.getTopicList()),
-        dispatch
+        createPost: (payload, history, redirectTo) => dispatch(postActions.createPost(payload, history, redirectTo))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatePost));

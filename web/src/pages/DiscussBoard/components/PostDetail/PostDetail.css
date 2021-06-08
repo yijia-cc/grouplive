@@ -1,0 +1,4 @@
+.ant-card-body {
+    max-height: 70vh;
+    overflow: auto;
+}

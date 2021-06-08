@@ -1,70 +1,89 @@
 import React from 'react';
-import { Layout, List, Avatar, Space, notification} from 'antd';
-import { MessageOutlined, LikeOutlined, DislikeOutlined, StarOutlined } from '@ant-design/icons';
-import * as $u from '../../services/DiscussService';
 import { connect } from 'react-redux'
-import { postActions } from '../../../../redux/actions/createPost';
+import { Layout, List, Avatar, Space, notification } from 'antd';
+import { LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { postActions } from '../../../../redux/actions/postAction';
+import { voteActions } from '../../../../redux/actions/voteAction';
+import { ACTION_TYPES } from '../../../../redux/actions/actionType';
+import './DiscussMain.css';
 
 const { Content } = Layout;
 const avatar = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
 const altLogo = 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png';
 
-const IconText = ({ icon, text }) => (
-  <Space>
-    <a onClick={() => iconClick(text)}>{React.createElement(icon)}</a>
-    {text != 'like' && text != 'dislike' ? text : ''}
-  </Space>
-);
+const IconText = ({ icon, text, item, that }) => {    
+    return (        
+        <Space>
+            <a onClick={() => that.iconClick(text, item, that, icon)}>
+                {React.createElement(icon) }                 
+            </a>     
+            {text !== 'like' && text !== 'dislike' ? text : ''}                
+        </Space>
+    );    
+};
 
 const VOTE = {
     like: 'UPVOTE',
     dislike: 'DOWNVOTE'
 }
 
-const iconClick = (text, id) => {        
-    const payload = {
-        voteType: VOTE[text],
-        postId: id
-    };
-    return;
-    $u.VOTE(payload).then(response => {
-        // this.setState({  });
-    });
+const POST_ICON_MAP = {    
+    LIKE_ICON: LikeOutlined,
+    LIKE_CLICKED_ICON: LikeFilled,        
+    DISLIKE_ICON: DislikeOutlined,
+    DISLIKE_CLICKED_ICON: DislikeFilled
 }
 
 const openNotificationWithIcon = (type, title, msg) => {
     notification[type]({
         message: title,
-        description: msg 
+        description: msg        
     });
 };
 
 class DiscussMain extends React.Component {
-    state = { postList: [] }
+    state = {
+        selectedItem: null
+    };
+    
     componentDidMount() {
-        this.props.getAllPost();
+        if (this.props.newPost.title == 'Post' && this.props.newPost.msg !== '') {
+            openNotificationWithIcon(this.props.newPost.type, this.props.newPost.title, this.props.newPost.msg);                        
+        } else if (this.props.newTopic.title === 'Topic' && this.props.newTopic.msg != '') {
+            openNotificationWithIcon(this.props.newTopic.type, this.props.newTopic.title, this.props.newTopic.msg);            
+        }
+        this.props.getAllPost();  
     }    
 
     componentDidUpdate() {
-        // TODO...
-        if (this.props.post.msg !== '') {
-            openNotificationWithIcon(this.props.post.type, this.props.post.title, this.props.post.msg);            
-        }
-        if (this.props.topic.msg != '') {
-            openNotificationWithIcon(this.props.topic.type, this.props.topic.title, this.props.topic.msg);
+        if (this.props.vote.isSuccess && 
+            this.state.selectedItem !== null && 
+            this.state.selectedItem.id === this.props.vote.item.id && 
+            this.state.selectedItem.voteCount != this.props.vote.item.voteCount) {
+            this.setState({ selectedItem: this.props.vote.item });
         }
     }
 
+    componentWillUnmount() {
+        this.props.dispatch({ type: ACTION_TYPES.RESET_NEW_POST });
+        this.props.dispatch({ type: ACTION_TYPES.RESET_NEW_TOPIC });
+    }
+
+    iconClick = (text, item, that) => {
+        this.setState({ selectedItem: item });
+        if (text === 'like' || text === 'dislike') {
+            const payload = {
+                voteType: VOTE[text],
+                postId: item.id
+            };        
+            that.props.voting(payload, item, text);
+        }
+    }
+   
     render() {        
         return (
-            <Layout style={{ padding: '24px 24px' }}>
-                <Content
-                    className="site-layout-background"
-                    style={{
-                    padding: 24,
-                    margin: 0,
-                    minHeight: 280,
-                    }}>
+            <Layout className="discuss-main-layout">
+                <Content className="site-layout-background discuss-main-content">
                     <List
                         itemLayout="vertical"
                         size="large"
@@ -77,12 +96,12 @@ class DiscussMain extends React.Component {
                         dataSource={this.props.post.postList}                    
                         renderItem={item => (
                             <List.Item
-                                key={item.name}
+                                key={item.id}
                                 actions={[
-                                    <IconText icon={StarOutlined} text={item.voteCount} key="list-vertical-star-o" />,
-                                    <IconText icon={LikeOutlined} text="like" key="list-vertical-like-o" onClick={() => this.iconClick('like')}/>,
-                                    <IconText icon={DislikeOutlined} text="dislike" key="list-vertical-dislike-o" onClick={() => this.iconClick('dislike')} />,
-                                    <IconText icon={MessageOutlined} text={item.commentCount} key="list-vertical-message" />,
+                                    <IconText icon={StarOutlined} text={item.voteCount} item={item} that={this} key="voteCnt" />,
+                                    <IconText icon={item.upVote ? POST_ICON_MAP.LIKE_CLICKED_ICON : POST_ICON_MAP.LIKE_ICON} text="like" item={item} that={this} key='like' />,                                    
+                                    <IconText icon={item.downVote ? POST_ICON_MAP.DISLIKE_CLICKED_ICON : POST_ICON_MAP.DISLIKE_ICON} text="dislike" item={item} that={this} key='dislike' />,
+                                    <IconText icon={MessageOutlined} text={item.commentCount} item={item} that={this} key="commentsCnt" />,
                                 ]}
                                 extra={
                                     <img
@@ -93,10 +112,10 @@ class DiscussMain extends React.Component {
                                 }>
                                 <List.Item.Meta
                                     avatar={<Avatar src={avatar} />}
-                                    title={<a href={item.href}>{item.subredditName}</a>}
+                                    title={<a href={`/discussion/posts/${item.id}`}>{item.subredditName}</a>}
                                     description={item.postName}/>
-                                    {item.description}
-                            </List.Item>
+                                    { item.description }
+                            </List.Item>                            
                         )}
                     />
                 </Content>
@@ -108,13 +127,18 @@ class DiscussMain extends React.Component {
 const mapStateToProps = (state) => {
     return {
         post: state.getAllPostReducer,
-        topic: state.getAllTopicReducer
+        topic: state.getAllTopicReducer,
+        newPost: state.newPostReducer,
+        newTopic: state.newTopicReducer,
+        vote: state.voteReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllPost: () => dispatch(postActions.getPostList())
+        getAllPost: () => dispatch(postActions.getPostList()),        
+        voting: (vote, item, option) => dispatch(voteActions.voting(vote, item, option)),
+        dispatch
     };
 }
 

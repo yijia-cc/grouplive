@@ -16,7 +16,7 @@ public interface SubredditMapper {
     SubredditDto mapSubredditToDto(Subreddit subreddit);
 
     default Integer mapPosts(List<Post> numberOfPosts) {
-        return numberOfPosts.size();
+        return numberOfPosts != null ? numberOfPosts.size() : 0;
     }
 
     @InheritInverseConfiguration

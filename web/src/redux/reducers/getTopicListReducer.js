@@ -1,6 +1,6 @@
 import { ACTION_TYPES } from '../actions/actionType'
 
-const initState = {
+export const initTopicState = {
     topicList: [],
     isSuccess: false,
     isLoading: false,
@@ -9,11 +9,11 @@ const initState = {
     title: ''
 };
 
-export const getAllTopicReducer = (state = initState, action) => {
+export const getAllTopicReducer = (state = initTopicState, action) => {
     const { data, type } = action;
     let succState;    
     switch (type) {
-        case ACTION_TYPES.GET_ALL_TOPIC_SUCCESS:                              
+        case ACTION_TYPES.GET_ALL_TOPICS:                              
             succState = {
                 topicList: data,
                 isSuccess: true,
@@ -22,17 +22,7 @@ export const getAllTopicReducer = (state = initState, action) => {
                 type: 'success',
                 title: ''            
             }
-            return succState;   
-        case ACTION_TYPES.GET_UPDATE_ALL_TOPIC_SUCCESS:                              
-            succState = {
-                topicList: data,
-                isSuccess: true,
-                isLoading: false,
-                msg: 'Your new Topic has been created.',
-                type: 'success',
-                title: 'Create Topic'            
-            }
-            return succState;  
+            return succState;           
         case ACTION_TYPES.GET_ALL_TOPIC_FAILED:                              
             const failedState = {
                 topicList: data,
@@ -42,7 +32,7 @@ export const getAllTopicReducer = (state = initState, action) => {
                 type: 'error',
                 title: 'Create Topic'
             }
-            return failedState;  
+            return failedState;        
         default:
             return state;
     }

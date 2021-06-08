@@ -5,12 +5,15 @@ import info.grouplive.discussion.Repository.CommentRepository;
 import info.grouplive.discussion.Repository.VoteRepository;
 import info.grouplive.discussion.dto.PostRequest;
 import info.grouplive.discussion.dto.PostResponse;
-import info.grouplive.discussion.model.Post;
-import info.grouplive.discussion.model.Subreddit;
-import info.grouplive.discussion.model.User;
+import info.grouplive.discussion.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
+
+import static info.grouplive.discussion.model.VoteType.DOWNVOTE;
+import static info.grouplive.discussion.model.VoteType.UPVOTE;
 
 @Mapper(componentModel = "spring")
 public abstract class PostMapper {
@@ -36,6 +39,8 @@ public abstract class PostMapper {
     @Mapping(target = "userName", source = "user.username")
     @Mapping(target = "commentCount", expression = "java(commentCount(post))")
 //    @Mapping(target = "duration", expression = "java(getDuration(post))")
+    @Mapping(target = "upVote", expression = "java(isPostUpVoted(post))")
+    @Mapping(target = "downVote", expression = "java(isPostDownVoted(post))")
     public abstract PostResponse mapToDto(Post post);
 
     Integer commentCount(Post post) {
@@ -45,4 +50,20 @@ public abstract class PostMapper {
 //    String getDuration(Post post) {
 //        return TimeAgo.using(post.getCreatedDate().toEpochMilli());
 //    }
+
+    boolean isPostUpVoted(Post post) {
+        return checkVoteType(post, UPVOTE);
+    }
+
+    boolean isPostDownVoted(Post post) {
+        return checkVoteType(post, DOWNVOTE);
+    }
+
+    private boolean checkVoteType(Post post, VoteType voteType) {
+        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
+        Optional<Vote> voteForPostByUser =
+                voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);
+        return voteForPostByUser.filter(vote -> vote.getVoteType().equals(voteType))
+                .isPresent();
+    }
 }

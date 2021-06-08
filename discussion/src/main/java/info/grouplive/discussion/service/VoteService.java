@@ -21,13 +21,14 @@ import static info.grouplive.discussion.model.VoteType.UPVOTE;
 public class VoteService {
     private final VoteRepository voteRepository;
     private final PostRepository postRepository;
-//    private final AuthService authService;
 
     @Transactional
     public void vote(VoteDto voteDto) {
         Post post = postRepository.findById(voteDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteDto.getPostId()));
-        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, new User(123l, "admin", "123", "", null, true));
+        // TODO: replace with authService.getCurrentUser() after authService complete
+        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
+        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);
         if (voteByPostAndUser.isPresent() &&
                 voteByPostAndUser.get().getVoteType()
                         .equals(voteDto.getVoteType())) {
@@ -44,10 +45,12 @@ public class VoteService {
     }
 
     private Vote mapToVote(VoteDto voteDto, Post post) {
+        // TODO: replace with authService.getCurrentUser() after authService complete
+        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
         return Vote.builder()
                 .voteType(voteDto.getVoteType())
                 .post(post)
+                .user(currentUser)
                 .build();
-//                .user(authService.getCurrentUser())
     }
 }

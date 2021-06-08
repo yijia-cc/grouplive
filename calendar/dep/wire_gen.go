@@ -7,12 +7,13 @@ package dep
 
 import (
 	"database/sql"
+	"net/http"
+
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
 	"github.com/yijia-cc/grouplive/calendar/gql/server"
 	"github.com/yijia-cc/grouplive/calendar/tx"
-	"net/http"
 )
 
 // Injectors from wire.go:

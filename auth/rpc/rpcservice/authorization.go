@@ -7,7 +7,7 @@ import (
 	"github.com/yijia-cc/grouplive/auth/entity"
 	"github.com/yijia-cc/grouplive/auth/service"
 	"github.com/yijia-cc/grouplive/auth/tx"
-	"github.com/yijia-cc/grouplive/proto/golang"
+	pb "github.com/yijia-cc/grouplive/proto/golang"
 )
 
 var _ pb.AuthorizationServiceServer = (*Authorization)(nil)

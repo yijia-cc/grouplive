@@ -1,4 +1,4 @@
-package gql
+package gqlentry
 
 import (
 	"database/sql"
@@ -6,13 +6,14 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/yijia-cc/grouplive/calendar/dep"
+	"github.com/yijia-cc/grouplive/calendar/obs"
 
 	"github.com/yijia-cc/grouplive/calendar/config"
+	"github.com/yijia-cc/grouplive/calendar/dep"
 )
 
-func StartServer(cfg config.Config, db *sql.DB) {
-	gqlAPIServer, err := dep.InitGraphQLServer(cfg, db)
+func StartServer(cfg config.Config, logger obs.Logger, db *sql.DB) {
+	gqlAPIServer, err := dep.InitGraphQLServer(cfg, logger.NextLayer().NextLayer(), db)
 	if err != nil {
 		panic(err)
 	}

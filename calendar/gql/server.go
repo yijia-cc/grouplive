@@ -1,9 +1,11 @@
-package server
+package gql
 
 import (
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/yijia-cc/grouplive/calendar/obs"
 
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
@@ -16,6 +18,7 @@ import (
 
 func NewServer(
 	cfg config.Config,
+	logger obs.Logger,
 	authenticator auth.Authenticator,
 	authorizer auth.Authorizer,
 	userProvider auth.UserProvider,
@@ -27,11 +30,15 @@ func NewServer(
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	schema := graphql.MustParseSchema(content, resolver.NewResolver(authorizer, transactionFactory, amenityDao, amenityTypeDao))
+	res := resolver.NewResolver(logger.NextLayer(), authorizer, transactionFactory, amenityDao, amenityTypeDao)
+	schema := graphql.MustParseSchema(content, res)
 	mux := http.NewServeMux()
+
 	relayHandler := &relay.Handler{Schema: schema}
-	mux.HandleFunc("/", auth.WithMiddleware(authenticator, userProvider, relayHandler.ServeHTTP))
+	handlerFunc := auth.WithMiddleware(authenticator, userProvider, relayHandler.ServeHTTP)
+	handlerFunc = obs.WithRequestLog(logger.NextLayer(), handlerFunc)
+
+	mux.HandleFunc("/", handlerFunc)
 	return mux
 }
 

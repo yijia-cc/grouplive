@@ -12,13 +12,14 @@ import (
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
-	"github.com/yijia-cc/grouplive/calendar/gql/server"
+	"github.com/yijia-cc/grouplive/calendar/gql"
+	"github.com/yijia-cc/grouplive/calendar/obs"
 	"github.com/yijia-cc/grouplive/calendar/tx"
 )
 
 // Injectors from wire.go:
 
-func InitGraphQLServer(cfg config.Config, db *sql.DB) (*http.ServeMux, error) {
+func InitGraphQLServer(cfg config.Config, logger obs.Logger, db *sql.DB) (*http.ServeMux, error) {
 	groupLiveAuthClient, err := newGroupLiveAuthClient(cfg)
 	if err != nil {
 		return nil, err
@@ -26,7 +27,7 @@ func InitGraphQLServer(cfg config.Config, db *sql.DB) (*http.ServeMux, error) {
 	safeTransactionFactory := tx.NewSafeTransactionFactory(db)
 	amenitySQL := dao.NewAmenitySQL(db)
 	amenityTypeSQL := dao.NewAmenityTypeSQL(db)
-	serveMux := server.NewServer(cfg, groupLiveAuthClient, groupLiveAuthClient, groupLiveAuthClient, safeTransactionFactory, amenitySQL, amenityTypeSQL)
+	serveMux := gql.NewServer(cfg, logger, groupLiveAuthClient, groupLiveAuthClient, groupLiveAuthClient, safeTransactionFactory, amenitySQL, amenityTypeSQL)
 	return serveMux, nil
 }
 

@@ -3,6 +3,8 @@ package service
 import (
 	"errors"
 
+	"github.com/yijia-cc/grouplive/calendar/obs"
+
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/auth/permission"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
@@ -12,6 +14,7 @@ import (
 )
 
 type Calendar struct {
+	logger             obs.Logger
 	authorizer         auth.Authorizer
 	transactionFactory tx.TransactionFactory
 	amenityTypeRepo    repo.AmenityType
@@ -30,12 +33,14 @@ func (c Calendar) ListAmenityTypes(user *entity.User) ([]entity.AmenityType, err
 }
 
 func NewCalendar(
+	logger obs.Logger,
 	authorizer auth.Authorizer,
 	transactionFactory tx.TransactionFactory,
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
 ) Calendar {
 	return Calendar{
+		logger:             logger,
 		authorizer:         authorizer,
 		transactionFactory: transactionFactory,
 		amenityTypeRepo:    repo.NewAmenityType(amenityDao, amenityTypeDao),

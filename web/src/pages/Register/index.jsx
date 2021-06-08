@@ -41,9 +41,10 @@ function Register(props) {
       apt_number,
       phone,
     } = values;
+    const { staging } = BASE_URL;
     const opt = {
       method: "POST",
-      url: `${BASE_URL}/sign-up`,
+      url: `${staging}/sign-up`,
       data: {
         username,
         password,

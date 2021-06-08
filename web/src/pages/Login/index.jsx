@@ -11,9 +11,10 @@ function Login(props) {
 
   const onFinish = (values) => {
     const { username, password } = values;
+    const { staging } = BASE_URL;
     const opt = {
       method: "POST",
-      url: `${BASE_URL}/sign-in`,
+      url: `${staging}/sign-in`,
       data: {
         username: username,
         password: password,

@@ -16,6 +16,7 @@ type Config struct {
 	DbMigrationDir    string `envconfig:"DB_MIGRATION_DIR"`
 	GraphQLSchemaPath string `envconfig:"GRAPHQL_SCHEMA_PATH"`
 	GraphQLServerPort int    `envconfig:"GRAPHQL_SERVER_PORT"`
+	AuthGRPCEndpoint  string `envconfig:"AUTH_GRPC_ENDPOINT"`
 }
 
 func FromEnv() Config {

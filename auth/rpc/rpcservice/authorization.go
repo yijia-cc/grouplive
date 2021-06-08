@@ -7,17 +7,17 @@ import (
 	"github.com/yijia-cc/grouplive/auth/entity"
 	"github.com/yijia-cc/grouplive/auth/service"
 	"github.com/yijia-cc/grouplive/auth/tx"
-	proto "github.com/yijia-cc/grouplive/proto/golang"
+	"github.com/yijia-cc/grouplive/proto/golang"
 )
 
-var _ proto.AuthorizationServiceServer = (*Authorization)(nil)
+var _ pb.AuthorizationServiceServer = (*Authorization)(nil)
 
 type Authorization struct {
-	proto.UnimplementedAuthorizationServiceServer
+	pb.UnimplementedAuthorizationServiceServer
 	authorizationService service.Authorization
 }
 
-func (a Authorization) HasPermission(_ context.Context, request *proto.HasPermissionRequest) (*proto.HasPermissionResponse, error) {
+func (a Authorization) HasPermission(_ context.Context, request *pb.HasPermissionRequest) (*pb.HasPermissionResponse, error) {
 	permission := entity.Permission{ID: (entity.ID)(request.PermissionId)}
 	user := entity.User{ID: (entity.ID)(request.UserId)}
 	resourceType := entity.ResourceType{ID: (entity.ID)(request.ResourceTypeId)}
@@ -29,7 +29,7 @@ func (a Authorization) HasPermission(_ context.Context, request *proto.HasPermis
 	if err != nil {
 		return nil, err
 	}
-	return &proto.HasPermissionResponse{HasPermission: hasPermission}, nil
+	return &pb.HasPermissionResponse{HasPermission: hasPermission}, nil
 }
 
 func NewAuthorization(txFactory tx.TransactionFactory, permissionBindingDao dao.PermissionBinding) Authorization {

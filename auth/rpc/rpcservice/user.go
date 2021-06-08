@@ -6,26 +6,27 @@ import (
 	"github.com/yijia-cc/grouplive/auth/db/dao"
 	"github.com/yijia-cc/grouplive/auth/service"
 	"github.com/yijia-cc/grouplive/auth/tx"
-	proto "github.com/yijia-cc/grouplive/proto/golang"
+	"github.com/yijia-cc/grouplive/proto/golang"
 )
 
-var _ proto.UserServiceServer = (*User)(nil)
+var _ pb.UserServiceServer = (*User)(nil)
 
 type User struct {
-	proto.UnimplementedUserServiceServer
+	pb.UnimplementedUserServiceServer
 	userService service.User
 }
 
-func (u User) GetUser(_ context.Context, request *proto.GetUserRequest) (*proto.User, error) {
+func (u User) GetUser(_ context.Context, request *pb.GetUserRequest) (*pb.User, error) {
 	user, err := u.userService.GetUser(request.UserId)
 	if err != nil {
 		return nil, err
 	}
-	return &proto.User{
+	return &pb.User{
 		Id:        string(user.ID),
 		Lastname:  &user.LastName,
 		Firstname: &user.FirstName,
-		Unit: &proto.Unit{
+		Username: user.Username,
+		Unit: &pb.Unit{
 			Address:   user.Unit.Address,
 			AptNumber: user.Unit.AptNumber,
 		},

@@ -1,8 +1,8 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
 import axios from "axios";
-import { BASE_URL } from "../../constants";
 import "./index.css";
+import {EnvService} from "../../service/env.service";
 
 const formItemLayout = {
   labelCol: {
@@ -41,10 +41,10 @@ function Register(props) {
       apt_number,
       phone,
     } = values;
-    const { staging } = BASE_URL;
+    const { authBaseUrl } = EnvService.getVal('AUTH_API_BASE_URL');
     const opt = {
       method: "POST",
-      url: `${staging}/sign-up`,
+      url: `${authBaseUrl}/sign-up`,
       data: {
         username,
         password,

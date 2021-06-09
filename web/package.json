@@ -34,7 +34,11 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build-env": "sh -ac '. ./.env.${REACT_APP_ENV}; react-app-rewired build'",
+    "build:development": "REACT_APP_ENV=development npm run build",
+    "build:testing": "REACT_APP_ENV=testing npm run build",
+    "build:staging": "REACT_APP_ENV=staging npm run build",
+    "build:production": "REACT_APP_ENV=production npm run build",
     "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-scripts eject"
   },

@@ -3,18 +3,19 @@ import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { BASE_URL } from "../../constants";
 import "./index.css";
+import {EnvService} from "../../service/env.service";
 
 function Login(props) {
   const { handleLoggedIn } = props;
 
   const onFinish = (values) => {
     const { username, password } = values;
-    const { staging } = BASE_URL;
+    const { authBaseUrl } = EnvService.getVal('AUTH_API_BASE_URL');
+    console.log("+++++++++",authBaseUrl);
     const opt = {
       method: "POST",
-      url: `${staging}/sign-in`,
+      url: `${authBaseUrl}/sign-in`,
       data: {
         username: username,
         password: password,

@@ -11,7 +11,7 @@ type Query {
     """
     amenityTypes: [AmenityType!]!
     amenityType(id: ID!): AmenityType!
-    myCalendar: Schedule!
+    myCalendar(weekStart: Time!): Schedule!
     reservations: [Reservation!]!
 }
 

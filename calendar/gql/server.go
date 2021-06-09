@@ -35,8 +35,13 @@ func NewServer(
 	mux := http.NewServeMux()
 
 	relayHandler := &relay.Handler{Schema: schema}
-	handlerFunc := auth.WithMiddleware(authenticator, userProvider, relayHandler.ServeHTTP)
-	handlerFunc = obs.WithRequestLog(logger.NextLayer(), handlerFunc)
+
+	handlerFunc := auth.WithMiddleware(
+		authenticator,
+		userProvider,
+		obs.WithRequestLog(
+			logger.NextLayer(),
+			relayHandler.ServeHTTP))
 
 	mux.HandleFunc("/", handlerFunc)
 	return mux

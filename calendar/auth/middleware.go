@@ -13,9 +13,14 @@ func WithMiddleware(authenticator Authenticator, userProvider UserProvider, hand
 			return
 		}
 
+		if len(authToken) == 0 {
+			handleFunc(writer, request)
+			return
+		}
+
 		userID, err := authenticator.VerifyIdentity(authToken)
 		if err != nil {
-			handleFunc(writer, request)
+			writer.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 

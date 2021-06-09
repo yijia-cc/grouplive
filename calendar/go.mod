@@ -11,7 +11,7 @@ require (
 	github.com/rubenv/sql-migrate v0.0.0-20210408115534-a32ed26c37ea
 	github.com/sirupsen/logrus v1.7.0 // indirect
 	github.com/stretchr/testify v1.7.0
-	github.com/yijia-cc/grouplive/proto/golang v0.0.0-20210607184134-3eecbc722c7d
+	github.com/yijia-cc/grouplive/proto/golang v0.0.0-20210609063939-c2e981f292ce
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/sync v0.0.0-20200625203802-6e8e738ad208 // indirect
 	golang.org/x/sys v0.0.0-20201029080932-201ba4db2418 // indirect

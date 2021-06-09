@@ -1,7 +1,8 @@
 package obs
 
-import "context"
+import "github.com/yijia-cc/grouplive/calendar/entity"
 
 type Analytics interface {
-	Track(ctx context.Context, eventName string, properties map[string]string)
+	Track(eventName string, user *entity.User, properties map[string]string)
 }
+

@@ -8,8 +8,7 @@ public enum VoteType {
 
     private int direction;
 
-    VoteType(int direction) {
-    }
+    VoteType(int direction) {}
 
     public static VoteType lookup(Integer direction) {
         return Arrays.stream(VoteType.values())

@@ -30,5 +30,5 @@ public class Subreddit {
     private List<Post> posts;
     private Instant createdDate;
     @ManyToOne(fetch = LAZY)
-    private User user;
+    private UserModel user;
 }

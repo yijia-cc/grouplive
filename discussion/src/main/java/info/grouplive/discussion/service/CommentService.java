@@ -9,7 +9,8 @@ import info.grouplive.discussion.exceptions.PostNotFoundException;
 import info.grouplive.discussion.mapper.CommentMapper;
 import info.grouplive.discussion.model.Comment;
 import info.grouplive.discussion.model.Post;
-import info.grouplive.discussion.model.User;
+//import info.grouplive.discussion.model.User;
+import info.grouplive.discussion.model.UserModel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,13 @@ public class CommentService {
     private final UserRepository userRepository;
     private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;
+    private final AuthService authService;
 
-    public void save(CommentsDto commentsDto) {
+    public void save(CommentsDto commentsDto, String token) {
         Post post = postRepository.findById(commentsDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException(commentsDto.getPostId().toString()));
-        // TODO: replace with authService.getCurrentUser() after authService complete
-        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
-        Comment comment = commentMapper.map(commentsDto, post, currentUser);
+        UserModel user = authService.getUser(token);
+        Comment comment = commentMapper.map(commentsDto, post, user);
         commentRepository.save(comment);
     }
 
@@ -44,7 +45,7 @@ public class CommentService {
     }
 
     public List<CommentsDto> getAllCommentsForUser(String userName) {
-        User user = userRepository.findByUsername(userName)
+        UserModel user = userRepository.findByUsername(userName)
                             .orElseThrow(() -> new UsernameNotFoundException(userName));
         return commentRepository.findAllByUser(user)
                 .stream()

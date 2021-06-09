@@ -21,8 +21,8 @@ public class CommentsController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity<List<CommentsDto>> createComment(@RequestBody CommentsDto commentsDto) {
-        commentService.save(commentsDto);
+    public ResponseEntity<List<CommentsDto>> createComment(@RequestHeader(value="Authorization") String token, @RequestBody CommentsDto commentsDto) {
+        commentService.save(commentsDto, token);
         return getAllCommentsForPost(commentsDto.getPostId());
     }
 

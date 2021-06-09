@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -18,18 +16,20 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class UserModel {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long userId;
+    @SequenceGenerator(name = "userId", sequenceName = "octo_reference_code", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "octo_reference_code")
+    private String userId;
     @NotBlank(message = "Username is required")
     private String username;
-    @NotBlank(message = "Password is required")
-    private String password;
+    private String lastName;
+    private String firstName;
     @Email
     @NotEmpty(message = "Email is required")
     private String email;
-    private Instant created;
-    private boolean enabled;
+    private String phone;
+    private String address;
+    private String aptNumber;
 }
 

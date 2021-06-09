@@ -4,12 +4,8 @@ import info.grouplive.discussion.Repository.PostRepository;
 import info.grouplive.discussion.Repository.VoteRepository;
 import info.grouplive.discussion.dto.VoteDto;
 import info.grouplive.discussion.exceptions.PostNotFoundException;
-import info.grouplive.discussion.model.Post;
-import info.grouplive.discussion.model.User;
-import info.grouplive.discussion.model.Vote;
-import info.grouplive.discussion.model.VoteType;
+import info.grouplive.discussion.model.*;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,14 +18,14 @@ import static info.grouplive.discussion.model.VoteType.UPVOTE;
 public class VoteService {
     private final VoteRepository voteRepository;
     private final PostRepository postRepository;
+    private final AuthService authService;
 
     @Transactional
-    public void vote(VoteDto voteDto) {
+    public void vote(VoteDto voteDto, String token) {
         Post post = postRepository.findById(voteDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteDto.getPostId()));
-        // TODO: replace with authService.getCurrentUser() after authService complete
-        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
-        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);
+        UserModel user = authService.getUser(token);
+        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, user);
         if (voteByPostAndUser.isPresent() &&
                 voteByPostAndUser.get().getVoteType()
                         .equals(voteDto.getVoteType())) { // case1: duplicate vote type
@@ -63,17 +59,16 @@ public class VoteService {
                 post.setVoteDownCount(post.getVoteDownCount() + 1);
             }
         }
-        voteRepository.save(mapToVote(voteDto, post));
+        voteRepository.save(mapToVote(voteDto, post, token));
         postRepository.save(post);
     }
 
-    private Vote mapToVote(VoteDto voteDto, Post post) {
-        // TODO: replace with authService.getCurrentUser() after authService complete
-        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
+    private Vote mapToVote(VoteDto voteDto, Post post, String token) {
+        UserModel user = authService.getUser(token);
         return Vote.builder()
                 .voteType(voteDto.getVoteType())
                 .post(post)
-                .user(currentUser)
+                .user(user)
                 .build();
     }
 }

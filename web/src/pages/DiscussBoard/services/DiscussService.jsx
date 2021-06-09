@@ -2,7 +2,8 @@ import axios from "axios";
 import { BASE_URL, TOKEN_KEY } from "../../../constants";
 
 const ROOT_LOCAL_URL = 'http://localhost:8080';
-const ROOT_URL = ROOT_LOCAL_URL;
+const STAGING_ROOT_URL = 'http://discussion.api.staging.allgame.fun'
+const ROOT_URL = STAGING_ROOT_URL;
 const CREATE_POST_URL = `${ROOT_URL}/api/posts/`;
 const GET_ALL_POSTS_SUCCESS_URL = `${ROOT_URL}/api/posts/`;
 const GET_SINGLE_POST_URL = `${ROOT_URL}/api/posts/`;

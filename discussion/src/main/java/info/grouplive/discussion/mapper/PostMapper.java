@@ -6,6 +6,7 @@ import info.grouplive.discussion.Repository.VoteRepository;
 import info.grouplive.discussion.dto.PostRequest;
 import info.grouplive.discussion.dto.PostResponse;
 import info.grouplive.discussion.model.*;
+import info.grouplive.discussion.service.AuthService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public abstract class PostMapper {
     private CommentRepository commentRepository;
     @Autowired
     private VoteRepository voteRepository;
-//    @Autowired
-//    private AuthService authService;
+    @Autowired
+    private AuthService authService;
 
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target = "description", source = "postRequest.description")
@@ -30,19 +31,19 @@ public abstract class PostMapper {
     @Mapping(target = "user", source = "user")
     @Mapping(target = "voteUpCount", constant = "0")
     @Mapping(target = "voteDownCount", constant = "0")
-    public abstract Post map(PostRequest postRequest, Subreddit subreddit, User user);
+    public abstract Post map(PostRequest postRequest, Subreddit subreddit, UserModel user);
 
-    @Mapping(target = "id", source = "postId")
-    @Mapping(target = "postName", source = "postName")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "url", source = "url")
-    @Mapping(target = "subredditName", source = "subreddit.name")
-    @Mapping(target = "userName", source = "user.username")
+    @Mapping(target = "id", source = "post.postId")
+    @Mapping(target = "postName", source = "post.postName")
+    @Mapping(target = "description", source = "post.description")
+    @Mapping(target = "url", source = "post.url")
+    @Mapping(target = "subredditName", source = "post.subreddit.name")
+    @Mapping(target = "userName", source = "post.user.username")
     @Mapping(target = "commentCount", expression = "java(commentCount(post))")
 //    @Mapping(target = "duration", expression = "java(getDuration(post))")
-    @Mapping(target = "upVote", expression = "java(isPostUpVoted(post))")
-    @Mapping(target = "downVote", expression = "java(isPostDownVoted(post))")
-    public abstract PostResponse mapToDto(Post post);
+    @Mapping(target = "upVote", expression = "java(isPostUpVoted(post, token))")
+    @Mapping(target = "downVote", expression = "java(isPostDownVoted(post, token))")
+    public abstract PostResponse mapToDto(Post post, String token);
 
     Integer commentCount(Post post) {
         return commentRepository.findByPost(post).size();
@@ -52,19 +53,19 @@ public abstract class PostMapper {
 //        return TimeAgo.using(post.getCreatedDate().toEpochMilli());
 //    }
 
-    boolean isPostUpVoted(Post post) {
-        return checkVoteType(post, UPVOTE);
+    boolean isPostUpVoted(Post post, String token) {
+        return checkVoteType(post, UPVOTE, token);
     }
 
-    boolean isPostDownVoted(Post post) {
-        return checkVoteType(post, DOWNVOTE);
+    boolean isPostDownVoted(Post post, String token) {
+        return checkVoteType(post, DOWNVOTE, token);
     }
 
-    private boolean checkVoteType(Post post, VoteType voteType) {
+    private boolean checkVoteType(Post post, VoteType voteType, String token) {
         // TODO: replace with authService.getCurrentUser() after authService complete
-        User currentUser = new User(1l, "admin", "123", "admin@gmail.com", null, true);
+        UserModel user = authService.getUser(token);
         Optional<Vote> voteForPostByUser =
-                voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, currentUser);
+                voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, user);
         return voteForPostByUser.filter(vote -> vote.getVoteType().equals(voteType))
                 .isPresent();
     }

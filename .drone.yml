@@ -61,6 +61,8 @@ steps:
     commands:
       - cd discussion
       - unset SERVER_PORT
+      - mvn validate
+      - mvn dependency:go-offline
       - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - mvn test -B
 trigger:

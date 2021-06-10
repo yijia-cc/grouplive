@@ -18,8 +18,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class UserModel {
     @Id
-    @SequenceGenerator(name = "userId", sequenceName = "octo_reference_code", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "octo_reference_code")
+//    @SequenceGenerator(name = "userId", sequenceName = "octo_reference_code", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "octo_reference_code")
+    @GeneratedValue
+    @Column(name = "userId", nullable = false)
     private String userId;
     @NotBlank(message = "Username is required")
     private String username;

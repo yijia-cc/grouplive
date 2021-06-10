@@ -36,6 +36,9 @@ public class AuthService {
     }
 
     public info.grouplive.discussion.model.UserModel getUser(String authToken) {
+        System.out.println("++++++++++++++++++++++");
+        System.out.println(authToken);
+        System.out.println("++++++++++++++++++++++");
         return getUserById(verifyIdentity(authToken));
     }
 

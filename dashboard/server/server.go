@@ -39,6 +39,6 @@ func StartUp(cfg *config.Config) {
 	// Serve any files located at <STAIC_MEDIA_DIR>/<filename> via the URL: http://host:port/<STAIC_MEDIA_DIR>/<filename>
 	r.PathPrefix(cfg.App.StaticMediaDir[1:]).Handler(http.StripPrefix(cfg.App.StaticMediaDir[1:], http.FileServer(http.Dir(cfg.App.StaticMediaDir))))
 
-	log.Printf("Dashboard server started at port %d\n", cfg.App.WebServerPort)
+	//log.Printf("Dashboard server started at port %d\n", cfg.App.WebServerPort)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.App.WebServerPort), r))
 }

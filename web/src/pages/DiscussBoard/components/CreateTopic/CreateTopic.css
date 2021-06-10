@@ -1,0 +1,13 @@
+.topicForm-container {
+    display: flex;
+    justify-content: center;    
+}
+
+.topicForm {
+    margin-top: 10vh;
+    width: 70vw;
+}
+
+.ant-btn {
+    margin-right: 8px;
+}

@@ -29,7 +29,7 @@ const tailFormItemLayout = {
 
 function Register(props) {
   const [form] = Form.useForm();
-
+  
   const onFinish = (values) => {
     const {
       username,

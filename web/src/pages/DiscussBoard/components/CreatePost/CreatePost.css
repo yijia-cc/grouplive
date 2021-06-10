@@ -1,0 +1,13 @@
+.postForm-container {
+    display: flex;
+    justify-content: center;    
+}
+
+.postForm {
+    margin-top: 10vh;
+    width: 70vw;
+}
+
+.ant-btn {
+    margin-right: 8px;
+}

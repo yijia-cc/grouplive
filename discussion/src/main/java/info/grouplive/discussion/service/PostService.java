@@ -10,9 +10,12 @@ import info.grouplive.discussion.exceptions.SubredditNotFoundException;
 import info.grouplive.discussion.mapper.PostMapper;
 import info.grouplive.discussion.model.Post;
 import info.grouplive.discussion.model.Subreddit;
-import info.grouplive.discussion.model.User;
+//import info.grouplive.discussion.model.User;
+import info.grouplive.discussion.model.UserModel;
+import io.grpc.StatusRuntimeException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,47 +33,52 @@ public class PostService {
     private final PostRepository postRepository;
     private final SubredditRepository subredditRepository;
     private final UserRepository userRepository;
-//    private final AuthService authService;
     private final PostMapper postMapper;
+    private final AuthService authService;
 
-    public Post save(PostRequest postRequest) {
+    public Post save(PostRequest postRequest, String token) {
         Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName())
                 .orElseThrow(() -> new SubredditNotFoundException(postRequest.getSubredditName()));
-        User currentUser = new User(123l, "admin", "123", "", null, true); // authService.getCurrentUser()
-        postRepository.save(postMapper.map(postRequest, subreddit, currentUser));
-        return postMapper.map(postRequest, subreddit, currentUser);
+        try {
+            UserModel user = authService.getUser(token);
+            postRepository.save(postMapper.map(postRequest, subreddit, user));
+            return postMapper.map(postRequest, subreddit, user);
+        } catch (StatusRuntimeException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Transactional(readOnly = true)
-    public PostResponse getPost(Long id) {
+    public PostResponse getPost(Long id, String token) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id.toString()));
-        return postMapper.mapToDto(post);
+        return postMapper.mapToDto(post, token);
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponse> getAllPosts() {
-        return postRepository.findAll()
-                .stream()
-                .map(postMapper::mapToDto)
-                .collect(toList());
+    public List<PostResponse> getAllPosts(String token) {
+         return postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"))
+                                    .stream()
+                                    .map((post) -> postMapper.mapToDto(post, token))
+                                    .collect(toList());
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponse> getPostsBySubreddit(Long subredditId) {
+    public List<PostResponse> getPostsBySubreddit(Long subredditId, String token) {
         Subreddit subreddit = subredditRepository.findById(subredditId)
                 .orElseThrow(() -> new SubredditNotFoundException(subredditId.toString()));
         List<Post> posts = postRepository.findAllBySubreddit(subreddit);
-        return posts.stream().map(postMapper::mapToDto).collect(toList());
+        return posts.stream().map((post) -> postMapper.mapToDto(post, token)).collect(toList());
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponse> getPostsByUsername(String username) {
-        User user = userRepository.findByUsername(username)
+    public List<PostResponse> getPostsByUsername(String username, String token) {
+        UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
         return postRepository.findByUser(user)
                 .stream()
-                .map(postMapper::mapToDto)
+                .map((post) -> postMapper.mapToDto(post, token))
                 .collect(toList());
     }
 }

@@ -16,10 +16,11 @@ import java.util.List;
 @Slf4j
 public class SubredditController {
     private final SubredditService subredditService;
+
     @PostMapping
-    public ResponseEntity<SubredditDto> createSubreddit(@RequestBody SubredditDto subredditDto) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(subredditService.save(subredditDto));
+    public ResponseEntity<List<SubredditDto>> createSubreddit(@RequestBody SubredditDto subredditDto) {
+        subredditService.save(subredditDto);
+        return getAllSubreddits();
     }
 
     @GetMapping

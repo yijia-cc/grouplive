@@ -1,7 +1,7 @@
 package info.grouplive.discussion.service;
 
 import info.grouplive.discussion.Repository.UserRepository;
-import info.grouplive.discussion.model.User;
+import info.grouplive.discussion.model.UserModel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,14 +24,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        User user = userOptional
+        Optional<UserModel> userOptional = userRepository.findByUsername(username);
+        UserModel user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
         return new org.springframework.security
-                .core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.isEnabled(), true, true,
+                .core.userdetails.User(user.getUsername(), null,
+                true, true, true,
                 true, getAuthorities("USER"));
     }
 

@@ -1,5 +1,16 @@
+import React from 'react';
+import DiscussHeader from './components/DiscussHeader/DiscussHeader';
+import DiscussNav from './components/DiscussNav/DiscussNav';
+
+
+
 const DiscussBoard = () => {
-  return <div>DiscussBoard</div>;
+  return (
+    <>
+      <DiscussHeader />
+      <DiscussNav />     
+    </>
+  );
 };
 
 export default DiscussBoard;

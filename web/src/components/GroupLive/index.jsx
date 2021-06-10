@@ -15,8 +15,10 @@ const GroupLive = () => {
   };
 
   const loggedIn = (token) => {
+    console.log(typeof token);    
     if (token) {
-      localStorage.setItem(TOKEN_KEY, token);
+      localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
+      console.log(localStorage.getItem(TOKEN_KEY))
       setIsLoggedIn(true);
     }
   };

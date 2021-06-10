@@ -1,8 +1,8 @@
-package controller
+package middleware
 
 import (
 	"fmt"
-	"github.com/yijia-cc/grouplive/dashboard/model"
+	"github.com/form3tech-oss/jwt-go"
 	"net/http"
 )
 
@@ -25,10 +25,19 @@ func (h AccessHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAccess(userName string) bool {
-	user, err := model.GetUserById(userName)
+	/*user, err := entity.GetUserByUserName(userName)
 	if err != nil {
 		return false
 	}
 
-	return user.Role == "admin"
+	return user.Role == "admin"*/
+
+	return true
+}
+
+
+func getUserNameFromToken(r *http.Request) string {
+	userToken := r.Context().Value("auth_token")
+	claims := userToken.(*jwt.Token).Claims
+	return claims.(jwt.MapClaims)["username"].(string)
 }

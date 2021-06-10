@@ -25,12 +25,24 @@ func NewServer(
 	transactionFactory tx.TransactionFactory,
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
+	timeSlotDao dao.TimeSlot,
+	reservationDao dao.Reservation,
+	weekDao dao.Week,
 ) *http.ServeMux {
 	content, err := readStringFromFile(cfg.GraphQLSchemaPath)
 	if err != nil {
 		log.Fatal(err)
 	}
-	res := resolver.NewResolver(logger.NextLayer(), authorizer, transactionFactory, amenityDao, amenityTypeDao)
+	res := resolver.NewResolver(
+		logger.NextLayer(),
+		authorizer,
+		transactionFactory,
+		amenityDao,
+		amenityTypeDao,
+		timeSlotDao,
+		reservationDao,
+		weekDao,
+		)
 	schema := graphql.MustParseSchema(content, res)
 	mux := http.NewServeMux()
 

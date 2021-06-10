@@ -12,13 +12,13 @@ func (mutation) MakeReservation(args struct {
 }
 
 func (mutation) ConfirmReservation(args struct {
-	Id graphql.ID
+	ID graphql.ID
 }) *Void {
 	return nil
 }
 
 func (mutation) CancelReservation(args struct {
-	Id graphql.ID
+	ID graphql.ID
 }) *Void {
 	return nil
 }
@@ -36,7 +36,7 @@ func (mutation) AddAmenityType(args struct {
 }
 
 func (mutation) DeleteAmenityType(args struct {
-	Id graphql.ID
+	ID graphql.ID
 }) *Void {
 	return nil
 }
@@ -54,7 +54,7 @@ func (mutation) AddAmenity(args struct {
 }
 
 func (mutation) DeleteAmenity(args struct {
-	Id graphql.ID
+	ID graphql.ID
 }) *Void {
 	return nil
 }

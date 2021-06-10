@@ -20,8 +20,20 @@ func NewResolver(
 	transactionFactory tx.TransactionFactory,
 	amenityDao dao.Amenity,
 	amenityTypeDao dao.AmenityType,
+	timeSlotDao dao.TimeSlot,
+	reservationDao dao.Reservation,
+	weekDao dao.Week,
 ) *Resolver {
-	calendarService := service.NewCalendar(logger.NextLayer(), authorizer, transactionFactory, amenityDao, amenityTypeDao)
+	calendarService := service.NewCalendar(
+		logger.NextLayer(),
+		authorizer,
+		transactionFactory,
+		amenityDao,
+		amenityTypeDao,
+		timeSlotDao,
+		reservationDao,
+		weekDao,
+		)
 	return &Resolver{
 		query: newQuery(calendarService),
 	}

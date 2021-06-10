@@ -1,27 +1,36 @@
 package resolver
 
-import "github.com/graph-gophers/graphql-go"
+import (
+	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/entity"
+)
 
-type Amenity struct{}
-
-func (Amenity) Schedule(args struct {
-	WeekStart *graphql.Time
-}) *Schedule {
-	return nil
+type Amenity struct {
+	amenity         entity.Amenity
 }
 
-func (Amenity) Id() graphql.ID {
-	return "id"
+func (a Amenity) ID() graphql.ID {
+	return graphql.ID(a.amenity.ID)
 }
 
-func (Amenity) Name() *string {
-	return nil
+func (a Amenity) Name() *string {
+	return &a.amenity.Name
 }
 
-func (Amenity) Type() AmenityType {
-	return AmenityType{}
+func (a Amenity) Type() AmenityType {
+	return newAmenityType(a.amenity.Type)
 }
 
-func (Amenity) OperationalHours() []TimeRange {
-	return nil
+func (a Amenity) OperationalHours() []TimeRange {
+	hours := make([]TimeRange, 0)
+	for _, timeRange := range a.amenity.OperationalHours {
+		hours = append(hours, newTimeRange(timeRange))
+	}
+	return hours
+}
+
+func newAmenity(amenity entity.Amenity) Amenity {
+	return Amenity{
+		amenity: amenity,
+	}
 }

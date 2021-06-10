@@ -7,14 +7,13 @@ package dep
 
 import (
 	"database/sql"
-	"net/http"
-
 	"github.com/yijia-cc/grouplive/calendar/auth"
 	"github.com/yijia-cc/grouplive/calendar/config"
 	"github.com/yijia-cc/grouplive/calendar/db/dao"
 	"github.com/yijia-cc/grouplive/calendar/gql"
 	"github.com/yijia-cc/grouplive/calendar/obs"
 	"github.com/yijia-cc/grouplive/calendar/tx"
+	"net/http"
 )
 
 // Injectors from wire.go:
@@ -27,7 +26,10 @@ func InitGraphQLServer(cfg config.Config, logger obs.Logger, db *sql.DB) (*http.
 	safeTransactionFactory := tx.NewSafeTransactionFactory(db)
 	amenitySQL := dao.NewAmenitySQL(db)
 	amenityTypeSQL := dao.NewAmenityTypeSQL(db)
-	serveMux := gql.NewServer(cfg, logger, groupLiveAuthClient, groupLiveAuthClient, groupLiveAuthClient, safeTransactionFactory, amenitySQL, amenityTypeSQL)
+	timeSlotSQL := dao.NewTimeSlotSQL(db)
+	reservationSQL := dao.NewReservationSQL(db)
+	weekSQL := dao.NewWeekSQL(db)
+	serveMux := gql.NewServer(cfg, logger, groupLiveAuthClient, groupLiveAuthClient, groupLiveAuthClient, safeTransactionFactory, amenitySQL, amenityTypeSQL, timeSlotSQL, reservationSQL, weekSQL)
 	return serveMux, nil
 }
 

@@ -1,16 +1,24 @@
 package resolver
 
-import "github.com/graph-gophers/graphql-go"
+import (
+	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/entity"
+)
 
 type TimeRange struct {
-	start graphql.Time
-	end   graphql.Time
+	timeRange entity.TimeRange
 }
 
-func (TimeRange) Start() graphql.Time {
-	return graphql.Time{}
+func (t TimeRange) Start() graphql.Time {
+	return graphql.Time{Time: t.timeRange.Start}
 }
 
-func (TimeRange) End() graphql.Time {
-	return graphql.Time{}
+func (t TimeRange) End() graphql.Time {
+	return graphql.Time{Time: t.timeRange.End}
+}
+
+func newTimeRange(timeRange entity.TimeRange) TimeRange {
+	return TimeRange{
+		timeRange: timeRange,
+	}
 }

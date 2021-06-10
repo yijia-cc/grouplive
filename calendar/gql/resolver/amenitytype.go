@@ -17,7 +17,7 @@ func (a AmenityType) AmenityInfoList() []AmenityInfo {
 	return gqlInfo
 }
 
-func (a AmenityType) Id() graphql.ID {
+func (a AmenityType) ID() graphql.ID {
 	return graphql.ID(a.amenityType.ID)
 }
 

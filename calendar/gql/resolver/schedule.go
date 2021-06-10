@@ -1,29 +1,44 @@
 package resolver
 
-import "github.com/graph-gophers/graphql-go"
+import (
+	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/entity"
+)
 
-type Schedule struct{}
-
-func (Schedule) Id() graphql.ID {
-	return "id"
+type Schedule struct{
+	schedule entity.Schedule
 }
 
-func (Schedule) WeekStart() graphql.Time {
-	return graphql.Time{}
+func (s Schedule) WeekID() graphql.ID {
+	return graphql.ID(s.schedule.WeekID)
 }
 
-func (Schedule) Previous() *Schedule {
-	return nil
+func (s Schedule) PreviousWeekID() *graphql.ID {
+	return (*graphql.ID)(&s.schedule.PreviousWeekID)
 }
 
-func (Schedule) Next() *Schedule {
-	return nil
+func (s Schedule) NextWeekID() *graphql.ID {
+	return (*graphql.ID)(&s.schedule.NextWeekID)
 }
 
-func (Schedule) TimeSlots() []TimeSlot {
-	return nil
+func (s Schedule) TimeSlots() []TimeSlot {
+	timeSlots := make([]TimeSlot, 0)
+	for _, timeSlot := range s.schedule.TimeSlots {
+		timeSlots = append(timeSlots, newTimeSlot(timeSlot))
+	}
+	return timeSlots
 }
 
-func (Schedule) Reservations() []Reservation {
-	return nil
+func (s Schedule) Reservations() []Reservation {
+	reservations := make([]Reservation, 0)
+	for _, reservation := range s.schedule.Reservations {
+		reservations = append(reservations, newReservation(reservation))
+	}
+	return reservations
+}
+
+func newSchedule(schedule entity.Schedule) Schedule {
+	return Schedule{
+		schedule: schedule,
+	}
 }

@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY pom.xml ./
 
+RUN mvn validate
+
 RUN mvn dependency:go-offline
 
 COPY src ./src

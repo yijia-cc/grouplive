@@ -15,7 +15,7 @@ const CREATE_COMMENT_URL = `${ROOT_URL}/api/comments/`;
 
 const TOKEN = localStorage.getItem(TOKEN_KEY);
 const axios_instance = axios.create();
-axios_instance.defaults.headers.common['Authorization'] = TOKEN;
+axios_instance.defaults.headers.common['Authorization'] = TOKEN?.auth_token;
 
 export const CREATE_POST = (payload) => {    
     return axios_instance.post(CREATE_POST_URL, payload)

@@ -11,7 +11,8 @@ type Query {
     """
     amenityTypes: [AmenityType!]!
     amenityType(id: ID!): AmenityType!
-    myCalendar(weekStart: Time!): Schedule!
+    myCalendar(weekId: ID): Schedule!
+    schedule(amenityId: ID!): Schedule!
     reservations: [Reservation!]!
 }
 
@@ -36,7 +37,7 @@ type Subscription {
 
 input ScheduleUpdateSubscribeInput {
     amenityId: ID!
-    weekStart: Time!
+    weekId: ID!
 }
 
 input ReservationInput {
@@ -85,26 +86,26 @@ type Reservation {
     holdDuration: Duration
     timeSlot: TimeSlot!
     status: ReservationStatus!
+    weekId: ID!
 }
 
 type Amenity {
     id: ID!
     name: String
     type: AmenityType!
-    schedule(weekStart: Time): Schedule
     operationalHours: [TimeRange!]!
 }
 
 type Schedule {
-    id: ID!
-    weekStart: Time!
-    previous: Schedule
-    next: Schedule
+    weekId: ID!
+    previousWeekId: ID
+    nextWeekId: ID
     reservations: [Reservation!]!
     timeSlots: [TimeSlot!]!
 }
 
 type TimeSlot {
+    id: ID!
     type: TimeSlotType!
     timeRange: TimeRange!
 }

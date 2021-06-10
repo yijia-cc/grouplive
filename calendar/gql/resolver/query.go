@@ -3,6 +3,7 @@ package resolver
 import (
 	"context"
 	"github.com/graph-gophers/graphql-go"
+	"github.com/yijia-cc/grouplive/calendar/entity"
 	"github.com/yijia-cc/grouplive/calendar/service"
 )
 
@@ -28,7 +29,9 @@ func (q query) AmenityTypes(ctx context.Context) ([]AmenityType, error) {
 	return gqlAmenityTypes, nil
 }
 
-func (q query) AmenityType(ctx context.Context, args struct{graphql.ID}) (AmenityType, error) {
+func (q query) AmenityType(ctx context.Context, args struct{
+	ID graphql.ID
+}) (AmenityType, error) {
 	//user, err := auth.UserFromContext(ctx)
 	//if err != nil {
 	//	return AmenityType{}, errors.New("user is unauthorized")
@@ -42,8 +45,28 @@ func (q query) AmenityType(ctx context.Context, args struct{graphql.ID}) (Amenit
 	return gqlAmenityType, nil
 }
 
-func (query) MyCalendar(ctx context.Context, args struct {
-	WeekStart graphql.Time
+func (q query) MyCalendar(ctx context.Context, args struct {
+	WeekID *graphql.ID
+}) (Schedule, error) {
+	//user, err := auth.UserFromContext(ctx)
+	//if err != nil {
+	//	return AmenityType{}, errors.New("user is unauthorized")
+	//}
+	var week *entity.Week
+	if args.WeekID != nil {
+		week = &entity.Week{ID: entity.ID(*args.WeekID)}
+	}
+
+	schedule, err := q.calendarService.GetWeekSchedule(nil, week)
+	if err != nil {
+		return Schedule{}, err
+	}
+
+	return newSchedule(schedule), nil
+}
+
+func (q query) Schedule(args struct{
+	AmenityID string
 }) Schedule {
 	return Schedule{}
 }

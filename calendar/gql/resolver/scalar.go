@@ -9,7 +9,7 @@ import (
 var _ decode.Unmarshaler = (*Duration)(nil)
 
 type Duration struct {
-	time.Duration
+	duration time.Duration
 }
 
 func (d Duration) ImplementsGraphQLType(name string) bool {
@@ -19,9 +19,9 @@ func (d Duration) ImplementsGraphQLType(name string) bool {
 func (d *Duration) UnmarshalGraphQL(input interface{}) error {
 	switch input := input.(type) {
 	case time.Duration:
-		d.Duration = input
+		d.duration = input
 	case int:
-		d.Duration = time.Duration(input)
+		d.duration = time.Duration(input)
 	}
 	return nil
 }

@@ -18,20 +18,20 @@ type ReservationInput struct {
 }
 
 type AmenityTypeInput struct {
-	Id           *graphql.ID
+	ID           *graphql.ID
 	Title        *string
 	Description  *string
 	ThumbnailUrl *string
 }
 
 type AmenityInput struct {
-	Id               *graphql.ID
+	ID              *graphql.ID
 	Name             *string
 	Type             AmenityTypeInput
 	OperationalHours []TimeRangeInput
 }
 
 type ScheduleUpdateSubscribeInput struct {
-	AmenityId graphql.ID
-	WeekStart graphql.Time
+	AmenityID graphql.ID
+	WeekID graphql.ID
 }

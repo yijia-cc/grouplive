@@ -9,7 +9,7 @@ type AmenityInfo struct {
 	amenityInfo entity.AmenityInfo
 }
 
-func (a AmenityInfo) Id() graphql.ID {
+func (a AmenityInfo) ID() graphql.ID {
 	return graphql.ID(a.amenityInfo.ID)
 }
 

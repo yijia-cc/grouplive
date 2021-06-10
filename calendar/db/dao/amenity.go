@@ -18,16 +18,13 @@ type AmenitySQL struct {
 }
 
 func (a AmenitySQL) FindAmenityInfo(transaction tx.Transaction, amenityTypeId entity.ID) ([]entity.AmenityInfo, error) {
-	stmt, err := transaction.DBTransaction.Prepare(
+	rows, err := transaction.DBTransaction.Query(
 		`
 SELECT id, name, type_id 
 FROM amenity 
 WHERE type_id = ?;
-`)
-	if err != nil {
-		return nil, err
-	}
-	rows, err := stmt.Query(amenityTypeId)
+`, amenityTypeId)
+
 	if err != nil {
 		return nil, err
 	}

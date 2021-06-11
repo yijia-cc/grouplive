@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/yijia-cc/grouplive/dashboard/auth"
 	"github.com/yijia-cc/grouplive/dashboard/db"
 	"github.com/yijia-cc/grouplive/dashboard/db/dao"
 	"log"
@@ -12,14 +13,14 @@ import (
 
 // DeleteHandler handles a DELETE request to delete an existing event
 func DeleteHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("[Debug]: ", "Received a delete request")
-
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization")
 
 	if r.Method == "OPTIONS" {
 		return
 	}
+
+	fmt.Println("Received a delete request")
 
 	// Retrieve the event id from the URL path parameter /post/{id}
 	id, err := strconv.ParseInt(mux.Vars(r)["id"], 10, 64)
@@ -28,6 +29,24 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("invalid id encountered: %v", id)
 		return
 	}
+
+	user, err := auth.UserFromContext(r.Context())
+	if err != nil {
+		http.Error(w, "missing user info in request context", http.StatusInternalServerError)
+		log.Println("missing user info in request context")
+		return
+	}
+
+	// Authorization - access control
+	//client, _ := auth.NewGroupLiveAuthClient("auth.rpc.staging.allgame.fun:8000")
+	//hasPermission := client.HasPermission(user, permission.Permission{})
+	hasPermission := true
+	if !hasPermission {
+		http.Error(w, fmt.Sprintf("%s has no permission", user.Username), http.StatusForbidden)
+		return
+	}
+
+
 
 	rowsDeleted, err := deleteEvent(id)
 	if err != nil {

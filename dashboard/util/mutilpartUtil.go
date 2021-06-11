@@ -84,20 +84,20 @@ func parseEvent(m map[string][]string) (*entity.Event, int, error) {
 		case "type_id":
 			event.Type = &entity.Type{}
 			event.Type.Id, err = strconv.ParseInt(values[0], 10, 64)
-		case "username":
-			event.User = &entity.User{Username: values[0]}
+		/*case "username":
+			event.User = &entity.User{Username: values[0]}*/
 		case "title":
 			event.Title = values[0]
 		case "description":
 			event.Description = values[0]
 		case "start_time":
-			//event.StartTime, err = time.Parse(LocalDateTimeFmt, values[0])
 			event.StartTime, err = time.Parse(config.Cfg.App.LocalDatetimeFormat, values[0])
 		case "end_time":
-			//event.EndTime, err = time.Parse(LocalDateTimeFmt, values[0])
 			event.EndTime, err = time.Parse(config.Cfg.App.LocalDatetimeFormat, values[0])
 		case "rsvp_required":
 			event.RsvpRequired = values[0] == "true"
+		/*case "active":
+			event.Active = values[0] == "true"*/
 		}
 
 		if err != nil {

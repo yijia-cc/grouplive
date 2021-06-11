@@ -1,12 +1,11 @@
 package auth
 
 import (
-	"context"
+	"fmt"
 	"net/http"
 )
 
 func WithMiddleware(authenticator Authenticator, userProvider UserProvider, handleFunc http.HandlerFunc) http.HandlerFunc {
-
 	//fmt.Println("Auth Middleware is running.....")
 
 	return func(writer http.ResponseWriter, request *http.Request) {
@@ -20,8 +19,9 @@ func WithMiddleware(authenticator Authenticator, userProvider UserProvider, hand
 
 		userID, err := authenticator.VerifyIdentity(authToken)
 		if err != nil {
-			handleFunc(writer, request)
-			//writer.WriteHeader(http.StatusUnauthorized)
+			fmt.Println(err)
+			//handleFunc(writer, request)
+			writer.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
@@ -33,9 +33,12 @@ func WithMiddleware(authenticator Authenticator, userProvider UserProvider, hand
 			return
 		}
 
+
 		//fmt.Println("user = ", user)
 
-		ctx := context.Background()
+		//ctx := context.Background()
+		ctx := request.Context()
+
 		ctx = NewContextWithUser(ctx, user)
 		req := request.WithContext(ctx)
 		handleFunc(writer, req)

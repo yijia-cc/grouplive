@@ -64,6 +64,10 @@ func getSearchType(r *http.Request) (entity.SearchType, error) {
 		return entity.Grouped, nil
 	case "dashboard":
 		return entity.Dashboard, nil
+	case "info":
+		return entity.UserInfo, nil
+	case "confirmation":
+		return entity.UserConfirmation, nil
 	default:
 		return -1, fmt.Errorf("invalid search type: %s", st)
 	}

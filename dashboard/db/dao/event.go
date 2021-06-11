@@ -16,10 +16,42 @@ type EventDao interface {
 	DeleteByEidTx(tx *sql.Tx, id int64) (int64, error)
 	ReadDashboard() (map[string][]*entity.Event, error)
 	Search(searchType entity.SearchType, searchKeys *entity.SearchKey) ([]byte, error)
+	MetaMapping() ([]byte, error)
 }
 
 type EventDaoImpl struct {
 	db *sql.DB
+}
+
+func (e EventDaoImpl) MetaMapping() ([]byte, error) {
+	query := `SELECT category_id, category.name AS category_name, type.id AS type_id, type.name AS type_name 
+              FROM type join category on category_id = category.id
+              ORDER BY category_id, type_id`
+
+	rows, err := e.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	type Meta struct {
+		CategoryId   int	`json:"category_id"`
+		CategoryName string `json:"category_name"`
+		TypeId       int	`json:"type-id"`
+		TypeName     string	`json:"type-name"`
+	}
+
+	var metaList []*Meta
+
+	for rows.Next() {
+		meta := Meta{}
+		if err := rows.Scan(&meta.CategoryId, &meta.CategoryName, &meta.TypeId, &meta.TypeName); err != nil {
+			return nil, err
+		}
+		metaList = append(metaList, &meta)
+	}
+
+	return json.Marshal(metaList)
 }
 
 func (e EventDaoImpl) Search(searchType entity.SearchType, searchKeys *entity.SearchKey) ([]byte, error) {
@@ -52,7 +84,8 @@ func (e EventDaoImpl) buildQuery(searchType entity.SearchType, searchKeys *entit
 			    JOIN media m ON e.id = m.event_id
 				JOIN type t ON e.type_id = t.id
 				JOIN category c on t.category_id = c.id 
-			WHERE e.active = TRUE AND m.active = TRUE`
+			WHERE e.active = TRUE AND m.active = TRUE
+			ORDER BY start_time`
 
 	if searchType == entity.Dashboard {
 		return fmt.Sprintf("%s AND start_time >= '%s'", sql, time.Now().Format(config.Cfg.App.LocalDatetimeFormat))
@@ -254,9 +287,9 @@ func (e EventDaoImpl) ReadDashboard() (map[string][]*entity.Event, error) {
 
 
 func (e EventDaoImpl) DeleteByEidTx(tx *sql.Tx, id int64) (int64, error) {
-	sql := "UPDATE event SET active = FALSE WHERE id = ?"
+	sql := "UPDATE event SET active = FALSE, updated_at = ? WHERE id = ?"
 
-	res, err := tx.Exec(sql, id)
+	res, err := tx.Exec(sql, time.Now(), id)
 	if err != nil {
 		return 0, err
 	}

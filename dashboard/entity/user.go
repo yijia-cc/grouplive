@@ -13,6 +13,7 @@ type User struct {
 	LastName          string     `json:"last_name,omitempty"`
 	Email             string     `json:"email,omitempty"`
 	Phone             string     `json:"phone,omitempty"`
+	//Unit              Unit       `json:"unit,omitempty"`
 	Unit              Unit       `json:"unit,omitempty"`
 	LastSignedInAt    *time.Time `json:"last_signed_in_at,omitempty"`
 }
@@ -22,6 +23,7 @@ func NewUserFromProto(pbUser *pb.User) User {
 		ID:        ID(pbUser.GetId()),
 		LastName:  pbUser.GetLastname(),
 		FirstName: pbUser.GetFirstname(),
+		//Unit:      NewUnitFromProto(pbUser.Unit),
 		Unit:      NewUnitFromProto(pbUser.Unit),
 		Username:  pbUser.GetUsername(),
 		Email:     pbUser.GetEmail(),

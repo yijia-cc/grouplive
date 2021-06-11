@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"github.com/yijia-cc/grouplive/dashboard/auth"
 	"github.com/yijia-cc/grouplive/dashboard/db"
 	"github.com/yijia-cc/grouplive/dashboard/db/dao"
 	"github.com/yijia-cc/grouplive/dashboard/entity"
@@ -21,6 +22,13 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Received a POST request for creating a new event")
 
+	user, err := auth.UserFromContext(r.Context())
+	if err != nil {
+		http.Error(w, "missing user info in request context", http.StatusInternalServerError)
+		log.Println("missing user info in request context")
+		return
+	}
+
 	event, mediaList, status, err := util.ParseMultipartRequest(r)
 	if err != nil {
 		http.Error(w, err.Error(), status)
@@ -28,6 +36,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	event.User = user
 	event.CreatedAt = time.Now()
 	event.UpdatedAt = event.CreatedAt
 

@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/yijia-cc/grouplive/dashboard/auth"
 	"github.com/yijia-cc/grouplive/dashboard/db"
 	"github.com/yijia-cc/grouplive/dashboard/db/dao"
 	"github.com/yijia-cc/grouplive/dashboard/entity"
@@ -22,16 +23,23 @@ func ConfirmHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Received a POST request for confirming/unconfirming an event")
 
+	user, err := auth.UserFromContext(r.Context())
+	if err != nil {
+		http.Error(w, "missing user info in request context", http.StatusInternalServerError)
+		log.Println("missing user info in request context")
+		return
+	}
+
 	now := time.Now()
 	re := entity.Reaction{
+		Username: user.Username,
  		CreatedAt: now,
  		UpdatedAt: now,
  		Active: true,
 	}
 
 	// Retrieve the user re from request body
-	err := json.NewDecoder(r.Body).Decode(&re)
-	if err != nil {
+	if err = json.NewDecoder(r.Body).Decode(&re); err != nil {
 		http.Error(w, fmt.Sprintf("unable to decode user re: %s", err), http.StatusBadRequest)
 		log.Printf("unable to decode user re: %s", err)
 		return

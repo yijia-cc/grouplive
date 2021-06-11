@@ -3,6 +3,7 @@ package dao
 import (
 	"database/sql"
 	"github.com/yijia-cc/grouplive/dashboard/entity"
+	"time"
 )
 
 type MediaDao interface {
@@ -16,9 +17,9 @@ type MediaDaoImpl struct{
 }
 
 func (MediaDaoImpl) DeleteByEidTx(tx *sql.Tx, eid int64) (int64, error) {
-	sql := "UPDATE media SET active = FALSE WHERE event_id = ?"
+	sql := "UPDATE media SET active = FALSE, updated_at = ? WHERE event_id = ?"
 
-	res, err := tx.Exec(sql, eid)
+	res, err := tx.Exec(sql, time.Now(), eid)
 	if err != nil {
 		return 0, err
 	}

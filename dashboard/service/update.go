@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"github.com/yijia-cc/grouplive/dashboard/auth"
 	"github.com/yijia-cc/grouplive/dashboard/db"
 	"github.com/yijia-cc/grouplive/dashboard/db/dao"
 	"github.com/yijia-cc/grouplive/dashboard/entity"
@@ -21,6 +22,12 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("Received a PUT request for updating an existing event")
+	user, err := auth.UserFromContext(r.Context())
+	if err != nil {
+		http.Error(w, "missing user info in request context", http.StatusInternalServerError)
+		log.Println("missing user info in request context")
+		return
+	}
 
 	// Fetch the event id, and new event data from the request body
 	event, mediaList, status, err := util.ParseMultipartRequest(r)
@@ -30,6 +37,7 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	event.User = user
 	event.UpdatedAt = time.Now()
 
 	// Update the database for the given event id

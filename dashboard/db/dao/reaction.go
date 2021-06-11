@@ -2,6 +2,7 @@ package dao
 
 import (
 	"database/sql"
+	"encoding/json"
 	"github.com/yijia-cc/grouplive/dashboard/db"
 	"github.com/yijia-cc/grouplive/dashboard/entity"
 	"time"
@@ -14,6 +15,7 @@ type ReactionDao interface {
 	GetReactionId(username string, eid int64) (int64, error)
 	GetReaction(username string, eid int64) (*entity.Reaction, error)
 	GetConfirmedEvtTIDs(username string) ([]int64, error)
+	GetConfirmations(username string) ([]byte, error)
 	DeleteByEidTx(tx *sql.Tx, eid int64) (int64, error)
 }
 
@@ -124,6 +126,42 @@ func (r ReactionDaoImpl) GetConfirmation(username string, eid int64) (bool, erro
 	return confirmed, nil
 }
 
+// GetConfirmations return all events confirmed by a given user
+func (r ReactionDaoImpl) GetConfirmations(username string) ([]byte, error) {
+	type confirmation struct {
+		ReactionId  int64     `json:"reaction_id"`
+		EventPoster string    `json:"event_poster"`
+		EventId     int64     `json:"event_id"`
+		TypeId      int64     `json:"type_id"`
+		Attend      bool      `json:"attend"`
+		CreatedAt   time.Time `json:"created_at"`
+		UpdatedAt   time.Time `json:"updated_at"`
+	}
+
+	query := `SELECT r.id, e.username, e.id, e.type_id, r.attend, r.created_at, r.updated_at
+			  FROM reaction r JOIN event e ON r.event_id = e.id
+			  WHERE r.username = ? AND r.attend = TRUE AND r.active = TRUE`
+
+	rows, err := r.db.Query(query, username)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var cnfms []*confirmation
+	for rows.Next() {
+		cnfm := confirmation{}
+		err := rows.Scan(&cnfm.ReactionId, &cnfm.EventPoster, &cnfm.EventId, &cnfm.TypeId, &cnfm.Attend, &cnfm.CreatedAt, &cnfm.UpdatedAt);
+		if err != nil {
+			return nil, err
+		}
+		cnfms = append(cnfms, &cnfm)
+	}
+
+	return json.Marshal(cnfms)
+}
+
+
 // GetConfirmedEvtTIDs return all confirmed events' type ids for a given user
 func (ReactionDaoImpl) GetConfirmedEvtTIDs(username string) ([]int64, error) {
 	query := `SELECT e.type_Id
@@ -151,9 +189,9 @@ func (ReactionDaoImpl) GetConfirmedEvtTIDs(username string) ([]int64, error) {
 
 
 func (ReactionDaoImpl) DeleteByEidTx(tx *sql.Tx, eid int64) (int64, error) {
-	query := "UPDATE reaction SET active = FALSE WHERE event_id = ?"
+	query := "UPDATE reaction SET active = FALSE, updated_at = ? WHERE event_id = ?"
 
-	res, err := tx.Exec(query, eid)
+	res, err := tx.Exec(query, time.Now(), eid)
 	if err != nil {
 		return 0, err
 	}

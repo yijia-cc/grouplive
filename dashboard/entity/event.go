@@ -35,4 +35,6 @@ const (
 	Mixed SearchType = iota + 1
 	Grouped
 	Dashboard
+	UserInfo
+	UserConfirmation
 )

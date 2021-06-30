@@ -2,7 +2,7 @@
 
 An open source Public Community Management System implemented with Microservices in Go & Java. 
 
-Core functions include Sign In/Sign Up, New Aggregation, Content Post and Share, Reservation, etc. 
+Core functions include [Auth Services](https://github.com/yijia-cc/grouplive/tree/master/auth) for Sign In/Sign Up, [Dashboard Service](https://github.com/yijia-cc/grouplive/tree/master/dashboard) for news aggregation, [Discussion Service](https://github.com/yijia-cc/grouplive/tree/master/discussion) for Content Post and Share, [Calendar Service](https://github.com/yijia-cc/grouplive/tree/master/calendar) for Reservation Creation and Modification, etc. 
 
 
 ## Web Preview

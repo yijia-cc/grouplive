@@ -1,53 +1,59 @@
 # GroupLive
 
-An open source Public Community Management System implemented with Microservices in Go & Java. 
-
-Core functions include 
-- [Auth Services](https://github.com/yijia-cc/grouplive/tree/master/auth) for Sign In/Sign Up
-- [Dashboard Service](https://github.com/yijia-cc/grouplive/tree/master/dashboard) for news aggregation 
-- [Discussion Service](https://github.com/yijia-cc/grouplive/tree/master/discussion) for Content Post and Share 
-- [Calendar Service](https://github.com/yijia-cc/grouplive/tree/master/calendar) for Reservation Creation and Modification 
-
+An open source Public Community Management System based on Service-oriented architecture (SOA) in Go & Java. 
 
 ## Web Preview
-
 https://user-images.githubusercontent.com/76569613/122740912-4bb42c80-d239-11eb-946f-d44be87bcef6.mov
-
-
-
 
 ## Getting Started
 ### Accessing the Source Code
-`git clone https://github.com/yijia-cc/grouplive.git`
+```
+git clone https://github.com/yijia-cc/grouplive.git
+```
 
 ### Prerequisites
-#### Development
-[Go](https://golang.org/doc/install) v1.15.6
+- [Docker](https://docs.docker.com/docker-for-mac/install/) v20.10.6
 
-[JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) v11.0.2
+### Database
+```
+docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password --network="host" -d mysql:8.0.25
+```
 
-[Maven](https://maven.apache.org/install.html) v3.8.1
+### Launch Application
+Please start services at different ports and update `.env` files with the correct ports so that services can communicate with each other.
 
-[Java](https://www.oracle.com/java/technologies/javase/jdk14-archive-downloads.html) v14
+- [Web UI](https://github.com/yijia-cc/grouplive/tree/master/web) 
+- [Auth Service](https://github.com/yijia-cc/grouplive/tree/master/auth)
+- [Calendar Service](https://github.com/yijia-cc/grouplive/tree/master/calendar)
+- [Discussion Service](https://github.com/yijia-cc/grouplive/tree/master/discussion)
+- Real-time Chat Service (In Progress)
+- Dashboard Service (In Progress)
+- Payment Service (In Progress)
 
-[Node.js](https://nodejs.org/en/download/) v14.16.1
+Assuming `web` is exposed at 8080, visit `http://localhost:8080` to view the website.
 
+## Tech Stack
+- gRPC
+- GraphQL
+- Go
+- Java Springboot
+- MySQL
+- React
+- Docker
+- Nginx
 
-#### Infrastructure
-[Docker](https://docs.docker.com/docker-for-mac/install/) v20.10.6
+## Authors
+- **yijia-cc**: Infrastructure(Docker, Continuous Delivery, Database), Auth Service(current), Calendar Service
+- **wl328Weiminli**: Frontend, Web UI
+- **isabellakqq**: Dashboard Service, Auth Service(first draft)
+- **jackiewang5566**: Discussion Service
+- **MEtoCS**: Chat Service
+- **yuranranran**: Chat Service
+- **wikiwu24**: Chat Service
+- **Zanzan666**: Payment Service
 
-[MySQL](https://dev.mysql.com/downloads/mysql/) v8.0.25
-
-#### API Framework
-[gRPC](https://github.com/yijia-cc/grouplive/blob/master/proto/scripts/grpc-install.sh) for Go
-
-[gRPC](https://github.com/yijia-cc/grouplive/tree/master/proto/java) for Java
-
-[graphQL](https://github.com/graphql-go/graphql) for Go
-
-## Service Architecture
-GroupLive adopts [Microservices Architecture](https://microservices.io/patterns/microservices.html) to organize dependent services and to enable independent deployment of each service.
-
+## License
+This project is maintained under MIT license.
 
 
 
